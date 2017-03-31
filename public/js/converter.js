@@ -29,7 +29,7 @@ var config = {
 	TERM: term
   });
   
-	var newPrizeRef = newStoreRef.child("PRIZE").push();
+	var newPrizeRef = newStoreRef.child("PRIZE");
 	newPrizeRef.set({
 		EBOOK:pz_ebook,
 		NEW:pz_new,
@@ -38,7 +38,7 @@ var config = {
 	
   });
   
-    var newQuantityRef = newStoreRef.child("QUANTITY").push();
+    var newQuantityRef = newStoreRef.child("QUANTITY");
 	newQuantityRef.set({
 		EBOOK:q_ebook,
 		NEW:q_new,
