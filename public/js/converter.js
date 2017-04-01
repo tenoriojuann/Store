@@ -1,3 +1,5 @@
+
+
 var config = {
     apiKey: "AIzaSyCRDKyvIxu8HOniceJ-Xot7PC8XFDg54Lc",
     authDomain: "bookstore-e0ecb.firebaseapp.com",
