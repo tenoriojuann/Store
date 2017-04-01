@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SEARCH</title>
+    <script src="https://cdn.jsdelivr.net/fuse/2.6.1/fuse.min.js"></script>
+</head>
+<body>
+    <h2>data</h2>
+    <textarea id="json" cols="30" rows="10"></textarea>
+    <h2>Search Result</h2>
+    <div id="results"></div>
+    <script>
+    var r = new XMLHttpRequest();
+      r.open('GET', 'https://bookstore-e0ecb.firebaseio.com/BOOKS.json', true);
+    r.onreadystatechange = function () {
+    if (r.readyState != 4 || r.status != 200) return;
+        var data = JSON.parse(r.responseText);
+
+      var x = [];
+      for (var t in data){
+        x.push(data[t]);
+
+        
+      }
+        document.getElementById("json").value=JSON.stringify(x);
+        var options = {
+        include: ["score"],
+  			shouldSort: true,
+  			tokenize: true,
+  			matchAllTokens: true,
+  			findAllMatches: true,
+  			threshold: 0.6,
+  			location: 0,
+  			distance: 100,
+  			maxPatternLength: 32,
+  			minMatchCharLength: 1,
+            keys: ['AUTHOR','BOOK_NAME','COURSE']
+        }
+        var f = new Fuse(x, options);
+        var output = f.search('barde');
+        for(var out in output){
+            document.getElementById('results').innerHTML += JSON.stringify(output[out].item)+'<br />'
+            console.log(output[out].item);
+        }
+    };
+    r.send();
+    </script>
+</body>
+</html>
