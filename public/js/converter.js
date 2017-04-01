@@ -6,6 +6,7 @@ var config = {
     storageBucket: "bookstore-e0ecb.appspot.com",
     messagingSenderId: "201530925901"
   };
+
   firebase.initializeApp(config);
       // Get a reference to the database service
   var database = firebase.database();
@@ -88,7 +89,13 @@ var config = {
       // Read file into memory as UTF-8      
       reader.readAsText(fileToRead);
       // Handle errors load
-      reader.onload = loadHandler;
+      	var div = document.getElementById('inputForm');
+      	var input = document.createElement('button');
+
+      	div.appendChild(input);
+      	var t = document.createTextNode("Submit");       // Create a text node
+		input.appendChild(t);
+		input.setAttribute("onclick",reader.onload=loadHandler);
       reader.onerror = errorHandler;
     }
 

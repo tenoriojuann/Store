@@ -15,12 +15,44 @@
   <li><a>About Us</a></li>
   <li><a>Contact</a></li>
   <li><a >FAQ</a></li>
+  <li><a onclick="document.getElementById('id01').style.display='block'">Admin</a></li>
   <li style="float:right"><a href="#about">Shopping Cart</a></li>
 </ul>
 
     <div id="main"></div>
     <div id="footer"></div>
 </div>
+
+<!-- The Modal -->
+<div id="id01" class="modal" style="display: none">
+  <span onclick="document.getElementById('id01').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" method ="post" action ="admin.html">
+    <div class="imgcontainer">
+      <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username"  required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password"  required>
+
+      <button>Login</button>
+      <input type="checkbox" checked="checked"> Remember me
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+
+
 <br></br>
 <br></br>
 <br></br>
@@ -32,16 +64,11 @@
   <p style="text-align:center; font-size:75%"><b>Search By:</b> Author, Title, Course Number</p>
 </form>
 
-    <input type="file" id="csvFileInput" onchange="handleFiles(this.files)"
-            accept=".csv">
+  
   </body>
   
-<script src="https://d3js.org/d3.v4.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
-<script src="js/converter.js"></script>
-<link rel = "stylesheet" href="css/index.css"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
+
+<link rel = "stylesheet" href="css/index.css"></script>
+
 </html>
