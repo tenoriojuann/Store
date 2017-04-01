@@ -71,3 +71,10 @@ text-align: center;
 #search input[type="text"]:focus {
     width: 200px;
     }
+	
+	
+  .thumb {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+  }
