@@ -101,20 +101,23 @@ var config = {
 	// Once we got the file from the user
 	// We can process it and then add it to the database
     function processData(csv) {
-		var result = "isbn, book_name, author, term, course, IDK, professor, crn, required, q_new, q_used, q_rental, q_ebook,pz_new,pz_used,pz_rental,pz_ebook,summary\n" + csv;  //now you have the header
+		var result = "isbn,book_name,author,term,course,IDK,professor,crn,required,q_new,q_used,q_rental,q_ebook,pz_new,pz_used,pz_rental,pz_ebook,summary\n" + csv;  //now you have the header
 		var data = d3.csvParse(result);
 		//Now that we got the file we can send it to the database.
 		
 		var dataInObject = [];
 		for(var i =0; i < data.length; i ++){
+			while(dataInObject.length > 0) {
+				dataInObject.pop();
+			}
 			for (var property in data[i]) {
 			
 				dataInObject.push(data[i][property]);
-			}
-			
+			} 
 			newStore(dataInObject[0], dataInObject[1], dataInObject[2], dataInObject[3], dataInObject[4], dataInObject[5],
 					dataInObject[6], dataInObject[7], dataInObject[8], dataInObject[9], dataInObject[10], dataInObject[11],
-					dataInObject[12], dataInObject[13], dataInObject[14], dataInObject[15], dataInObject[16], dataInObject[17]);
+					dataInObject[12], dataInObject[13], dataInObject[14], dataInObject[15], dataInObject[16], dataInObject[17]); 
+		
 		}
 		
 		
