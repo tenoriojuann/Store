@@ -17,7 +17,7 @@ var config = {
   
   // Function to add new entries to the database
   
-  function newStore(isbn, book_name, author, term, course,professor, crn, IDK, required, 
+  function newStore(isbn, book_name, author, term, course, IDK, professor, crn, required, 
 			q_new, q_used, q_rental, q_ebook,pz_new,pz_used,pz_rental,pz_ebook,
 			summary) {
 				
@@ -30,6 +30,7 @@ var config = {
     AUTHOR: author,
     BOOK_NAME: book_name,
     COURSE : course,
+    PROF : professor,
 	CRN : crn,
 	ISBN : isbn,
 	REQUIRED: required,
