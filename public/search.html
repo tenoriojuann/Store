@@ -1,10 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <title >SEARCH</title>
+=======
+>>>>>>> origin/master
     <script src="https://cdn.jsdelivr.net/fuse/2.6.1/fuse.min.js"></script>
-</head>
 
+    <meta charset="utf-8">
+    <title>KSU Bookstore</title>
+
+  </head>
+<div id="page"></div>
+</head>
+<body class = "body">
+
+
+
+<p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
+<ul>
+  <li><a class="active" href="index.html">Home</a></li>
+  <li><a  href="AboutUs.html">About Us</a></li>
+  <li><a  href="Contact.html">Contact</a></li>
+  <li><a  href="FAQ.html">FAQ</a></li>
+  <li><a onclick="document.getElementById('id01').style.display='block'">Admin</a></li>
+  <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
+</ul>
+
+    <div id="main"></div>
+    <div id="footer"></div>
+</div>
+
+
+<form method="get" action="search.html" id="search">
+  <input id ="searchValue" name="submit" type="text" size="40" placeholder="Enter Search" required></input>
+  <p style="text-align:center; font-size:75%"><b>Search By:</b> Author, Title, Course Number</p>
+</form>
+
+<!-- The Modal -->
+<div id="id01" class="modal" style="display: none">
+  <span onclick="document.getElementById('id01').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" method ="post" action ="../admin.html">
+    <div class="imgcontainer">
+      <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username"  required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password"  required>
+
+      <button style = "background-color: yellow">Login</button>
+      <input type="checkbox" checked="checked"> Remember me
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+  
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
+
+<script>
+  //Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCRDKyvIxu8HOniceJ-Xot7PC8XFDg54Lc",
+    authDomain: "bookstore-e0ecb.firebaseapp.com",
+    databaseURL: "https://bookstore-e0ecb.firebaseio.com",
+    projectId: "bookstore-e0ecb",
+    storageBucket: "bookstore-e0ecb.appspot.com",
+    messagingSenderId: "201530925901"
+  };
+  firebase.initializeApp(config);
+    var storage = firebase.storage();
+          var storageRef = storage.ref();
+</script>
 <script language="JavaScript">
   function processForm()
   {
@@ -15,6 +95,7 @@
   }
   processForm();
 </script>
+<<<<<<< HEAD
 <body>
 <style>
 body {
@@ -34,5 +115,72 @@ background-size:16px 16px;
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
 <script src = "js/search.js"></script>
+=======
+
+    <div id="results"></div>
+    <img src = ></img>
+    <div id = "mine">
+      
+    </div>
+
+
+    <script>
+    var r = new XMLHttpRequest();
+      r.open('GET', 'https://bookstore-e0ecb.firebaseio.com/BOOKS.json', true);
+    r.onreadystatechange = function () {
+    if (r.readyState != 4 || r.status != 200) return;
+        var data = JSON.parse(r.responseText);
+
+      var x = [];
+      for (var t in data){
+    data[t]["id"] = t;
+        x.push(data[t]);
+
+        }
+        var options = {
+        include: ["score"],
+        shouldSort: true,
+        tokenize: true,
+        matchAllTokens: true,
+        findAllMatches: true,
+        threshold: 0.2,
+        location: 0,
+        distance: 5000,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+            keys: ['AUTHOR','BOOK_NAME','COURSE']
+        };
+        function setImage(ISBN, divID){
+        
+          storageRef.child('images/'+ISBN+'.jpg').getDownloadURL().then(function(url){
+
+            var img = document.createElement('img');
+            img.src = url;
+            document.getElementById(divID).appendChild(img);
+          });
+        }
+
+        function setData(object, divID){
+          var data = document.createElement('p');
+          data.innerHTML = object.AUTHOR;
+          document.getElementById(divID).appendChild(data);
+        }
+        var f = new Fuse(x, options);
+        var output = f.search(l);
+
+
+        for(var out in output){
+            setImage(output[out].item.ISBN, 'mine');
+            setData(output[out].item, 'mine')
+        }
+
+
+    };
+    r.send();
+    </script>
+    <link rel = "stylesheet" href="css/index.css"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script>
+>>>>>>> origin/master
 </body>
 </html>

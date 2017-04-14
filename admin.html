@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 
 
-<html>
-<title>Admin Page</title>
-<body>
-<p><b>ADMIN</b></p>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
+  <head>
+    <meta charset="utf-8">
+    <title>KSU Bookstore</title>
 
+  </head>
+ 
+<body class = "body">
+<p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
+<ul>
+  <li><a href="public/index.html">Home</a></li>
+  <li><a  href="public/AboutUs.html">About Us</a></li>
+  <li><a href="public/Contact.html">Contact</a></li>
+  <li><a  href="public/FAQ.html">FAQ</a></li>
+  <li><a class = "active" onclick="document.getElementById('id01').style.display='block'">Admin</a></li>
+  <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
+</ul>
+
+<br></br>
+<br></br>
+<br></br>
+<br></br>
 <div id = "inputForm">
   <input type="file" id="csvFileInput" onchange="handleFiles(this.files)"
             accept=".csv">
@@ -29,6 +40,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://d3js.org/d3.v4.js"></script>
 
-
+<link rel = "stylesheet" href="public/css/index.css"></script>
 <script src="js/converter.js"></script>
 </html>

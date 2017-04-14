@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -7,20 +8,16 @@
   </head>
 
 <body class = "body">
-
 <p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
 <ul>
-  <li><a class="active" href="index.html">Home</a></li>
+  <li><a href="index.html">Home</a></li>
   <li><a  href="AboutUs.html">About Us</a></li>
   <li><a  href="Contact.html">Contact</a></li>
-  <li><a  href="FAQ.html">FAQ</a></li>
+  <li><a class="active"  href="FAQ.html">FAQ</a></li>
   <li><a onclick="document.getElementById('id01').style.display='block'">Admin</a></li>
   <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
 </ul>
 
-    <div id="main"></div>
-    <div id="footer"></div>
-</div>
 
 <!-- The Modal -->
 <div id="id01" class="modal" style="display: none">
@@ -51,23 +48,6 @@ class="close" title="Close Modal">&times;</span>
   </form>
 </div>
 
-
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<form method="get" action="search.html" id="search">
-<p style="text-align:center; font-size:125%"><b>Search for Books</b></p>
-  <input id ="searchValue" name="submit" type="text" size="40" placeholder="Enter Search" required></input>
-  <p style="text-align:center; font-size:75%"><b>Search By:</b> Author, Title, Course Number</p>
-</form>
-
-  
-  </body>
-  
-
-
+</body>
 <link rel = "stylesheet" href="css/index.css"></script>
-<script src="js/converter.js"></script>
 </html>
