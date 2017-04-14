@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>SEARCH</title>
+    <title >SEARCH</title>
     <script src="https://cdn.jsdelivr.net/fuse/2.6.1/fuse.min.js"></script>
 </head>
 
@@ -16,9 +16,18 @@
   processForm();
 </script>
 <body>
-    <h2>DATABASE</h2>
-    <textarea id="json" cols="30" rows="10"></textarea>
-    <h2>Search Result</h2>
+<style>
+body {
+background:
+radial-gradient(black 15%, transparent 16%) 0 0,
+radial-gradient(black 15%, transparent 16%) 8px 8px,
+radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+background-color:#282828;
+background-size:16px 16px;
+}
+</style>
+    <h2 style="color:white">Search Result</h2>
     <div id="mine"></div>
 <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>

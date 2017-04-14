@@ -21,12 +21,15 @@ var config = {
 var r = new XMLHttpRequest();
 r.open('GET', 'https://bookstore-e0ecb.firebaseio.com/BOOKS.json', true);
 
-function setImage(ISBN, divID){
+function setImage(object, divID){
 
-  storageRef.child('images/'+ISBN+'.jpg').getDownloadURL().then(function(url){
+  storageRef.child('images/'+object.ISBN+'.jpg').getDownloadURL().then(function(url){
     var img = document.createElement('img');
     img.src = url;
+    img.height = "250";
+    img.width = "250";
     document.getElementById(divID).appendChild(img);
+    setData(object, divID);
   });
 }
 
@@ -34,6 +37,8 @@ function setData(object, divID){
 
   var data = document.createElement('p');
   data.innerHTML = object.AUTHOR;
+  data.style.fontWeight = "bold";
+  data.style.color = "white";
   document.getElementById(divID).appendChild(data);
 }
 
@@ -45,7 +50,6 @@ r.onreadystatechange = function () {
   for (var t in data){
     x.push(data[t]);
   }
-  document.getElementById("json").value=JSON.stringify(x);
   var options = {
     include: ["score"],
   	shouldSort: true,
@@ -63,8 +67,8 @@ r.onreadystatechange = function () {
   var f = new Fuse(x, options);
   var output = f.search(l);
   for(var out in output){
-    setImage(output[out].item.ISBN,'mine');
-    setData(output[out].item, 'mine');
+    setImage(output[out].item,'mine');
+    //setData(output[out].item, 'mine');
   }
 };
 
