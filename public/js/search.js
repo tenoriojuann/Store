@@ -29,7 +29,7 @@ function setData(object, divID){
   var data = document.createElement('p');
   data.innerHTML = object.AUTHOR;
   data.style.fontWeight = "bold";
-  data.style.color = "white";
+  data.style.color = "black";
   document.getElementById(divID).appendChild(data);
 }
 
@@ -76,24 +76,6 @@ function receiveSearchRequest(){
       // Keys to look for
       keys: ['AUTHOR','BOOK_NAME','COURSE']
     };
-        
-
-    function setImage(ISBN, divID){
-        
-      storageRef.child('images/'+ISBN+'.jpg').getDownloadURL().then(function(url){
-
-        var img = document.createElement('img');
-        img.src = url;
-        document.getElementById(divID).appendChild(img);
-      });
-    }
-
-        
-    function setData(object, divID){
-      var data = document.createElement('p');
-      data.innerHTML = object.AUTHOR;
-      document.getElementById(divID).appendChild(data);
-    }
 
     // Calling the Search object and passing the database and the search options
     var f = new Fuse(arrDATA, options);
@@ -101,7 +83,7 @@ function receiveSearchRequest(){
 
 
     for(var entry in output){
-      setImage(output[entry].item.ISBN, 'Results');
+      setImage(output[entry].item, 'Results');
       setData(output[entry].item, 'Results')
     }
 
