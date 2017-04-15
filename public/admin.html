@@ -10,10 +10,10 @@
 <body class = "body">
 <p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
 <ul>
-  <li><a href="public/index.html">Home</a></li>
-  <li><a  href="public/AboutUs.html">About Us</a></li>
-  <li><a href="public/Contact.html">Contact</a></li>
-  <li><a  href="public/FAQ.html">FAQ</a></li>
+  <li><a href="index.html">Home</a></li>
+  <li><a  href="AboutUs.html">About Us</a></li>
+  <li><a href="Contact.html">Contact</a></li>
+  <li><a  href="FAQ.html">FAQ</a></li>
   <li><a class = "active" onclick="document.getElementById('id01').style.display='block'">Admin</a></li>
   <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
 </ul>
@@ -22,6 +22,8 @@
 <br></br>
 <br></br>
 <br></br>
+
+
 <div id = "inputForm">
   <input type="file" id="csvFileInput" onchange="handleFiles(this.files)"
             accept=".csv">
@@ -36,10 +38,11 @@
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
-<link rel = "stylesheet" href="public/css/admin.css"></script>
+<link rel = "stylesheet" href="css/admin.css"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://d3js.org/d3.v4.js"></script>
 
-<link rel = "stylesheet" href="public/css/index.css"></script>
+<link rel = "stylesheet" href="css/index.css"></script>
 <script src="js/converter.js"></script>
+<script src = "js/firebase.js"></script>
 </html>

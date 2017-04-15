@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 
@@ -8,15 +9,18 @@
 
     <meta charset="utf-8">
     <title>KSU Bookstore</title>
-
-  </head>
-<div id="page"></div>
 </head>
-<body class = "body">
+
+
+
+<body onload = "receiveSearchRequest()" class = "searchResults">
 
 
 
 <p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
+
+<!--- TABS -->
+
 <ul>
   <li><a class="active" href="index.html">Home</a></li>
   <li><a  href="AboutUs.html">About Us</a></li>
@@ -26,15 +30,11 @@
   <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
 </ul>
 
-    <div id="main"></div>
-    <div id="footer"></div>
-</div>
 
 
-<form method="get" action="search.html" id="search">
-  <input id ="searchValue" name="submit" type="text" size="40" placeholder="Enter Search" required></input>
-  <p style="text-align:center; font-size:75%"><b>Search By:</b> Author, Title, Course Number</p>
-</form>
+
+<!--- Admin Log in -->
+
 
 <!-- The Modal -->
 <div id="id01" class="modal" style="display: none">
@@ -54,7 +54,7 @@ class="close" title="Close Modal">&times;</span>
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password"  required>
 
-      <button style = "background-color: yellow">Login</button>
+      <button class = "loginbtn">Login</button>
       <input type="checkbox" checked="checked"> Remember me
     </div>
 
@@ -65,121 +65,30 @@ class="close" title="Close Modal">&times;</span>
   </form>
 </div>
   
-<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
 
-<script>
-  //Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCRDKyvIxu8HOniceJ-Xot7PC8XFDg54Lc",
-    authDomain: "bookstore-e0ecb.firebaseapp.com",
-    databaseURL: "https://bookstore-e0ecb.firebaseio.com",
-    projectId: "bookstore-e0ecb",
-    storageBucket: "bookstore-e0ecb.appspot.com",
-    messagingSenderId: "201530925901"
-  };
-  firebase.initializeApp(config);
-    var storage = firebase.storage();
-          var storageRef = storage.ref();
-</script>
-<script language="JavaScript">
-  function processForm()
-  {
-    var parameters = location.search.substring(1).split("&");
-    var temp = parameters[0].split("=");
-    l = unescape(temp[1]);
-    //alert(l); //Dialog with the text you put on the textbox
-  }
-  processForm();
-</script>
-<<<<<<< HEAD
-<body>
-<style>
-body {
-background:
-radial-gradient(black 15%, transparent 16%) 0 0,
-radial-gradient(black 15%, transparent 16%) 8px 8px,
-radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
-radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
-background-color:#282828;
-background-size:16px 16px;
-}
-</style>
-    <h2 style="color:white">Search Result</h2>
-    <div id="mine"></div>
+
+
+
+<!--- Search Field -->
+
+<form method="get" action="search.html" id="search">
+  <input id ="searchValue" name="submit" type="text" size="40" placeholder="Enter Search" required></input>
+  <p style="text-align:center; font-size:75%"><b>Search By:</b> Author, Title, Course Number</p>
+</form>
+
+
+<!--- Search Results -->
+<h2 style="color:black">Search Result</h2>
+<div id = "Results"></div>
+
+
+<link rel = "stylesheet" href="css/index.css"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
 <script src = "js/search.js"></script>
-=======
-
-    <div id="results"></div>
-    <img src = ></img>
-    <div id = "mine">
-      
-    </div>
-
-
-    <script>
-    var r = new XMLHttpRequest();
-      r.open('GET', 'https://bookstore-e0ecb.firebaseio.com/BOOKS.json', true);
-    r.onreadystatechange = function () {
-    if (r.readyState != 4 || r.status != 200) return;
-        var data = JSON.parse(r.responseText);
-
-      var x = [];
-      for (var t in data){
-    data[t]["id"] = t;
-        x.push(data[t]);
-
-        }
-        var options = {
-        include: ["score"],
-        shouldSort: true,
-        tokenize: true,
-        matchAllTokens: true,
-        findAllMatches: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 5000,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-            keys: ['AUTHOR','BOOK_NAME','COURSE']
-        };
-        function setImage(ISBN, divID){
-        
-          storageRef.child('images/'+ISBN+'.jpg').getDownloadURL().then(function(url){
-
-            var img = document.createElement('img');
-            img.src = url;
-            document.getElementById(divID).appendChild(img);
-          });
-        }
-
-        function setData(object, divID){
-          var data = document.createElement('p');
-          data.innerHTML = object.AUTHOR;
-          document.getElementById(divID).appendChild(data);
-        }
-        var f = new Fuse(x, options);
-        var output = f.search(l);
-
-
-        for(var out in output){
-            setImage(output[out].item.ISBN, 'mine');
-            setData(output[out].item, 'mine')
-        }
-
-
-    };
-    r.send();
-    </script>
-    <link rel = "stylesheet" href="css/index.css"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
-<script>
->>>>>>> origin/master
+<script src = "js/firebase.js"></script>
 </body>
 </html>

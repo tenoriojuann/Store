@@ -1,26 +1,4 @@
-var config = {
-    apiKey: "AIzaSyCRDKyvIxu8HOniceJ-Xot7PC8XFDg54Lc",
-    authDomain: "bookstore-e0ecb.firebaseapp.com",
-    databaseURL: "https://bookstore-e0ecb.firebaseio.com",
-    projectId: "bookstore-e0ecb",
-    storageBucket: "bookstore-e0ecb.appspot.com",
-    messagingSenderId: "201530925901"
-  };
-
-  firebase.initializeApp(config);
-      // Get a reference to the database service
-  var database = firebase.database();
-  var storage = firebase.storage();
-  var storageRef = storage.ref();
-
-
-
-
-
-
-var r = new XMLHttpRequest();
-r.open('GET', 'https://bookstore-e0ecb.firebaseio.com/BOOKS.json', true);
-
+// Sets the images of the books to the given div
 function setImage(object, divID){
 
   storageRef.child('images/'+object.ISBN+'.jpg').getDownloadURL().then(function(url){
@@ -33,7 +11,20 @@ function setImage(object, divID){
   });
 }
 
+// Formating the input to the search
+
+function processForm()
+  {
+    var parameters = location.search.substring(1).split("&");
+    var temp = parameters[0].split("=");
+    value = unescape(temp[1]);
+
+    return value;
+  }
+
+// Sets the data to the given div
 function setData(object, divID){
+
 
   var data = document.createElement('p');
   data.innerHTML = object.AUTHOR;
@@ -42,34 +33,80 @@ function setData(object, divID){
   document.getElementById(divID).appendChild(data);
 }
 
-r.onreadystatechange = function () {
-  if (r.readyState != 4 || r.status != 200) return;
-  var data = JSON.parse(r.responseText);
-  var x = [];
 
-  for (var t in data){
-    x.push(data[t]);
-  }
-  var options = {
-    include: ["score"],
-  	shouldSort: true,
-  	tokenize: true,
-  	matchAllTokens: true,
-  	findAllMatches: true,
-  	threshold: 0.5,
-  	location: 0,
-  	distance: 5000,
-  	maxPatternLength: 32,
-  	minMatchCharLength: 1,
-    keys: ['AUTHOR','BOOK_NAME','COURSE','ISBN','CRN']
-  }
+function receiveSearchRequest(){
+
+  value = processForm();
+  var r = new XMLHttpRequest();
+  r.open('GET', 'https://bookstore-e0ecb.firebaseio.com/BOOKS.json', true);
+
+
+  r.onreadystatechange = function () {
+    if (r.readyState != 4 || r.status != 200) return;
+    var data = JSON.parse(r.responseText);
+
+    var arrDATA = [];
+
+    // The search only works in an array
+    // So we are now inputting everything inside an array
+    // As well as the ID, which determines the location in the database
+    // This ID will be used to update the cart and to remove the entry from the database
+    for (var ID in data){
+      // creating a new entrr in the object
+      data[ID]["ID"] = ID;
+      arrDATA.push(data[ID]);
+    }
+
+    // Settings for the search
+    var options = {
+
+      include: ["score"],
+      // Will sort based on score
+      shouldSort: true,
+      tokenize: true,
+      matchAllTokens: true,
+      findAllMatches: true,
+      // The treshhold determines how strict the search is.
+      // The lower the value the more strict it is
+      threshold: 0.2,
+      location: 0,
+      distance: 5000,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      // Keys to look for
+      keys: ['AUTHOR','BOOK_NAME','COURSE']
+    };
+        
+
+    function setImage(ISBN, divID){
+        
+      storageRef.child('images/'+ISBN+'.jpg').getDownloadURL().then(function(url){
+
+        var img = document.createElement('img');
+        img.src = url;
+        document.getElementById(divID).appendChild(img);
+      });
+    }
+
+        
+    function setData(object, divID){
+      var data = document.createElement('p');
+      data.innerHTML = object.AUTHOR;
+      document.getElementById(divID).appendChild(data);
+    }
+
+    // Calling the Search object and passing the database and the search options
+    var f = new Fuse(arrDATA, options);
+    var output = f.search(value);
+
+
+    for(var entry in output){
+      setImage(output[entry].item.ISBN, 'Results');
+      setData(output[entry].item, 'Results')
+    }
+
+
+  };
   
-  var f = new Fuse(x, options);
-  var output = f.search(l);
-  for(var out in output){
-    setImage(output[out].item,'mine');
-    //setData(output[out].item, 'mine');
-  }
-};
-
-r.send();
+  r.send();
+}

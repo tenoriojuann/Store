@@ -8,7 +8,11 @@
 
 <body class = "body">
 
+
+
 <p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
+
+<!--- TABS -->
 <ul>
   <li><a class="active" href="index.html">Home</a></li>
   <li><a  href="AboutUs.html">About Us</a></li>
@@ -18,9 +22,8 @@
   <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
 </ul>
 
-    <div id="main"></div>
-    <div id="footer"></div>
-</div>
+
+<!--- Admin Log in -->
 
 <!-- The Modal -->
 <div id="id01" class="modal" style="display: none">
@@ -28,7 +31,7 @@
 class="close" title="Close Modal">&times;</span>
 
   <!-- Modal Content -->
-  <form class="modal-content animate" method ="post" action ="../admin.html">
+  <form class="modal-content animate" method ="post" action ="admin.html">
     <div class="imgcontainer">
       <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
     </div>
@@ -40,7 +43,7 @@ class="close" title="Close Modal">&times;</span>
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password"  required>
 
-      <button style = "background-color: yellow">Login</button>
+      <button class = "loginbtn">Login</button>
       <input type="checkbox" checked="checked"> Remember me
     </div>
 
@@ -57,6 +60,9 @@ class="close" title="Close Modal">&times;</span>
 <br></br>
 <br></br>
 <br></br>
+
+
+<!--- Search Field -->
 <form method="get" action="search.html" id="search">
 <p style="text-align:center; font-size:125%"><b>Search for Books</b></p>
   <input id ="searchValue" name="submit" type="text" size="40" placeholder="Enter Search" required></input>
@@ -64,7 +70,7 @@ class="close" title="Close Modal">&times;</span>
 </form>
 
   
-  </body>
+</body>
   
 
 

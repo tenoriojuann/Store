@@ -14,7 +14,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: black;
+    border-radius: 20px;
 }
 
 li {
@@ -35,7 +36,8 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: #111;
+    background-color: yellow;
+    color: black;
 }
 
 .active {
@@ -112,13 +114,13 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
+    background-color: yellow;
+    color: black;
+    padding: 14px 18px;
+    border: 2px solid rgb(3,155,229);
+    border-radius: 20px;
     cursor: pointer;
-    width: 100%;
+    width: 25%;
 }
 
 /* Add a hover effect for buttons */
@@ -131,7 +133,15 @@ button:hover {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
+    border: none;
 }
+.loginbtn {
+    width: auto;
+    padding: 10px 25px;
+    background-color: yellow;
+    border: none;
+}
+
 
 /* Center the avatar image inside this container */
 .imgcontainer {
@@ -208,4 +218,16 @@ span.psw {
 @keyframes animatezoom {
     from {transform: scale(0)} 
     to {transform: scale(1)}
+}
+
+
+searchResults {
+background:
+radial-gradient(black 15%, transparent 16%) 0 0,
+radial-gradient(black 15%, transparent 16%) 8px 8px,
+radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+background-color:#282828;
+background-size:16px 16px;
+}
 }
