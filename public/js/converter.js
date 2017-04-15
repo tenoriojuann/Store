@@ -66,19 +66,22 @@
       // Read file into memory as UTF-8      
       reader.readAsText(fileToRead);
       // Handle errors load
-      	var div = document.getElementById('inputForm');
-      	var input = document.createElement('button');
 
-      	div.appendChild(input);
-      	var t = document.createTextNode("Submit");       // Create a text node
-		input.appendChild(t);
-		input.setAttribute("onclick",reader.onload=loadHandler);
-      reader.onerror = errorHandler;
+		reader.onerror = errorHandler;
+		reader.onload = loadHandler;
+      
     }
 
     function loadHandler(event) {
-      var csv = event.target.result;
-      processData(csv);
+    	var csv = event.target.result;
+    	var div = document.getElementById('inputForm');
+    	var input = document.createElement('button');
+
+    	div.appendChild(input);
+    	var t = document.createTextNode("Submit");       // Create a text node
+		input.appendChild(t);
+        input.onclick = function(){processData(csv);}
+
     }
 
 	
@@ -106,9 +109,8 @@
 					dataInObject[12], dataInObject[13], dataInObject[14], dataInObject[15], dataInObject[16], dataInObject[17]); 
 		
 		}
-		
-		
-  
+
+		window.confirm("Database updated!");
     }
 
 	// ERRORS
