@@ -8,6 +8,10 @@
  *
  * Date: Tue Jan 02 2014
  */
+th{
+  background-color:#f2f2f2;
+}
+tr:nth-child(even) {background-color: #f2f2f2}
 th a {
   color: blue;
 }
