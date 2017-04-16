@@ -63,8 +63,8 @@ function receiveSearchRequest(){
       include: ["score"],
       // Will sort based on score
       shouldSort: true,
-      tokenize: true,
-      matchAllTokens: true,
+      tokenize: false,
+      matchAllTokens: false,
       findAllMatches: true,
       // The treshhold determines how strict the search is.
       // The lower the value the more strict it is
@@ -74,17 +74,16 @@ function receiveSearchRequest(){
       maxPatternLength: 32,
       minMatchCharLength: 1,
       // Keys to look for
-      keys: ['AUTHOR','BOOK_NAME','COURSE']
+      keys: ['AUTHOR','BOOK_NAME','COURSE', 'PROF', 'CRN']
     };
 
     // Calling the Search object and passing the database and the search options
     var f = new Fuse(arrDATA, options);
     var output = f.search(value);
 
-
-    for(var entry in output){
-      setImage(output[entry].item, 'Results');
-      setData(output[entry].item, 'Results')
+    for(var index in output){
+      setImage(output[index].item, 'Results');
+      setData(output[index].item, 'Results');
     }
 
 
