@@ -38,7 +38,7 @@ function receiveSearchRequest(){
 
   value = processForm();
   var r = new XMLHttpRequest();
-  r.open('GET', 'https://bookstore-e0ecb.firebaseio.com/BOOKS.json', true);
+  r.open('GET', 'https://bookstore-e0ecb.firebaseio.com/books.json', true);
 
 
   r.onreadystatechange = function () {
@@ -54,7 +54,7 @@ function receiveSearchRequest(){
     for (var ID in data){
       // creating a new entrr in the object
       data[ID]["ID"] = ID;
-      arrDATA.push(data[ID]);
+      arrDATA.push(data[ID]); 
     }
 
     // Settings for the search
@@ -74,17 +74,23 @@ function receiveSearchRequest(){
       maxPatternLength: 32,
       minMatchCharLength: 1,
       // Keys to look for
-      keys: ['AUTHOR','BOOK_NAME','COURSE', 'PROF', 'CRN']
+      keys: ['author','bookName','course', 'prof', 'crn']
     };
 
     // Calling the Search object and passing the database and the search options
     var f = new Fuse(arrDATA, options);
     var output = f.search(value);
-
+    var results = [];
     for(var index in output){
-      setImage(output[index].item, 'Results');
-      setData(output[index].item, 'Results');
+      results.push(output[index].item);
     }
+    console.log(results);
+
+$('#my-final-table').dynatable({
+  dataset: {
+    records: results
+  }
+});
 
 
   };

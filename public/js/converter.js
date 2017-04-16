@@ -7,44 +7,28 @@
 			summary) {
 				
 	var rootRef = database.ref();
-	var storeRef = rootRef.child("BOOKS");
+	var storeRef = rootRef.child("books");
 	
 	// DATABASE structure
 	var newStoreRef = storeRef.push();
 	newStoreRef.set({
-    AUTHOR: author,
-    BOOK_NAME: book_name,
-    COURSE : course,
-    PROF : professor,
-	CRN : crn,
-	ISBN : isbn,
-	REQUIRED: required,
-	SUMMARY: summary,
-	TERM: term
-  });
-  
-	// This node has to be process separetly
-	// They will still appear in the database together with 
-	// The other book-data
-	var newPrizeRef = newStoreRef.child("PRICE");
-	newPrizeRef.set({
-		EBOOK:pz_ebook,
-		NEW:pz_new,
-		RENTAL:pz_rental,
-		USED: pz_used
-	
-  });
-  
-  	// This node has to be process separetly
-	// They will still appear in the database together with 
-	// The other book-data
-    var newQuantityRef = newStoreRef.child("QUANTITY");
-	newQuantityRef.set({
-		EBOOK:q_ebook,
-		NEW:q_new,
-		RENTAL:q_rental,
-		USED:q_used
-	
+    author: author,
+    bookName: book_name,
+    course : course,
+    prof : professor,
+	crn : crn,
+	isbn : isbn,
+	required: required,
+	summary: summary,
+	term: term,
+	priceEbook:pz_ebook,
+	priceNew:pz_new,
+	priceRental:pz_rental,
+	priceUsed: pz_used,
+	quantityEbook:q_ebook,
+	quantityNew:q_new,
+	quantityRental:q_rental,
+	quantityUsed:q_used
   });
 
 }
