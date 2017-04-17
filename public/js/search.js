@@ -132,7 +132,7 @@ function receiveSearchRequest(){
       maxPatternLength: 32,
       minMatchCharLength: 1,
       // Keys to look for
-      keys: ['author','bookName','course', 'prof', 'crn']
+      keys: ['author','bookName','course', 'prof', 'crn', 'summary']
     };
 
     // Calling the Search object and passing the database and the search options
