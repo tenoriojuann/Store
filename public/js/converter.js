@@ -15,7 +15,7 @@
     author: author,
     bookName: book_name,
     course : course,
-    prof : professor,
+    professor : professor,
 	crn : crn,
 	isbn : isbn,
 	required: required,

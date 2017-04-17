@@ -1,14 +1,27 @@
-// Sets the images of the books to the given div
-function setImage(object, divID){
+    var results = [];
+    var value;
 
-  storageRef.child('images/'+object.ISBN+'.jpg').getDownloadURL().then(function(url){
-    var img = document.createElement('img');
-    img.src = url;
-    img.height = "250";
-    img.width = "250";
-    document.getElementById(divID).appendChild(img);
-    setData(object, divID);
-  });
+
+
+// Sets the images of the books to the given div
+function setImages(){
+
+$('#my-final-table tr').each(function(index){
+
+  var row = $(this);
+  if(index>0){
+
+    
+    storageRef.child('images/'+row.find('td:last-child').text()+'.jpg').getDownloadURL().then(function(url){
+      var img = document.createElement('img');
+      img.src = url;
+      img.height = "125";
+      img.width = "100";
+      row.find('td:first-child').replaceWith(img);
+    });
+  }
+  row.find('td:last-child').replaceWith('<p></p>');
+});
 }
 
 // Formating the input to the search
@@ -21,17 +34,6 @@ function processForm()
 
     return value;
   }
-
-// Sets the data to the given div
-function setData(object, divID){
-
-
-  var data = document.createElement('p');
-  data.innerHTML = object.AUTHOR;
-  data.style.fontWeight = "bold";
-  data.style.color = "black";
-  document.getElementById(divID).appendChild(data);
-}
 
 
 function receiveSearchRequest(){
@@ -80,20 +82,38 @@ function receiveSearchRequest(){
     // Calling the Search object and passing the database and the search options
     var f = new Fuse(arrDATA, options);
     var output = f.search(value);
-    var results = [];
+
+
+
     for(var index in output){
+
       results.push(output[index].item);
     }
-    console.log(results);
 
-$('#my-final-table').dynatable({
-  dataset: {
-    records: results
+
+ table();
   }
-});
 
 
-  };
   
   r.send();
+
+ 
+
+}
+
+
+function table(){
+    $('#my-final-table').dynatable({
+      dataset: {
+      records: results,
+      perPageDefault: 20
+      },
+      features:{
+        search:false
+      }
+    }).bind('dynatable:afterProcess', setImages);
+
+    setImages();
+
 }

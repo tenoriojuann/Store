@@ -8,15 +8,17 @@
  *
  * Date: Tue Jan 02 2014
  */
-th{
-  background-color:#f2f2f2;
+thead{
+  background-color:black;
+  border-radius: 20px;
+}
+th a{
+  color:white;
 }
 tr:nth-child(even) {background-color: #f2f2f2}
-th a {
-  color: blue;
-}
+
 th a:hover {
-  color: blue;
+  color: cyan;
   text-decoration: underline;
 }
 
@@ -59,12 +61,12 @@ th a:hover {
 }
 
 .dynatable-active-page {
-  background: #71AF5A;
+  background: yellow;
+  color:black;
   border-radius: 5px;
-  color: #fff;
 }
 .dynatable-active-page:hover {
-  color: #fff;
+  color: yellow;
 }
 .dynatable-disabled-page,
 .dynatable-disabled-page:hover {
