@@ -1,5 +1,54 @@
     var results = [];
     var value;
+    var Cart = [];
+
+
+// Finds the books that have been checked and adds the ID to the cart
+function sendToCart(){
+  $('#my-final-table tr').each(function(index){
+    var row = $(this);
+    if(index>0){
+
+      if(row.find('input[type="checkbox"]').is(':checked')){
+          console.log(row.find('td:nth-last-child(3)').text());
+          Cart.push(row.find('td:nth-last-child(3)').text());
+
+      }
+    }
+  });
+
+
+}
+
+
+// When the user clicks on an image a model pop up will appear
+function displayInfo(isbn, summary){
+
+storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
+  var modal = document.getElementById('myModal');
+  var captionText = document.getElementById("caption");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+  var modalImg = document.getElementById("img01");
+    modal.style.display = "block";
+    modalImg.src = url;
+    captionText.innerHTML = summary;
+});
+
+
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+    modal.style.display = "none";
+  }
+
+  $('#myModal').click(function (){
+      $(this).hide();
+  });
+}
+
+
+
 
 
 
@@ -10,17 +59,24 @@ $('#my-final-table tr').each(function(index){
 
   var row = $(this);
   if(index>0){
-
-    
-    storageRef.child('images/'+row.find('td:last-child').text()+'.jpg').getDownloadURL().then(function(url){
+    var isbn = row.find('td:last-child').text();
+    storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
       var img = document.createElement('img');
       img.src = url;
       img.height = "125";
       img.width = "100";
+      img.onclick = function(){displayInfo(isbn,row.find('td:nth-last-child(2)').text())};
+      var check = document.createElement('input');
+      check.setAttribute('type', 'checkbox');
+      check.setAttribute('value', 'default');
       row.find('td:first-child').replaceWith(img);
+      row.find('td:nth-last-child(4)').replaceWith(check);
     });
+
+
+
   }
-  row.find('td:last-child').replaceWith('<p></p>');
+
 });
 }
 
@@ -55,7 +111,7 @@ function receiveSearchRequest(){
     // This ID will be used to update the cart and to remove the entry from the database
     for (var ID in data){
       // creating a new entrr in the object
-      data[ID]["ID"] = ID;
+      data[ID]["id"] = ID;
       arrDATA.push(data[ID]); 
     }
 
@@ -107,7 +163,7 @@ function table(){
     $('#my-final-table').dynatable({
       dataset: {
       records: results,
-      perPageDefault: 20
+      perPageDefault: 10
       },
       features:{
         search:false

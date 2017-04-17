@@ -90,11 +90,29 @@ class="close" title="Close Modal">&times;</span>
     <th>Price Ebook</th>
     <th>Price New</th>
     <th>Price Rental</th>
+    <th>Add to Cart</th>
+    <th style="display: none">ID</th>
+    <th style = "display: none">Summary</th>
     <th style="display: none">isbn</th>
   </thead>
   <tbody>
   </tbody>
 </table>
+
+<button id = "submitSelect" onclick="sendToCart()"">Submit</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal2">
+
+  <!-- The Close Button -->
+  <span class="close2" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content2" id="img01">
+
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
 
 <link rel = "stylesheet" href="css/index.css"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
