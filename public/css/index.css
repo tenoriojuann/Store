@@ -199,6 +199,7 @@ button {
     border-radius: 20px;
     cursor: pointer;
     width: 25%;
+    float: right;
 }
 
 /* Add a hover effect for buttons */

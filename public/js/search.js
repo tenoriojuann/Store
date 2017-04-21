@@ -3,7 +3,7 @@
     var IDs = [];
 
 
-// Finds the books that have been checked and adds the ID to the cart
+// Finds the books that have been checked and adds the ID to the array
 function saveIDs(){
   $('#my-final-table tr').each(function(index){
     var row = $(this);

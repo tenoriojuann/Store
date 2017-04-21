@@ -72,7 +72,8 @@
 	// Once we got the file from the user
 	// We can process it and then add it to the database
     function processData(csv) {
-    	//now you have the header to the csv file
+    	// The file comes without headers by passing this string
+    	//we will have the header added to the csv file
 		var result = "isbn,book_name,author,term,course,IDK,professor,crn,required,q_new,q_used,q_rental,q_ebook,pz_new,pz_used,pz_rental,pz_ebook,summary\n" + csv;  
 		var data = d3.csvParse(result);
 		//Now that we got the file we can send it to the database.

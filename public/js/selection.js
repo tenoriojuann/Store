@@ -1,5 +1,6 @@
+
+// Grabbing the ids of the selected books
 var IDs = Cookies.getJSON('id');
-var numberOfItems = [];
 
 
 function selectedBooks(){
@@ -25,6 +26,8 @@ function selectedBooks(){
       		var cell5 = row.insertCell(4);
       		var cell6 = row.insertCell(5); // ID
       		var input = document.createElement('input');
+
+      		//tried to use only one input but it only one would show
       		input.setAttribute('type', 'text');
       		input.setAttribute('value' , '0');
       		var input2 = document.createElement('input');
