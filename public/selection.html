@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 
-<html lang="en">
-<head>
-
-    <title >SEARCH</title>
-
-    <script src="https://cdn.jsdelivr.net/fuse/2.6.1/fuse.min.js"></script>
-
+<html>
+  <head>
     <meta charset="utf-8">
     <title>KSU Bookstore</title>
-</head>
 
-
-
-<body onload = "receiveSearchRequest()" class = "searchResults">
-
-
-
+  </head>
+  
+<body class = "body" onload="selectedBooks()">
 <p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
-
-<!--- TABS -->
-
 <ul>
-  <li><a class="active" href="index.html">Home</a></li>
+  <li><a href="index.html">Home</a></li>
   <li><a  href="AboutUs.html">About Us</a></li>
   <li><a  href="Contact.html">Contact</a></li>
   <li><a  href="FAQ.html">FAQ</a></li>
   <li><a onclick="document.getElementById('id01').style.display='block'">Admin</a></li>
   <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
 </ul>
-
-
-
-
-<!--- Admin Log in -->
-
 
 <!-- The Modal -->
 <div id="id01" class="modal" style="display: none">
@@ -64,70 +46,22 @@ class="close" title="Close Modal">&times;</span>
     </div>
   </form>
 </div>
-  
+
+<div id="my-container"></div>
 
 
-
-
-<!--- Search Field -->
-
-<form method="get" action="search.html" id="search">
-  <input id ="searchValue" name="submit" type="text" size="40" placeholder="Enter Search" required></input>
-  <p style="text-align:center; font-size:75%"><b>Search By:</b> Author, Title, Course, Professor or CRN</p>
-</form>
-
-
-<!--- Search Results -->
-
-<!--- HEADERS FOR THE TABLE-->
-<table id="my-final-table">
-  <thead>
-    <th>Art</th>
-    <th>Book Name</th>
-    <th>Term</th>
-    <th>Course</th>
-    <th>Professor</th>
-    <th>Author</th>
-    <th>CRN</th>
-    <th>Price Ebook</th>
-    <th>Price New</th>
-    <th>Price Rental</th>
-    <th>Add to Cart</th>
-    <th style="display: none">ID</th>
-    <th style = "display: none">Summary</th>
-    <th style="display: none">isbn</th>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-
-<button id = "submitSelect" onclick="saveIDs()">Submit</button>
-
-<!-- The Modal -->
-<div id="myModal" class="modal2">
-
-  <!-- The Close Button -->
-  <span class="close2" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-
-  <!-- Modal Content (The Image) -->
-  <img class="modal-content2" id="img01">
-
-  <!-- Modal Caption (Image Text) -->
-  <div id="caption"></div>
-</div>
-
-<link rel = "stylesheet" href="css/index.css"></script>
+<button onclick = "sendToCart()">Add to Cart</button>
+</body>
 <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src = "js/search.js"></script>
-<script src = "js/firebase.js"></script>
-<script src="dynatable/vendor/jquery-1.7.2.min.js"></script>
-<script src="dynatable/jquery.dynatable.js"></script>
-<link rel="stylesheet" type="text/css" href="dynatable/jquery.dynatable.css">
+<script type="text/javascript" src="js/firebase.js"></script>
+<link rel = "stylesheet" href="css/index.css"></script>
 <script type="text/javascript" src="js/cookie.js"></script>
-</body>
+<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript" src ="js/selection.js"></script>
+
 </html>

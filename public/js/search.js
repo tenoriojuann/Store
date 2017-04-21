@@ -1,22 +1,28 @@
     var results = [];
     var value;
-    var Cart = [];
+    var IDs = [];
 
 
 // Finds the books that have been checked and adds the ID to the cart
-function sendToCart(){
+function saveIDs(){
   $('#my-final-table tr').each(function(index){
     var row = $(this);
     if(index>0){
 
       if(row.find('input[type="checkbox"]').is(':checked')){
-          console.log(row.find('td:nth-last-child(3)').text());
-          Cart.push(row.find('td:nth-last-child(3)').text());
+          IDs.push(row.find('td:nth-last-child(3)').text());
 
       }
     }
   });
 
+
+//set cookie
+
+
+  Cookies.set('id', JSON.stringify(IDs));
+
+  window.location.href = "selection.html"
 
 }
 
@@ -76,6 +82,7 @@ $('#my-final-table tr').each(function(index){
 
 
   }
+
 
 });
 }
