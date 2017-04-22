@@ -5,26 +5,28 @@ var IDs = Cookies.getJSON('id');
 
 function selectedBooks(){
 
-	var rootRef = database.ref();
-	var storeRef = rootRef.child("books");
 
 	var table = document.createElement('table');
 	table.setAttribute('id', "selectionTable");
-	for(index in IDs){	
+
+	for(index in IDs){
+
 		var starCountRef = firebase.database().ref('books/' + IDs[index]);
+
 		starCountRef.on('value', function(snapshot) {
 
 		var book = snapshot.val();
+
 	  	storageRef.child('images/'+book.isbn+'.jpg').getDownloadURL().then(function(url){
 
       		var img = document.createElement('img');
       		var row = table.insertRow();
-      		var cell1 = row.insertCell(0);
-      		var cell2 = row.insertCell(1);
-      		var cell3 = row.insertCell(2);
-      		var cell4 = row.insertCell(3);
-      		var cell5 = row.insertCell(4);
-      		var cell6 = row.insertCell(5); // ID
+      		var cell1 = row.insertCell();
+      		var cell2 = row.insertCell();
+      		var cell3 = row.insertCell();
+      		var cell4 = row.insertCell();
+      		var cell5 = row.insertCell();
+      		var cell6 = row.insertCell(); // ID
       		var input = document.createElement('input');
 
       		//tried to use only one input but it only one would show
@@ -61,7 +63,7 @@ function selectedBooks(){
       		cell5.appendChild(text4);
       		cell5.appendChild(input4);
       		var txt5 = document.createElement('p');
-      		txt5.innerHTML = snapshot.key;
+      		txt5.innerHTML = snapshot.key; // node ID in database
       		txt5.style.display = 'none';
       		cell6.appendChild(txt5);
 		});
@@ -75,31 +77,35 @@ function selectedBooks(){
 
 function sendToCart(){
 
-	var cartData = [];
+	var cartData = {};
   $('#selectionTable tr').each(function(index){
     var row = $(this);
     var values = [];
-    var id = row.find('td:last-child').text();
 	row.find('input').each(function(){
 		values.push(this.value);
     });
-    var tmp = {
-    		"id": id,
-    		"ebook": values[0],
+    var tmpValues = {
+    			"ebook": values[0],
 				"used": values[1],
 				"rental" : values[2],
-				"new" : values[3]
-			
+				"new" : values[3]	
 		};
-	cartData.push(tmp);
+
+	var nodeID = row.find('td:last-child').text();
+
+	cartData[nodeID] =(tmpValues);
+
   });
 
 
 //set cookie
 
-
   Cookies.set('cart', JSON.stringify(cartData));
 
-  window.location.href = "Cart.html"
+// log cookie to make sure it is right
+  console.log(Cookies.getJSON('cart'));
+
+//Navigate to the cart page
+ // window.location.href = "Cart.html"
 
 }

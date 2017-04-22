@@ -1,0 +1,16 @@
+/* .roundedOne */
+.roundedOne {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+}
+
+.roundedOne input[type=checkbox] {
+  visibility: hidden;
+}
+.roundedOne input[type=checkbox]:checked{
+  opacity: 1;
+}
+
+/* end .roundedOne */

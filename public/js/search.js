@@ -75,6 +75,7 @@ $('#my-final-table tr').each(function(index){
       var check = document.createElement('input');
       check.setAttribute('type', 'checkbox');
       check.setAttribute('value', 'default');
+      check.className = 'roundedOne';
       row.find('td:first-child').replaceWith(img);
       row.find('td:nth-last-child(4)').replaceWith(check);
     });
