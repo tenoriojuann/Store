@@ -20,7 +20,7 @@ function verifyEmail(email){
 	var validate = true;
 			
 	//Checks to make sure there is 1 and only 1 @ symbol 
-	if (email.indexOf('@') == -1 || email.indexOf('@') != email.lastIndexOf('@'))
+	if (email.indexOf('@') <= 0 || email.indexOf('@') != email.lastIndexOf('@'))
 		validate = false;
 	else {
 		var parts = email.split('@');
@@ -34,11 +34,10 @@ function verifyEmail(email){
 			var extension = partTwo[1];
 					
 			//checks to make sure the extension after the . is between 2 and 3 characters in length
-			if (extension.length >= 4 || extension.length < 2){
+			if (extension.length >= 4 || extension.length < 2)
 				validate = false;
 		}
-	}
-	
+	}	
 	return validate;
 }
 
