@@ -1,5 +1,9 @@
 
 var searchData = [];
+var taleDATA = [];
+var cookieID = [];
+
+
 
 function search() {
 
@@ -43,9 +47,12 @@ function search() {
     var f = new Fuse(searchData, options);
     var output = f.search(value);
 
-    for(var index in output) {
-        searchData.push(output[index].item);
+    for(var index in output){
+
+      taleDATA.push(output[index].item);
     }
+
+    table();
 }
 
 //formats input for search
@@ -57,6 +64,68 @@ function processForm() {
     return value;
 }
 
-$(document).ready(function() {
-    $('#search-table').DataTable();
-} );
+function table(){
+    $('#search-table').dynatable({
+      dataset: {
+      records: taleDATA,
+      perPageDefault: 10
+      },
+      features:{
+        search:false
+      }
+    }).bind('dynatable:afterProcess', setImages);
+
+    setImages();
+
+}
+
+// Sets the images of the books to the given div
+function setImages(){
+
+$('#search-table tr').each(function(index){
+
+  var row = $(this);
+  if(index>0){
+    var isbn = row.find('td:last-child').text();
+    storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
+      var img = document.createElement('img');
+      img.src = url;
+      img.height = "125";
+      img.width = "100";
+      //img.onclick = function(){displayInfo(isbn,row.find('td:nth-last-child(2)').text())};
+      var check = document.createElement('input');
+      check.setAttribute('type', 'checkbox');
+      check.setAttribute('value', 'default');
+      check.className = 'roundedOne';
+      row.find('td:first-child').replaceWith(img);
+      row.find('td:nth-last-child(4)').replaceWith(check);
+    });
+
+
+
+  }
+
+
+});
+}
+// Finds the books that have been checked and adds the ID to the array
+function saveIDs(){
+  $('#search-table tr').each(function(index){
+    var row = $(this);
+    if(index>0){
+
+      if(row.find('input[type="checkbox"]').is(':checked')){
+          cookieID.push(row.find('td:nth-last-child(3)').text());
+
+      }
+    }
+  });
+
+
+//set cookie
+
+
+  Cookies.set('id', JSON.stringify(cookieID));
+
+  console.log(Cookies.getJSON('id'))
+}
