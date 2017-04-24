@@ -1,13 +1,9 @@
-
 var searchData = [];
 var tableData = [];
 var cookieID = [];
 
-
-
 function search() {
 
-    //TODO: this data needs to be appended to the HTML table
     //retrieve book data
     $.ajax({
         url: "https://ksu-bookstore.firebaseio.com/books.json",
@@ -22,7 +18,6 @@ function search() {
                 // the search needs an array of objects
                 searchData.push(data[id]);
             }
-  
         },
         async: false
     });
@@ -76,7 +71,6 @@ function table(){
     }).bind('dynatable:afterProcess', setImages);
 
     setImages();
-
 }
 
 // Sets the images of the books to the given div
@@ -103,6 +97,7 @@ $('#search-table tr').each(function(index){
   }
 });
 }
+
 // Finds the books that have been checked and adds the ID to the array
 function saveIDs(){
   $('#search-table tr').each(function(index){
