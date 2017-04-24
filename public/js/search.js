@@ -1,4 +1,4 @@
-var results = [];
+
 var searchData = [];
 
 function search() {
@@ -6,11 +6,21 @@ function search() {
     //TODO: this data needs to be appended to the HTML table
     //retrieve book data
     $.ajax({
-        url: "https://bookstore-e0ecb.firebaseio.com/books.json",
+        url: "https://ksu-bookstore.firebaseio.com/books.json",
         success: function (data) {
-            results = data;
-            console.log(data);
-        }
+
+            for(id in data){
+                // the id is the key to the object
+                // but we will later need it and so now I added it as
+                // an entry in the object
+                data[id]["id"] = id;
+                // data is an object of objects but
+                // the search needs an array of objects
+                searchData.push(data[id]);
+            }
+  
+        },
+        async: false
     });
 
     var value = processForm();
@@ -30,7 +40,7 @@ function search() {
         keys: ['author','bookName','course', 'professor', 'crn', 'summary']
     };
 
-    var f = new Fuse(results, options);
+    var f = new Fuse(searchData, options);
     var output = f.search(value);
 
     for(var index in output) {

@@ -1,4 +1,3 @@
-var firebase = require("firebase");
 
 // Initialize Firebase
 var config = {
@@ -12,6 +11,6 @@ var config = {
 
 firebase.initializeApp(config);
 
-var database = firebase.database;
-var storage = firebase.storage;
-var storageRef = storage.refs();
+var database = firebase.database();
+var storage = firebase.storage();
+var storageRef = storage.ref();
