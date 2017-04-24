@@ -1,6 +1,6 @@
 
 var searchData = [];
-var taleDATA = [];
+var tableData = [];
 var cookieID = [];
 
 
@@ -49,7 +49,7 @@ function search() {
 
     for(var index in output){
 
-      taleDATA.push(output[index].item);
+      tableData.push(output[index].item);
     }
 
     table();
@@ -67,7 +67,7 @@ function processForm() {
 function table(){
     $('#search-table').dynatable({
       dataset: {
-      records: taleDATA,
+      records: tableData,
       perPageDefault: 10
       },
       features:{
@@ -100,12 +100,7 @@ $('#search-table tr').each(function(index){
       row.find('td:first-child').replaceWith(img);
       row.find('td:nth-last-child(4)').replaceWith(check);
     });
-
-
-
   }
-
-
 });
 }
 // Finds the books that have been checked and adds the ID to the array
@@ -116,15 +111,11 @@ function saveIDs(){
 
       if(row.find('input[type="checkbox"]').is(':checked')){
           cookieID.push(row.find('td:nth-last-child(3)').text());
-
       }
     }
   });
 
-
 //set cookie
-
-
   Cookies.set('id', JSON.stringify(cookieID));
 
   console.log(Cookies.getJSON('id'))

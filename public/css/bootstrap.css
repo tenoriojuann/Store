@@ -186,6 +186,7 @@ table {
 td,
 th {
   padding: 0;
+  background-color: #2b669a;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {

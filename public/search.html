@@ -8,10 +8,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/dynatable/jquery.dynatable.js"></script>
-
     <script src="js/bootstrap.min.js"></script>
     <script src="js/fuse/fuse.min.js"></script>
     <script src="js/firebase.js"></script>
+    <link rel="stylesheet" href="css/dynatable.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/title.css">
@@ -52,9 +52,9 @@
 </nav>
 
 <!--TABLE HEADERS-->
-<table id="search-table">
+<table id="search-table" class="table">
+    <div class="col-lg-2">
     <thead>
-    <tr>
         <th>Cover</th>
         <th>Book Name</th>
         <th>Term</th>
@@ -69,17 +69,21 @@
         <th style="display: none">ID</th>
         <th style = "display: none">Summary</th>
         <th style="display: none">isbn</th>
-    </tr>
     </thead>
+    </div>
     <tbody>
     </tbody>
 </table>
+<div class="container">
+    <button class="btn-primary" onclick="saveIDs()" style="margin: auto !important;">
+        Submit</button>
+    <a href="index.html"><button class="btn-secondary" href="index.html" style="margin: auto;">
+        Back to search</button></a>
+</div>
 
-<button onclick="saveIDs()">Submit</button>
 
 <script>
     search();
-
 </script>
 
 
