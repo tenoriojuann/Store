@@ -1,15 +1,17 @@
-// Firebase stuff
-var config = {
-    apiKey: "AIzaSyCRDKyvIxu8HOniceJ-Xot7PC8XFDg54Lc",
-    authDomain: "bookstore-e0ecb.firebaseapp.com",
-    databaseURL: "https://bookstore-e0ecb.firebaseio.com",
-    projectId: "bookstore-e0ecb",
-    storageBucket: "bookstore-e0ecb.appspot.com",
-    messagingSenderId: "201530925901"
-  };
+var firebase = require("firebase");
 
-  firebase.initializeApp(config);
-// Get a reference to the database service
-  var database = firebase.database();
-  var storage = firebase.storage();
-  var storageRef = storage.ref();
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyA5sQLFwbqG-b1OqK9ROXYN8yBJnL5zIC0",
+    authDomain: "ksu-bookstore.firebaseapp.com",
+    databaseURL: "https://ksu-bookstore.firebaseio.com",
+    projectId: "ksu-bookstore",
+    storageBucket: "ksu-bookstore.appspot.com",
+    messagingSenderId: "87493716263"
+};
+
+firebase.initializeApp(config);
+
+var database = firebase.database;
+var storage = firebase.storage;
+var storageRef = storage.refs();

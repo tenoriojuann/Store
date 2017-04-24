@@ -1,0 +1,23 @@
+{
+  "name": "ksu_bookstore",
+  "version": "1.0.0",
+  "description": "Kennesaw State University bookstore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tenoriojuann/Store.git"
+  },
+  "author": "Brendan Draper, Juan Tenorio, Stephen Chatham, Dedric Sundby",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tenoriojuann/Store/issues"
+  },
+  "homepage": "https://github.com/tenoriojuann/Store#readme",
+  "dependencies": {
+    "firebase": "^3.8.0",
+    "fuse.js": "^2.6.2"
+  }
+}
