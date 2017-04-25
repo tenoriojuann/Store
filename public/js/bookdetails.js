@@ -1,45 +1,49 @@
 var bookID = window.location.search.slice(4);
-var bookDetails;
-var myBook;
+var myBook=null;
 
-function Book() {
-	    book = {
-		Name: bookDetails.bookName,
-		Author: bookDetails.author,
-		ISBN: bookDetails.isbn,
-		Aourse: bookDetails.course,
-		CRN: bookDetails.crn,
-		PriceEbook: bookDetails.priceEbook,
-		PriceUsed: bookDetails.priceUsed,
-		PriceNew: bookDetails.priceNew,
-		PriceRental: bookDetails.priceRental,
-		Professor: bookDetails.professor,
-		QuantityEbook: bookDetails.quantityEbook,
-		QuantityUsed: bookDetails.quantityUsed,
-		QuantityNew: bookDetails.quantityNew,
-		QuantityRental: bookDetails.quantityRental,
-		QuantityTotal: (parseInt(bookDetails.quantityUsed)
+class Book {
+	constructor(bookDetails){
+		this.bookName= bookDetails.bookName;
+		this.author= bookDetails.author;
+		this.isbn = bookDetails.isbn;
+		this.course= bookDetails.course;
+		this.crn = bookDetails.crn;
+		this.priceEbook= bookDetails.priceEbook;
+		this.priceUsed= bookDetails.priceUsed;
+		this.priceNew= bookDetails.priceNew;
+		this.priceRental= bookDetails.priceRental;
+		this.professor= bookDetails.professor;
+		this.quantityEbook= bookDetails.quantityEbook;
+		this.quantityUsed= bookDetails.quantityUsed;
+		this.quantityNew= bookDetails.quantityNew;
+		this.quantityRental= bookDetails.quantityRental;
+		this.quantityTotal= (parseInt(bookDetails.quantityUsed)
 			+ parseInt(bookDetails.quantityRental)
-			+ parseInt(bookDetails.quantityNew)),
-		Requirement: bookDetails.required,
-		Summary: bookDetails.summary,
-		Term: bookDetails.term
-	};
+			+ parseInt(bookDetails.quantityNew));
+		this.requirement= bookDetails.required;
+		this.summary= bookDetails.summary;
+		this.term= bookDetails.term;
+	}
 
-	return book;
+	print(){
+		console.log(this);
+	}
+
 }
 
 getBookByID();
 
 function getBookByID() {
-	$.ajax({
-		url: "http://ksu-bookstore.firebaseio.com/books/" + bookID + "/.json",
-		success: function(results) {
-			bookDetails = results;
-			myBook = new Book();
-			console.log(myBook);
-		}
+
+	var rootRef = database.ref();
+	var storeRef = rootRef.child("books");
+	// Grabbing the book from the database
+	storeRef.child(bookID).once('value', function(book){
+		myBook = new Book(book.val());
+		myBook.print()
 	});
+
+
 
 }
 
