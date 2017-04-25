@@ -34,8 +34,9 @@ class Book {
 getBookByID();
 
 function getBookByID() {
-
+	//reference to the root of the database
 	var rootRef = database.ref();
+	// referencing the 'books' node 
 	var storeRef = rootRef.child("books");
 	// Grabbing the book from the database
 	storeRef.child(bookID).once('value', function(book){
@@ -62,7 +63,7 @@ function addToCart() {
 	cookie.push(bookID);
 
 	Cookies.remove('cart');
-	Cookies.set('cart', JSON.stringify(bookID));
+	Cookies.set('cart', JSON.stringify(cookie));
 
 }
 
