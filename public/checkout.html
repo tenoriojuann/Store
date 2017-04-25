@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>KSU Bookstore</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/title.css">
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/firebase.js"></script>
+    <script type="text/javascript" src = "js/cookie.js"></script>
+    <script type="text/javascript" src = "js/paypal.js"></script>
+    <script type="text/javascript" src = "js/dynatable/jquery.dynatable.js"></script>
+    <script type="text/javascript" src = "js/creditcardpayment.js"></script>
+    <script type="text/javascript" src ="js/card/card.js"></script>
+    <script type="text/javascript" src ="js/card/jquery.card.js"></script>
+    <script type="text/javascript" src ="js/checkout.js"></script>
+
+
+</head>
+<body onload="price()">
+
+<!--TITLE-->
+<div class="jumbotron text-center">
+    <div class="title">
+        <img class="logo" width="15%" height="15%" src="images/ksulogo.png">
+        <h1>KSU BOOKSTORE</h1>
+    </div>
+
+
+<!--- Total price -->
+
+<table class = "table" id = "price">
+<thead>
+    <th>Amount of Books</th>
+    <th>Subtotal</th>
+    <th>Total</th>
+    </thead>
+</table>
+
+
+<!--- CC -->
+    <div class="demo-container" id="forms" style="display:none">
+        <div class="card-wrapper"></div>
+
+        <div class="form-container active">
+            <form >
+                <input placeholder="Card number" type="tel" name="number" id ="number">
+                <input placeholder="Full name" type="text" name="name" id="name">
+                <input placeholder="MM/YY" type="tel" name="expiry" id="exp">
+                <input placeholder="CVC" type="number" name="cvc" id="cvc">
+            </form>
+        </div>
+        <button id ="submit">Submit</button>
+        <button id = "cancel">Cancel</button>
+    </div>
+
+
+<!--- Paypal -->
+<div id="forms2" style="display:none">
+<form >
+
+    <input placeholder="Email" type="email" name="email" id="email">
+    <input placeholder="password" type="password" name="pass" id = "pass">
+
+</form>
+    <button id="login">Login</button>
+    <button id ="cancel2">Cancel</button>
+
+</div>
+
+<!--- MENU -->
+    <p style="text-align: center" s>How would you like to pay?</p>
+
+    <button id ="cc">Credit Card</button>
+    <button id ="paypal">Paypal</button>
+
+</body>
+</html>

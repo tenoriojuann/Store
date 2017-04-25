@@ -1,10 +1,5 @@
 //These methods are used to verify payment with a credit card, all variables are strings
 
-	var cardnumber;
-	var cardholdername;
-	var vercode;
-	var expdate;
-
 //checks to see if  card is valid
 //returns a boolean
 function verifyCard(cardholdername, cardnumber, vercode, expdate) {
@@ -17,11 +12,11 @@ function verifyCard(cardholdername, cardnumber, vercode, expdate) {
 //verifies the card number if valid
 //returns a boolean
 function verifyCardNumber(cardnumber){
-	var cardKey = 16;
+	var cardKey = 19; // acounting for spaces
 	var regexDigit = /\D/;
 	
 	//checks number length and if there is anything other than a number
-	if (cardnumber.length == cardKey && !regexDigit.test(cardnumber))
+	if (cardnumber.length == cardKey)
 		return true;
 	else 
 		return false;
@@ -36,7 +31,7 @@ function whatCompany(cardnumber){
 	var firstThree = parseInt(cardnumber.substring(0, 3));
 	var firstSix = parseInt(cardnumber.substring(0, 6));
 			
-	if (verifyCardNumber(cardnumber) == true){
+	if (verifyCardNumber(cardnumber)){
 		if ( cardnumber.charAt(0) == '4')
 			company = 'VISA';
 		else if (firstTwo >= 51 && firstTwo <= 55)
@@ -91,32 +86,29 @@ function verifyName(cardholdername){
 //verifies the provided expiration date mm/dd/yyyy
 //returns a boolean
 function verifyExpDate(expdate){
-	var month, day, year;
+	var month, year;
 	var d = new Date();
 			
-	//Checks to make sure the date is 10 digits long mm/dd/yyyy
-	if (expdate.length != 10)
+	//Checks to make sure the date is 7 digits long 'mm / yy'
+	if (expdate.length != 7)
 		return false;
 			
 	//checks to make sure the date has the '/' in right places
-	if (expdate.charAt(2) != '/' || expdate.charAt(5) != '/')
+	if (expdate.charAt(3) != '/')
 		return false;
 		
-	month = expdate.substring(0,2) -1;
-	day = expdate.substring(3,5);
-	year = expdate.substring(6, 10);
+	month = expdate.substring(0,1);
+	
+	year = 2000+expdate.substring(5, 6);
 			
 	//checks for a valid month 0-11
 	if (month < 0 || month > 11)
 		return false;
 	
-	//checks to make sure the day is a valid number
-	if (day < 1 || day > 31)
-		return false;
-	
 	//checks to make sure the date is in the future(i.e. after the current date)
-	if (year >= d.getFullYear() && month >= d.getMonth() && day > d.getDate())
+	if (year >= d.getFullYear() && month >= d.getMonth()){
 		return true;
+	}
 	else
 		return false;	
 }
