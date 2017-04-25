@@ -7,7 +7,7 @@
 
 //checks to see if  card is valid
 //returns a boolean
-function verifyCard(cardholdername, cardnumber, vercode, expdate){
+function verifyCard(cardholdername, cardnumber, vercode, expdate) {
 	if (verifyCardNumber(cardnumber) && verifyCode(vercode) && verifyName(cardholdername) && verifyExpDate(expdate))
 		return true;
 	else

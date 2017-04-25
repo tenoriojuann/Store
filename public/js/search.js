@@ -18,6 +18,7 @@ function search() {
                 // the search needs an array of objects
                 searchData.push(data[id]);
             }
+
         },
         async: false
     });
@@ -76,7 +77,7 @@ function table(){
 // Sets the images of the books to the given div
 function setImages(){
 
-$('#search-table tr').each(function(index){
+$('#search-table tr').each(function(index) {
 
   var row = $(this);
   if(index>0){
@@ -86,7 +87,11 @@ $('#search-table tr').each(function(index){
       img.src = url;
       img.height = "125";
       img.width = "100";
-      //img.onclick = function(){displayInfo(isbn,row.find('td:nth-last-child(2)').text())};
+      img.onclick = function() {
+          window.location = generateUrl("bookdetails.html", {
+              id: '25' //book id here
+          });
+      };
       var check = document.createElement('input');
       check.setAttribute('type', 'checkbox');
       check.setAttribute('value', 'default');
@@ -115,3 +120,20 @@ function saveIDs(){
 
   console.log(Cookies.getJSON('id'))
 }
+
+function generateUrl(url, params) {
+    var i = 0, key;
+    for (key in params) {
+        if (i === 0) {
+            url += "?";
+        } else {
+            url += "&";
+        }
+        url += key;
+        url += '=';
+        url += params[key];
+        i++;
+    }
+    return url;
+}
+

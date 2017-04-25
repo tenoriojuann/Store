@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/title.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -53,11 +54,19 @@
         </div>
     </div>
 </nav>
+
+<!--Search Header-->
+<div class="header">
+    <div class="container-fluid">
+        <h2><span class="glyphicon glyphicon-search"></span> Search books</h2>
+    </div>
+</div>
+
     <!--- Search Field -->
-    <div class="jumbotron text-center" style="margin-top: 50px;">
+    <div class="jumbotron text-center" style="margin-top: 0;">
     <form class="form-inline" method="get" action="search.html" id="search">
         <div class="input-group">
-            <input type="text" id="searchValue" name="searchValue" class="form-control" size="50" placeholder="search books.." required>
+            <input type="text" id="searchValue" name="searchValue" class="form-control" size="50" required>
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-danger">search</button>
             </div>
