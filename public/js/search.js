@@ -93,33 +93,13 @@ $('#search-table tr').each(function(index) {
           });
       };
       var check = document.createElement('input');
-      check.setAttribute('type', 'checkbox');
-      check.setAttribute('value', 'default');
-      check.className = 'roundedOne';
       row.find('td:first-child').replaceWith(img);
-      row.find('td:nth-last-child(4)').replaceWith(check);
     });
   }
 });
 }
 
-// Finds the books that have been checked and adds the ID to the array
-function saveIDs(){
-  $('#search-table tr').each(function(index){
-    var row = $(this);
-    if(index>0){
 
-      if(row.find('input[type="checkbox"]').is(':checked')){
-          cookieID.push(row.find('td:nth-last-child(3)').text());
-      }
-    }
-  });
-
-//set cookie
-  Cookies.set('id', JSON.stringify(cookieID));
-
-  console.log(Cookies.getJSON('id'))
-}
 
 function generateUrl(url, params) {
     var i = 0, key;
