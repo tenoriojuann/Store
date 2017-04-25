@@ -54,6 +54,10 @@ function viewBookDetails() {
 	storageRef.child('images/'+myBook.isbn+'.jpg').getDownloadURL().then(function(url){
 
 		document.getElementById('imgArt').src = url;
+		document.getElementById('Hnew').innerHTML += "<br>$" + myBook.priceNew;
+		document.getElementById('Hused').innerHTML += "<br>$" + myBook.priceUsed;
+		document.getElementById('Hrental').innerHTML += "<br>$" + myBook.priceRental;
+		document.getElementById('Hebook').innerHTML += "<br>$" + myBook.priceEbook;
 		document.getElementById('bookName').innerHTML = myBook.bookName;
 		document.getElementById('summary').innerHTML = myBook.summary;
 
