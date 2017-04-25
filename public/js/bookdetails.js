@@ -6,7 +6,8 @@ function AddToCart(){
 
 	// Need to check if the cookie exists first
 
-	
+	// format of the cookie will end up being different
+	// but this is just a start
 	var cookie = Cookies.getJSON('cart');
 
 
