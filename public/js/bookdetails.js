@@ -11,3 +11,15 @@ function AddToCart(){
 	Cookies.set('cart',JSON.stringify(bookID));
 
 }
+
+function removeFromCart(){
+	var cookie = Cookies.getJSON('cart');
+
+	cookie = jQuery.grep(cookie, function(value) {
+  		return value != bookID;
+	});
+
+	Cookies.remove('cart');
+
+	Cookies.set('cart',JSON.stringify(bookID));
+}
