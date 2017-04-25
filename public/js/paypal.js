@@ -2,8 +2,6 @@
 //Group 8
 
 //These functions are used to verify payment for PayPal
-	var email;
-	var passwaord;
 
 //Verifies the provided password is correct
 function verifyPassword(password){
