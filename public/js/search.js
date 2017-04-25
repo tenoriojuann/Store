@@ -89,7 +89,7 @@ $('#search-table tr').each(function(index) {
       img.width = "100";
       img.onclick = function() {
           window.location = generateUrl("bookdetails.html", {
-              id: '25' //book id here
+              id: row.find('td:nth-last-child(3)').text() //book id here
           });
       };
       var check = document.createElement('input');
