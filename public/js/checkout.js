@@ -78,6 +78,7 @@ $(document).ready(
 
             if(verifyCard(name,number,cvc,exp)){
             	$("#forms").toggle("slows");
+            	Cookies.remove('cart');
             	alert("THank you for your payment");
 
             }
