@@ -3,7 +3,12 @@ var bookID = window.location.search.slice(4);
 console.log(bookID);
 
 function AddToCart(){
+
+	// Need to check if the cookie exists first
+
+	
 	var cookie = Cookies.getJSON('cart');
+
 
 	cookie.push(bookID);
 

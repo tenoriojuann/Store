@@ -100,6 +100,11 @@ $('#search-table tr').each(function(index) {
 }
 
 
+//set cookie
+  Cookies.set('id', JSON.stringify(cookieID));
+
+  console.log(Cookies.getJSON('id'))
+
 
 function generateUrl(url, params) {
     var i = 0, key;
