@@ -31,7 +31,7 @@ class Book {
 
 }
 
-getBookByID();
+
 
 function getBookByID() {
 	//reference to the root of the database
@@ -42,6 +42,7 @@ function getBookByID() {
 	storeRef.child(bookID).once('value', function(book){
 		myBook = new Book(book.val());
 		myBook.print()
+		viewBookDetails();
 	});
 
 
@@ -49,6 +50,14 @@ function getBookByID() {
 }
 
 function viewBookDetails() {
+
+	storageRef.child('images/'+myBook.isbn+'.jpg').getDownloadURL().then(function(url){
+
+		document.getElementById('imgArt').src = url;
+		document.getElementById('bookName').innerHTML = myBook.bookName;
+		document.getElementById('summary').innerHTML = myBook.summary;
+
+	});
 
 }
 
@@ -60,13 +69,33 @@ function addToCart() {
 	// but this is just a start
 	var cookie = Cookies.getJSON('cart');
 
-	cookie.push(bookID);
+		myBook["id"] = bookID;
+		myBook["new"] = document.getElementById('new').value;
+		myBook["rental"] = document.getElementById('rental').value;
+		myBook["used"] = document.getElementById('used').value;
+		myBook["ebook"] = document.getElementById('ebook').value;
+	
+	if(cookie){
+		cookie.push(myBook);
 
-	Cookies.remove('cart');
-	Cookies.set('cart', JSON.stringify(cookie));
+		Cookies.remove('cart');
+		Cookies.set('cart', JSON.stringify(cookie));
+	}
+	else{
+		var cookie = [];
+		cookie.push(myBook);
+
+		Cookies.remove('cart');
+		Cookies.set('cart', JSON.stringify(cookie));
+	}
+	console.log(Cookies.getJSON('cart'));
+
+	alert("YES! added to cart!");
 
 }
 
+
+// Need to work on this one
 function removeFromCart() {
 	var cookie = Cookies.getJSON('cart');
 
@@ -77,5 +106,7 @@ function removeFromCart() {
 	Cookies.remove('cart');
 
 	Cookies.set('cart', JSON.stringify(bookID));
+
+	console.log(Cookies.getJSON('cart'));
 }
 

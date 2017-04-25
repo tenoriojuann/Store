@@ -18,7 +18,7 @@
     <script type="text/javascript" src="js/cookie.js"></script>
 
 </head>
-<body>
+<body onload = "getBookByID()">
 
 <!--TITLE-->
 <div class="jumbotron text-center">
@@ -51,3 +51,43 @@
     </div>
 </nav>
 
+
+<table class = "table" id = "bookdetails">
+        <th>Art</th>
+        <th>Book Name</th>
+        <th>New</th>
+        <th>Used</th>
+        <th>Rental</th>
+        <th>Ebook</th>
+        <th>Summary</th>
+    <tbody>
+            <td>
+                <img id="imgArt" height="20%"></img>
+            </td>
+            <td>
+                <p id ="bookName"></p>
+            </td>
+            <td>
+                <input id = "new" type="text" value="0"></input>
+            </td>
+            <td>
+                <input id = "used" type="text" value="0"></input>
+            </td>
+            <td>
+                <input id = "rental" type="text" value="0"></input>
+            </td>
+            <td>
+                <input id = "ebook" type="text" value="0"></input>
+            </td>
+            <td>
+                <p id = "summary"></p>
+            </td>
+    </tbody>
+</table>
+
+<button onclick="addToCart()">Add to Cart</button>
+<button>Remove from Cart</button>
+
+</body>
+
+</html>

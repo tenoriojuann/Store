@@ -18,9 +18,11 @@ function verifyCardNumber(cardnumber){
     var regexDigit = /\D/;
 
     //checks number length and if there is anything other than a number
-    if (cardnumber.length == cardKey && !regexDigit.test(cardnumber))
+    if (noSpaceNumb.length == cardKey && !regexDigit.test(noSpaceNumb))
         return true;
     else
+        console.log("failed card number");
+
         return false;
 }
 //checks to see what card company the provided card belongs too
@@ -63,6 +65,7 @@ function verifyCode(vercode){
     if (vercodekey == vercode && !regexDigit.test(vercode))
         return true;
     else
+        console.log("failed code number");
         return false;
 }
 //verifies the provided name
@@ -72,12 +75,16 @@ function verifyName(cardholdername){
     var regexChar = /[^\w\s\*]/;
 
     //checks to see if the name contains any numbers
-    if (regexDigits.test(cardholdername))
+    if (regexDigits.test(cardholdername)){
+        console.log("failed, name contains numbers");
         return false;
+    }
     else {
         //checks for special characters excluding white-space
-        if (regexChar.test(cardholdername))
+        if (regexChar.test(cardholdername)){
+            console.log("failed, name has special characters");
             return false;
+        }
         else
             return true;
     }
@@ -88,7 +95,7 @@ function verifyExpDate(expdate){
     var month, year;
     var yearPrefix = new String('20');
     var d = new Date();
-
+    expdate = removeWhiteSpace(expdate);
     //Checks to make sure the date is 5 digits long 'mm/yy'
     if (expdate.length != 5)
         return false;
