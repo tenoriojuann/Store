@@ -67,10 +67,8 @@ function viewBookDetails() {
 
 function addToCart() {
 
-	// Need to check if the cookie exists first
-
-	// format of the cookie will end up being different
-	// but this is just a start
+	
+	// Adding user input to the book
 	var cookie = Cookies.getJSON('cart');
 
 		myBook["id"] = bookID;
@@ -79,6 +77,7 @@ function addToCart() {
 		myBook["used"] = document.getElementById('used').value;
 		myBook["ebook"] = document.getElementById('ebook').value;
 	
+	// Need to check if the cookie exists first
 	if(cookie){
 		cookie.push(myBook);
 
