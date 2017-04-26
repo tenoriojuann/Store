@@ -11,7 +11,7 @@ function verifyCard(cardholdername, cardnumber, vercode, expdate) {
 //verifies the card number if valid
 //the passed card number should be a string
 //returns a boolean
-function verifyCardNumber(cardnumber){
+function verifyCardNumber(cardnumber) {
     var noSpaceNumb;
     noSpaceNumb = removeWhiteSpace(cardnumber);
     var cardKey = 16; // acounting for spaces
@@ -23,11 +23,11 @@ function verifyCardNumber(cardnumber){
     else
         console.log("failed card number");
 
-        return false;
+    return false;
 }
 //checks to see what card company the provided card belongs too
 //Returns a string
-function whatCompany(cardnumber){
+function whatCompany(cardnumber) {
     var noSpaceNumb = removeWhiteSpace(cardnumber);
     var company = new String('');
     var firstTwo = parseInt(noSpaceNumb.substring(0, 2));
@@ -35,8 +35,8 @@ function whatCompany(cardnumber){
     var firstThree = parseInt(noSpaceNumb.substring(0, 3));
     var firstSix = parseInt(noSpaceNumb.substring(0, 6));
 
-    if (verifyCardNumber(cardnumber)){
-        if ( cardnumber.charAt(0) == '4')
+    if (verifyCardNumber(cardnumber)) {
+        if (cardnumber.charAt(0) == '4')
             company = 'VISA';
         else if (firstTwo >= 51 && firstTwo <= 55)
             company = 'MASTERCARD';
@@ -58,7 +58,7 @@ function whatCompany(cardnumber){
 }
 //verifies the security code entered is valid
 //returns a boolean
-function verifyCode(vercode){
+function verifyCode(vercode) {
     var vercodekey = '777';
     var regexDigit = /\D/;
 
@@ -66,22 +66,22 @@ function verifyCode(vercode){
         return true;
     else
         console.log("failed code number");
-        return false;
+    return false;
 }
 //verifies the provided name
 //returns a boolean
-function verifyName(cardholdername){
+function verifyName(cardholdername) {
     var regexDigits = /\d/;
     var regexChar = /[^\w\s\*]/;
 
     //checks to see if the name contains any numbers
-    if (regexDigits.test(cardholdername)){
+    if (regexDigits.test(cardholdername)) {
         console.log("failed, name contains numbers");
         return false;
     }
     else {
         //checks for special characters excluding white-space
-        if (regexChar.test(cardholdername)){
+        if (regexChar.test(cardholdername)) {
             console.log("failed, name has special characters");
             return false;
         }
@@ -91,7 +91,7 @@ function verifyName(cardholdername){
 }
 //verifies the provided expiration date mm/yy
 //returns a boolean
-function verifyExpDate(expdate){
+function verifyExpDate(expdate) {
     var month, year;
     var yearPrefix = new String('20');
     var d = new Date();
@@ -104,7 +104,7 @@ function verifyExpDate(expdate){
     if (expdate.charAt(2) != '/')
         return false;
 
-    month = expdate.substring(0,2) - 1; //months are from 0-12 so you have to subtract 1 from what is entered to compare correct month
+    month = expdate.substring(0, 2) - 1; //months are from 0-12 so you have to subtract 1 from what is entered to compare correct month
     year = yearPrefix.concat(expdate.substring(3, 5));
 
     //checks for a valid month 0-11
@@ -120,11 +120,11 @@ function verifyExpDate(expdate){
 }
 //Removes any white space out of the card number string
 //returns a new string
-function removeWhiteSpace(cardnumber){
-    var newNumber ='';
+function removeWhiteSpace(cardnumber) {
+    var newNumber = '';
 
-    for (var i = 0; i <= cardnumber.length; i++){
-        if (cardnumber.charAt(i) != ' ' )
+    for (var i = 0; i <= cardnumber.length; i++) {
+        if (cardnumber.charAt(i) != ' ')
             newNumber = newNumber.concat(cardnumber.charAt(i));
     }
     return newNumber;
