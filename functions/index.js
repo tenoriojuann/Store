@@ -1,5 +1,4 @@
 var functions = require('firebase-functions');
-var $ = require("jquery");
 // The current card.js code does not explictly require jQuery, but instead uses the global, so this line is needed.
 window.jQuery = $;
 var card = require("card");

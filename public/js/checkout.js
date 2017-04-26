@@ -78,9 +78,8 @@ $(document).ready(
 
             if(verifyCard(name,number,cvc,exp)){
             	$("#forms").toggle("slows");
-            	Cookies.remove('cart');
-            	alert("THank you for your payment");
-
+            	window.location.reload();
+            	setEmailToCookie();
             }
             else{
             	alert("not");
@@ -88,6 +87,17 @@ $(document).ready(
         });
  });
 
+
+function setEmailToCookie() {
+    var txt;
+    var email = prompt("Please enter your email to send receipt:");
+    if (email == null || email == "") {
+        txt = "User cancelled the prompt.";
+    } else {
+        txt = email;
+    }
+    Cookies.set('email', txt);
+}
 
 
 
