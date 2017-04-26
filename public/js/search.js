@@ -9,7 +9,7 @@ function search() {
         url: "https://ksu-bookstore.firebaseio.com/books.json",
         success: function (data) {
 
-            for(id in data){
+            for (id in data) {
                 // the id is the key to the object
                 // but we will later need it and so now I added it as
                 // an entry in the object
@@ -37,15 +37,15 @@ function search() {
         distance: 5000,
         maxPatternLength: 32,
         minMatchCharLength: 1,
-        keys: ['author','bookName','course', 'professor', 'crn', 'summary']
+        keys: ['author', 'bookName', 'course', 'professor', 'crn', 'summary']
     };
 
     var f = new Fuse(searchData, options);
     var output = f.search(value);
 
-    for(var index in output){
+    for (var index in output) {
 
-      tableData.push(output[index].item);
+        tableData.push(output[index].item);
     }
 
     table();
@@ -60,46 +60,44 @@ function processForm() {
     return value;
 }
 
-function table(){
+function table() {
     $('#search-table').dynatable({
-      dataset: {
-      records: tableData,
-      perPageDefault: 10
-      },
-      features:{
-        search:false
-      }
+        dataset: {
+            records: tableData,
+            perPageDefault: 10
+        },
+        features: {
+            search: false
+        }
     }).bind('dynatable:afterProcess', setImages);
 
     setImages();
 }
 
 // Sets the images of the books to the given div
-function setImages(){
+function setImages() {
 
-$('#search-table tr').each(function(index) {
+    $('#search-table tr').each(function (index) {
 
-  var row = $(this);
-  if(index>0){
-    var isbn = row.find('td:last-child').text();
-    storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
-      var img = document.createElement('img');
-      img.src = url;
-      img.height = "125";
-      img.width = "100";
-      img.onclick = function() {
-          window.location = generateUrl("bookdetails.html", {
-              id: row.find('td:nth-last-child(3)').text()
-          });
-      };
-      var check = document.createElement('input');
-      row.find('td:first-child').replaceWith(img);
+        var row = $(this);
+        if (index > 0) {
+            var isbn = row.find('td:last-child').text();
+            storageRef.child('images/' + isbn + '.jpg').getDownloadURL().then(function (url) {
+                var img = document.createElement('img');
+                img.src = url;
+                img.height = "125";
+                img.width = "100";
+                img.onclick = function () {
+                    window.location = generateUrl("bookdetails.html", {
+                        id: row.find('td:nth-last-child(3)').text()
+                    });
+                };
+                var check = document.createElement('input');
+                row.find('td:first-child').replaceWith(img);
+            });
+        }
     });
-  }
-});
 }
-
-
 
 function generateUrl(url, params) {
     var i = 0, key;
