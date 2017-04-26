@@ -1,8 +1,6 @@
 
 var cookie = Cookies.getJSON('cart');
 console.log(cookie);
-var tableData = [];
-
 
 function drawTable(){
 	$('#shopping-cart').dynatable({
