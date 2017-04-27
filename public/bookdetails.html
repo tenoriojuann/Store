@@ -13,17 +13,26 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
     <script src="js/bookdetails.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
+	<!-- styles needed by jScrollPane -->
+	<link type="text/css" href="style/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+	<!-- latest jQuery direct from google's CDN -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<!-- the mousewheel plugin - optional to provide mousewheel support -->
+	<script type="text/javascript" src="script/jquery.mousewheel.js"></script>
+	<!-- the jScrollPane script -->
+	<script type="text/javascript" src="script/jquery.jscrollpane.min.js"></script>
+
 
 </head>
-<body onload="getBookByID()">
+<body onload = "getBookByID()">
+
 
 <!--TITLE-->
 <div class="jumbotron text-center">
     <div class="title">
-        <img class="logo" width="15%" height="15%" src="images/ksulogo.png">
+        <img class="logo" width="5%" height="5%" src="images/ksulogo.png">
         <h1>KSU BOOKSTORE</h1>
     </div>
 </div>
@@ -51,42 +60,90 @@
     </div>
 </nav>
 
-<table class="table" id="bookdetails">
-    <th>Art</th>
-    <th>Book Name</th>
-    <th id="Hnew">New</th>
-    <th id="Hused">Used</th>
-    <th id="Hrental">Rental</th>
-    <th id="Hebook">Ebook</th>
-    <th>Summary</th>
-    <tbody>
-    <td>
-        <img id="imgArt" height="20%">
-    </td>
-    <td>
-        <p id="bookName"></p>
-    </td>
-    <td>
-        <input id="new" type="text" value="0">
-    </td>
-    <td>
-        <input id="used" type="text" value="0">
-    </td>
-    <td>
-        <input id="rental" type="text" value="0">
-    </td>
-    <td>
-        <input id="ebook" type="text" value="0">
-    </td>
-    <td>
-        <p id="summary"></p>
-    </td>
-    </tbody>
+<table class = "floatedTable1" width="40%" border="0" cellspacing="0" cellpadding="0"> 
+<tr>
+
+<th style=font-size:18pt;>Cover Page</th>
+<th style=font-size:18pt;>Book Description</th>
+
+</tr>
+<tr>
+<td>
+    <img id="imgArt" height="400px" ></img>
+</td>
+<td>
+    <div class = "scroll-pane"> <!--Scrollpane for summary -->
+	<p id = "summary"></p>
+	</div>
+</td>
+</tr>
+<tbody>
+</tbody>
+</table>
+
+<table class = "floatedtable" id = "bookdetails" width="40%" border="0" cellspacing="0" cellpadding="0"> 
+	<!--set headers for types of books -->
+    <tr>
+        <th id = "Hnew">New</th>
+        <th id = "Hused">Used</th>
+        <th id = "Hrental">Rental</th>
+        <th id = "Hebook">Ebook</th>
+	</tr> 
+	<!--Insert labels into cells -->
+    <tr>
+            <td>
+                <input id = "new" type="text" value="0" style="width: 100px;"></input>
+            </td>
+            <td>
+                <input id = "used" type="text" value="0" style="width: 100px;"></input>
+            </td>
+            <td>
+                <input id = "rental" type="text" value="0" style="width: 100px;"></input>
+            </td>
+            <td>
+                <input id = "ebook" type="text" value="0" style="width: 100px;"></input>
+            </td>
+            
+    </tr>
+	<!--Print Stock: and qty of each book in row -->
+	<tr>
+		<td>
+			<p> Stock: 
+			<label id = "quantityNew"></label>
+		</td></p>
+		<td>
+			<p> Stock: 
+			<label id = "quantityUsed"></label>
+		</td></p>
+		<td>
+			<p> Stock: 
+			<label id = "quantityRental"></label>
+		</td></p>
+		<td>
+			<p> Stock: 
+			<label id = "quantityEbook"></label>
+		</td></p>
+	</tr>	
 </table>
 
 <button onclick="addToCart()">Add to Cart</button>
 <button>Remove from Cart</button>
 
+<table class = "table5" width="40%" border="0" cellspacing="0" cellpadding="0" > 
+	<tbody>
+	<tr>
+		<th width = "150px"> Title: </th>
+		<td id = "bookName"></td>
+	</tr>
+	<tr>
+		<th> ISBN: </th>
+		<td id = "isbn"></td>
+	</tr>
+	<tr>
+		<th> Author(s): </th>
+		<td id = "author"></td>
+	</tr>
+	</tbody>
+</table>
 </body>
-
 </html>
