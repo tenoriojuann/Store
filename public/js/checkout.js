@@ -1,7 +1,7 @@
 // function will draw a table for the price
 function price() {
     var cookie = Cookies.getJSON('cart');
-    console.log(cookie);
+
     var subtotal = 0;
     var totalBooks = 0;
     for (var index in cookie) {
@@ -80,16 +80,9 @@ $(document).ready(
             var cvc = $('#cvc').val();
             var number = $('#number').val();
 
-
-
-            if(verifyCard(name,number,cvc,exp)){
-            	$("#forms").toggle("slows");
-            	window.location.reload();
-            	setEmailToCookie();
-            }
             if (verifyCard(name, number, cvc, exp)) {
                 $("#forms").toggle("slows");
-                Cookies.remove('cart');
+                $(location).attr('href', "receipt.html");
                 alert("THank you for your payment");
 
             }
@@ -101,17 +94,6 @@ $(document).ready(
 
  });
 
-
-function setEmailToCookie() {
-    var txt;
-    var email = prompt("Please enter your email to send receipt:");
-    if (email == null || email == "") {
-        txt = "User cancelled the prompt.";
-    } else {
-        txt = email;
-    }
-    Cookies.set('email', txt);
-}
 
 
 
