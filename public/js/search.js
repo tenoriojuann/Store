@@ -88,6 +88,7 @@ function table(){
     setImages();
 }
 
+
 // Sets the images of the books to the given div
 function setImages(){
 
@@ -110,6 +111,10 @@ $('#search-table tr').each(function(index) {
       check.type = "checkbox";
       row.find('td:first-child').replaceWith(img);
       row.find('td:last-child').replaceWith(check);
+	  var x = document.createElement('input');
+	  x.type="text";
+	  row.find('td:nth-last-child(4)').append(x);
+	  
     });
   }
 });
