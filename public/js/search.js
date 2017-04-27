@@ -121,7 +121,6 @@ $('#search-table tr').each(function(index) {
         var quantity = document.createElement('p');
         quantity.innerHTML = "<br>Quantity: " + book.val().quantityNew;
         mycell.append(quantity);
-        console.log(mycell[0].innerHTML);
 
       });
       var check = document.createElement('input');
@@ -154,7 +153,9 @@ function sendToCart(){
         var id = row.find('td:nth-last-child(2)').text();
         
         storeRef.child(id).once('value').then(function (book) {
-          myBook.push(new Book(book.val()));
+          temp = book.val();
+          temp["new"] = row.find('td:nth-last-child(4)').find('input').val();
+          myBook.push(temp);
           
          
         });
