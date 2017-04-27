@@ -9,7 +9,7 @@ function search() {
         url: "https://ksu-bookstore.firebaseio.com/books.json",
         success: function (data) {
 
-            for (id in data) {
+            for(id in data){
                 // the id is the key to the object
                 // but we will later need it and so now I added it as
                 // an entry in the object
@@ -24,7 +24,7 @@ function search() {
     });
 
     var value = processForm();
-
+    console.log(value);
     var options = {
         include: ["score"],
         shouldSort: true,
@@ -32,20 +32,20 @@ function search() {
         matchAllTokens: false,
         findAllMatches: true,
         // threshold determines strictness of search
-        threshold: 0.2,
+        threshold: 0.1,
         location: 0,
         distance: 5000,
         maxPatternLength: 32,
         minMatchCharLength: 1,
-        keys: ['author', 'bookName', 'course', 'professor', 'crn', 'summary']
+        keys: [value.type1,value.type2]
     };
 
     var f = new Fuse(searchData, options);
-    var output = f.search(value);
+    var output = f.search(value.value);
 
-    for (var index in output) {
+    for(var index in output){
 
-        tableData.push(output[index].item);
+      tableData.push(output[index].item);
     }
 
     table();
@@ -55,49 +55,65 @@ function search() {
 function processForm() {
     var parameters = location.search.substring(1).split("&");
     var temp = parameters[0].split("=");
-    value = unescape(temp[1]);
-
-    return value;
+    var v = {};
+    v["value"] = unescape(temp[1]);
+    v.value = v.value.replace(new RegExp("\\+","g"),' ');
+    console.log(v);
+    if(temp[0] == "professor"){
+      v["type1"] = "professor"; 
+      v["type2"] = "author";
+    }
+    else if(temp[0] == "course"){
+      v["type1"] = "course";
+      v["type2"] = "course";
+    }
+    else if(temp[0] == "keyword"){
+      v["type1"] = "summary"
+      v["type2"] = "summary"
+    }
+    return v;
 }
 
-function table() {
+function table(){
     $('#search-table').dynatable({
-        dataset: {
-            records: tableData,
-            perPageDefault: 10
-        },
-        features: {
-            search: false
-        }
+      dataset: {
+      records: tableData,
+      perPageDefault: 10
+      },
+      features:{
+        search:false
+      }
     }).bind('dynatable:afterProcess', setImages);
 
     setImages();
 }
 
 // Sets the images of the books to the given div
-function setImages() {
+function setImages(){
 
-    $('#search-table tr').each(function (index) {
+$('#search-table tr').each(function(index) {
 
-        var row = $(this);
-        if (index > 0) {
-            var isbn = row.find('td:last-child').text();
-            storageRef.child('images/' + isbn + '.jpg').getDownloadURL().then(function (url) {
-                var img = document.createElement('img');
-                img.src = url;
-                img.height = "125";
-                img.width = "100";
-                img.onclick = function () {
-                    window.location = generateUrl("bookdetails.html", {
-                        id: row.find('td:nth-last-child(3)').text()
-                    });
-                };
-                var check = document.createElement('input');
-                row.find('td:first-child').replaceWith(img);
-            });
-        }
+  var row = $(this);
+  if(index>0){
+    var isbn = row.find('td:last-child').text();
+    storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
+      var img = document.createElement('img');
+      img.src = url;
+      img.height = "125";
+      img.width = "100";
+      img.onclick = function() {
+          window.location = generateUrl("bookdetails.html", {
+              id: row.find('td:nth-last-child(3)').text()
+          });
+      };
+      var check = document.createElement('input');
+      row.find('td:first-child').replaceWith(img);
     });
+  }
+});
 }
+
+
 
 function generateUrl(url, params) {
     var i = 0, key;

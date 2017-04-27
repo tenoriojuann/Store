@@ -18,7 +18,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/firebase.js"></script>
     <script src="js/fuse/fuse.min.js"></script>
-    <script src="js/search.js"></script>
+    <script src="js/index.js"></script>
 
 
 </head>
@@ -63,17 +63,40 @@
 </div>
 
     <!--- Search Field -->
-    <div class="jumbotron text-center" style="margin-top: 0;">
+    <div class="jumbotron text-center" style="margin-top: 0; display: none" id="s">
     <form class="form-inline" method="get" action="search.html" id="search">
         <div class="input-group">
-            <input type="text" id="searchValue" name="searchValue" class="form-control" size="50" required>
+            <input type="text" id="course" name="keyword" class="form-control" size="50" required>
             <div class="input-group-btn">
-                <button type="submit" class="btn btn-danger">search</button>
+                <button id = "btn" type="submit" class="btn btn-danger">search</button>
             </div>
+
         </div>
-        <p style="font-size:75%"><b>Search By:</b> Author, Title, Course, Professor or CRN</p>
+             
+
     </form>
     </div>
+    <form action ="search.html" name = "select" method="get" id = "selection" style="width:210px; margin:0 auto; display: none">
+         <select id="options"  name = "professor" required >
+        
+        </select>
+        <input type="submit" value="submit"></input>
+    </form>
+
+
+
+    <form action ="search.html" name = "course" method="get" id = "selection2" style="width:210px; margin:0 auto; display: none">
+        <select id="courses"  name = "course" required >
+        
+        </select>
+        <input type="submit" value="submit"></input>
+    </form>
+    <form id ="myform" style="width: 210px; margin: 0 auto">
+        <input type="radio" name = "option" value ="professor" id ="professor" onclick = "displayProfessors()" >Professor</input>
+        <input type="radio" name = "option" value ="summary" id ="keyword" onclick = "displayKW()">Keyword</input>
+        <input type="radio" name = "option" value ="course" id ="crs" onclick = "displayCRS()">Course</input>
+        
+    </form >
 
 
 </body>
