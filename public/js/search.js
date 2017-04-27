@@ -95,7 +95,7 @@ $('#search-table tr').each(function(index) {
 
   var row = $(this);
   if(index>0){
-    var isbn = row.find('td:last-child').text();
+    var isbn = row.find('td:nth-last-child(3)').text();
     storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
       var img = document.createElement('img');
       img.src = url;
@@ -103,14 +103,66 @@ $('#search-table tr').each(function(index) {
       img.width = "100";
       img.onclick = function() {
           window.location = generateUrl("bookdetails.html", {
-              id: row.find('td:nth-last-child(3)').text()
+              id: row.find('td:nth-last-child(2)').text()
           });
       };
       var check = document.createElement('input');
+      check.type = "checkbox";
       row.find('td:first-child').replaceWith(img);
+      row.find('td:last-child').replaceWith(check);
     });
   }
 });
+}
+
+function sendToCart(){
+
+  var myBook = [];
+    var rootRef = database.ref();
+    // referencing the 'books' node
+    var storeRef = rootRef.child("books");
+
+  $('#search-table tr').each(function(index){
+
+    if(index > 0){
+      var row = $(this);
+      console.log(row.find('td:last-child input'));
+      if(row.find('td:last-child input').is(':checked')){
+      var id = row.find('td:nth-last-child(2)').text();
+      
+      storeRef.child(id).once('value', function (book) {
+        myBook.push(new Book(book.val()));
+        console.log(myBook);
+      });
+    
+       // Need to check if the cookie exists first
+    // format of the cookie will end up being different
+    // but this is just a start
+    var cookie = Cookies.getJSON('cart');
+
+
+    if (cookie) {
+        cookie.push(myBook);
+
+        Cookies.remove('cart');
+        Cookies.set('cart', JSON.stringify(cookie));
+    }
+    else {
+        var cookie = [];
+        cookie.push(myBook);
+
+        Cookies.remove('cart');
+        Cookies.set('cart', JSON.stringify(cookie));
+    }
+    console.log(Cookies.getJSON('cart'));
+
+    alert("YES! added to cart!");
+  
+  
+  }
+}
+});
+
 }
 
 

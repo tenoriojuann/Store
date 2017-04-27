@@ -63,17 +63,21 @@
         <th>Book Name</th>
         <th>Professor</th>
         <th>Course</th>
-        <th style="display: none">ID</th>
-        <th style = "display: none">Summary</th>
         <th>isbn</th>
+        <th>ID</th>
+        <th>Add to Cart</th>
     </thead>
     </div>
     <tbody>
     </tbody>
 </table>
+
 <div>
-    <a href="index.html"><button class="btn btn-warning" href="index.html" style="margin: auto;">
-        Back to search</button></a>
+    <button onclick = "location.href='index.html'" class="btn btn-warning" 
+            style="margin: auto;">Back to search</button>
+
+    <button onclick = "sendToCart()" class="btn btn-warning"  
+            style="margin: auto;">Add to Cart</button>
 </div>
 
 
