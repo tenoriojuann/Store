@@ -48,6 +48,8 @@ function getBookByID() {
 function viewBookDetails() {
 
 
+
+
 	storageRef.child('images/'+myBook.isbn+'.jpg').getDownloadURL().then(function(url){
 
 		document.getElementById('imgArt').src = url;
