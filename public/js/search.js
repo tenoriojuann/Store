@@ -110,19 +110,25 @@ $('#search-table tr').each(function(index) {
       // referencing the 'books' node
       var storeRef = rootRef.child("books");
       var id = row.find('td:nth-last-child(2)').text();
-        
-        storeRef.child(id).once('value').then(function (book) {
-          console.log(book.val()); //this holds the object and its properties
-          
-         
+      
+      storeRef.child(id).once('value').then(function (book) {
+        var mycell = row.find('td:nth-last-child(4)');
+
+        mycell[0].innerHTML = ("$" + book.val().priceNew);
+        var input = document.createElement('input');
+        input.type = "text";
+        mycell.append(input);
+        var quantity = document.createElement('p');
+        quantity.innerHTML = "<br>Quantity: " + book.val().quantityNew;
+        mycell.append(quantity);
+        console.log(mycell[0].innerHTML);
+
       });
       var check = document.createElement('input');
       check.type = "checkbox";
       row.find('td:first-child').replaceWith(img);
       row.find('td:last-child').replaceWith(check);
-	  var x = document.createElement('input');
-	  x.type="text";
-	  row.find('td:nth-last-child(4)').append(x);
+
 	  
     });
   }
