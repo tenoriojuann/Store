@@ -20,14 +20,12 @@
 	<!-- latest jQuery direct from google's CDN -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<!-- the mousewheel plugin - optional to provide mousewheel support -->
-	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/scrollpane/jquery.mousewheel.js"></script>
 	<!-- the jScrollPane script -->
-	<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
-
+    <script type="text/javascript" src="js/scrollpane/jquery.jscrollpane.min.js"></script>
 
 </head>
 <body onload = "getBookByID()">
-
 
 <!--TITLE-->
 <div class="jumbotron text-center">
@@ -72,8 +70,8 @@
     <img id="imgArt" height="400px" ></img>
 </td>
 <td>
-    <div class = "scroll-pane"> <!--Scrollpane for summary -->
-	<p id = "summary"></p>
+    <div class="scroll-pane">
+	<p id="summary" class="scroll-pane"></p>
 	</div>
 </td>
 </tr>
@@ -81,14 +79,14 @@
 </tbody>
 </table>
 
-<table class = "floatedtable" id = "bookdetails" width="40%" border="0" cellspacing="0" cellpadding="0"> 
+<table class="floatedtable" id="bookdetails" width="40%" border="0" cellspacing="0" cellpadding="0">
 	<!--set headers for types of books -->
     <tr>
-        <th id = "Hnew">New</th>
-        <th id = "Hused">Used</th>
-        <th id = "Hrental">Rental</th>
-        <th id = "Hebook">Ebook</th>
-	</tr> 
+        <th id="Hnew">New</th>
+        <th id="Hused">Used</th>
+        <th id="Hrental">Rental</th>
+        <th id="Hebook">Ebook</th>
+	</tr>
 	<!--Insert labels into cells -->
     <tr>
             <td>
@@ -129,19 +127,19 @@
 <button onclick="addToCart()">Add to Cart</button>
 <button>Remove from Cart</button>
 
-<table class = "table5" width="40%" border="0" cellspacing="0" cellpadding="0" > 
+<table class="table5" width="40%" border="0" cellspacing="0" cellpadding="0">
 	<tbody>
 	<tr>
-		<th width = "150px"> Title: </th>
-		<td id = "bookName"></td>
+		<th width="150px"> Title: </th>
+		<td id="bookName"></td>
 	</tr>
 	<tr>
 		<th> ISBN: </th>
-		<td id = "isbn"></td>
+		<td id="isbn"></td>
 	</tr>
 	<tr>
 		<th> Author(s): </th>
-		<td id = "author"></td>
+		<td id="author"></td>
 	</tr>
 	</tbody>
 </table>
