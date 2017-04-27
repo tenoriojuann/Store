@@ -31,7 +31,9 @@ function price() {
             perPageDefault: 1
         },
         features: {
-            search: false
+            search: false,
+            paginate: false,
+            recordCount: false
         }
     });
 }
@@ -47,6 +49,9 @@ function updateDataBase() {
 $(document).ready(
     function () {
         $("#cc").click(function () {
+
+        	document.getElementById('menu').style.display = "none";
+        	document.getElementById('price').style.display = "none";
             new Card({
                 form: document.querySelector('form'),
                 container: '.card-wrapper'
@@ -60,7 +65,9 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#cancel").click(function () {
-            $("#forms").toggle("slows");
+        	document.getElementById('menu').style.display = "block";
+        	document.getElementById('price').style.display = "block";
+            $("#forms").hide("slow");
         });
     });
 
@@ -74,24 +81,24 @@ $(document).ready(
             var number = $('#number').val();
 
 
-<<<<<<< HEAD
+
             if(verifyCard(name,number,cvc,exp)){
             	$("#forms").toggle("slows");
             	window.location.reload();
             	setEmailToCookie();
-=======
+            }
             if (verifyCard(name, number, cvc, exp)) {
                 $("#forms").toggle("slows");
                 Cookies.remove('cart');
                 alert("THank you for your payment");
 
->>>>>>> 91ea257ebff8e35f15387b0f93473a4b10b5a8e2
             }
             else {
                 alert("not");
             }
-        });
-<<<<<<< HEAD
+        
+    });
+
  });
 
 
@@ -106,9 +113,6 @@ function setEmailToCookie() {
     Cookies.set('email', txt);
 }
 
-=======
-    });
->>>>>>> 91ea257ebff8e35f15387b0f93473a4b10b5a8e2
 
 
 // hide the paypal input form

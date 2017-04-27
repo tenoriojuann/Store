@@ -24,7 +24,7 @@ function search() {
     });
 
     var value = processForm();
-    console.log(value);
+
     var options = {
         include: ["score"],
         shouldSort: true,
@@ -58,7 +58,7 @@ function processForm() {
     var v = {};
     v["value"] = unescape(temp[1]);
     v.value = v.value.replace(new RegExp("\\+","g"),' ');
-    console.log(v);
+
     if(temp[0] == "professor"){
       v["type1"] = "professor"; 
       v["type2"] = "author";

@@ -20,7 +20,7 @@ function displayProfessors(){
 
         for( var id in data){
         	prof.push(data[id].professor);
-           console.log(data[id].professor);
+           
         }
         document.getElementById('s').style.display = "none";
         document.getElementById('selection2').style.display = "none";
@@ -58,7 +58,7 @@ if(document.getElementById('crs').checked) {
 
         for( var id in data){
         	courses.push(data[id].course);
-           console.log(data[id].course);
+           
         }
 
         document.getElementById('s').style.display = "none";

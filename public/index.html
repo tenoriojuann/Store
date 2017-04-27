@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>KSU Bookstore</title>
-    <link rel="stylesheet" href="css/dynatable.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/title.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/dynatable/jquery.dynatable.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
     <script src="js/bootstrap.min.js"></script>
     <script src="js/firebase.js"></script>
-    <script src="js/fuse/fuse.min.js"></script>
     <script src="js/index.js"></script>
 
 
@@ -58,15 +54,20 @@
 <!--Search Header-->
 <div class="header">
     <div class="container-fluid">
-        <h2><span class="glyphicon glyphicon-search"></span> Search books</h2>
+        <h2><span class="glyphicon glyphicon-search"></span> Search By:</h2>
     </div>
 </div>
-
+    <form id ="myform"  style="width:210px; margin:0 auto;">
+        <input type="radio"  name = "option" value ="professor" id ="professor" onclick = "displayProfessors()" >Professor</input>
+        <input type="radio"  name = "option" value ="summary" id ="keyword" onclick = "displayKW()">Keyword</input>
+        <input type="radio"  name = "option" value ="course" id ="crs" onclick = "displayCRS()">Course</input>
+        
+    </form >
     <!--- Search Field -->
     <div class="jumbotron text-center" style="margin-top: 0; display: none" id="s">
     <form class="form-inline" method="get" action="search.html" id="search">
         <div class="input-group">
-            <input type="text" id="course" name="keyword" class="form-control" size="50" required>
+            <input type="text" id="course" name="keyword" size="50" required>
             <div class="input-group-btn">
                 <button id = "btn" type="submit" class="btn btn-danger">search</button>
             </div>
@@ -76,27 +77,24 @@
 
     </form>
     </div>
+
     <form action ="search.html" name = "select" method="get" id = "selection" style="width:210px; margin:0 auto; display: none">
-         <select id="options"  name = "professor" required >
+         <select id="options" class="form-control" name = "professor" required >
         
         </select>
-        <input type="submit" value="submit"></input>
+        <input type="submit" class="btn btn-primary" value="Search"></input>
     </form>
 
 
 
     <form action ="search.html" name = "course" method="get" id = "selection2" style="width:210px; margin:0 auto; display: none">
-        <select id="courses"  name = "course" required >
+        <select id="courses" class="form-control"  name = "course" required >
         
         </select>
-        <input type="submit" value="submit"></input>
+        <input type="submit" class="btn btn-primary" value="Search"></input>
     </form>
-    <form id ="myform" style="width: 210px; margin: 0 auto">
-        <input type="radio" name = "option" value ="professor" id ="professor" onclick = "displayProfessors()" >Professor</input>
-        <input type="radio" name = "option" value ="summary" id ="keyword" onclick = "displayKW()">Keyword</input>
-        <input type="radio" name = "option" value ="course" id ="crs" onclick = "displayCRS()">Course</input>
-        
-    </form >
+
+
 
 
 </body>
