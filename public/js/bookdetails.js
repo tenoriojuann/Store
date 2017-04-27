@@ -48,6 +48,7 @@ function getBookByID() {
 function viewBookDetails() {
 
 
+<<<<<<< HEAD
     storageRef.child('images/' + myBook.isbn + '.jpg').getDownloadURL().then(function (url) {
 
         document.getElementById('imgArt').src = url;
@@ -107,6 +108,56 @@ function viewBookDetails() {
 
         });
     });
+=======
+
+
+	storageRef.child('images/'+myBook.isbn+'.jpg').getDownloadURL().then(function(url){
+
+		document.getElementById('imgArt').src = url;
+		document.getElementById('Hnew').innerHTML += "<br>$" + myBook.priceNew;
+		document.getElementById('Hused').innerHTML += "<br>$" + myBook.priceUsed;
+		document.getElementById('Hrental').innerHTML += "<br>$" + myBook.priceRental;
+		document.getElementById('Hebook').innerHTML += "<br>$" + myBook.priceEbook;
+		document.getElementById('bookName').innerHTML = myBook.bookName;
+		document.getElementById('summary').innerHTML = myBook.summary;
+		document.getElementById('isbn').innerHTML = myBook.isbn;
+		document.getElementById('author').innerHTML = myBook.author;
+		document.getElementById('quantityNew').innerHTML = myBook.quantityNew;
+		document.getElementById('quantityUsed').innerHTML = myBook.quantityUsed;
+		document.getElementById('quantityRental').innerHTML = myBook.quantityRental;
+		document.getElementById('quantityEbook').innerHTML = myBook.quantityEbook;
+		if(myBook.quantityEbook <= 0 || myBook.quantityEbook % 1 != 0) //check if qty less than or equal to 0, or if qty is an int
+		{
+			var strX = "Out of Stock";
+			var redX = strX.fontcolor("red");
+			document.getElementById('quantityEbook').innerHTML = redX;	
+			
+		}
+		else //it must be in stock, so list as unlimited
+		{
+			var x = 'unlimited';
+			document.getElementById('quantityEbook').innerHTML = x;
+		}
+		if(myBook.quantityNew <=0 || myBook.quantityNew % 1 != 0) //check if qty less than or equal to 0, or if qty is an int
+		{
+			var strX = "Out of Stock";
+			var redX = strX.fontcolor("red");
+			document.getElementById('quantityNew').innerHTML = redX;
+		}
+		if(myBook.quantityUsed <=0 || myBook.quantityUsed % 1 != 0) //check if qty less than or equal to 0, or if qty is an int
+		{
+			var strX = "Out of Stock";
+			var redX = strX.fontcolor("red");
+			document.getElementById('quantityUsed').innerHTML = redX;
+		}
+		if(myBook.quantityRental <= 0 || myBook.quantityRental % 1 != 0) //check if qty less than or equal to 0, or if qty is an int
+		{
+			var strX = "Out of Stock";
+			var redX = strX.fontcolor("red");
+			document.getElementById('quantityRental').innerHTML = redX;
+		}
+	});
+>>>>>>> 7bb8da1bc42842a673712bdbf6bd8073f0ed2bea
 }
 
 
@@ -199,5 +250,19 @@ $(function () {
             }
         );
 });
+<<<<<<< HEAD
 
+=======
+$(function()
+{
+	$('.scroll-pane').jScrollPane(
+		{
+			verticalDragMinHeight: 20,
+			verticalDragMaxHeight: 20,
+			horizontalDragMinWidth: 20,
+			horizontalDragMaxWidth: 20
+		}
+	);
+});
+>>>>>>> 7bb8da1bc42842a673712bdbf6bd8073f0ed2bea
 
