@@ -30,7 +30,7 @@ class Book {
 		console.log(this);
 	}
 
-=======
+
     constructor(bookDetails) {
         this.bookName = bookDetails.bookName;
         this.author = bookDetails.author;
