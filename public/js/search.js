@@ -47,7 +47,6 @@ function search() {
 
       tableData.push(output[index].item);
     }
-
     table();
 }
 
@@ -107,6 +106,16 @@ $('#search-table tr').each(function(index) {
               id: row.find('td:nth-last-child(2)').text()
           });
       };
+      var rootRef = database.ref();
+      // referencing the 'books' node
+      var storeRef = rootRef.child("books");
+      var id = row.find('td:nth-last-child(2)').text();
+        
+        storeRef.child(id).once('value').then(function (book) {
+          console.log(book.val()); //this holds the object and its properties
+          
+         
+      });
       var check = document.createElement('input');
       check.type = "checkbox";
       row.find('td:first-child').replaceWith(img);
