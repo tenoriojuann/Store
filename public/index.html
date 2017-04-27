@@ -1,79 +1,107 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>KSU Bookstore</title>
-
-  </head>
-
-<body class = "body">
-
-
-
-<p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
-
-<!--- TABS -->
-<ul>
-  <li><a class="active" href="index.html">Home</a></li>
-  <li><a  href="AboutUs.html">About Us</a></li>
-  <li><a  href="Contact.html">Contact</a></li>
-  <li><a  href="FAQ.html">FAQ</a></li>
-  <li><a onclick="document.getElementById('id01').style.display='block'">Admin</a></li>
-  <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
-</ul>
+    <link rel="stylesheet" href="css/dynatable.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/title.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/dynatable/jquery.dynatable.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/fuse/fuse.min.js"></script>
+    <script src="js/index.js"></script>
 
 
-<!--- Admin Log in -->
+</head>
+<body>
 
-<!-- The Modal -->
-<div id="id01" class="modal" style="display: none">
-  <span onclick="document.getElementById('id01').style.display='none'" 
-class="close" title="Close Modal">&times;</span>
-
-  <!-- Modal Content -->
-  <form class="modal-content animate" method ="post" action ="admin.html">
-    <div class="imgcontainer">
-      <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
+<!--TITLE-->
+<div class="jumbotron text-center">
+    <div class="title">
+        <img class="logo" width="15%" height="15%" src="images/ksulogo.png">
+        <h1>KSU BOOKSTORE</h1>
     </div>
-
-    <div class="container">
-      <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username"  required>
-
-      <label><b>Password</b></label>
-      <input type="password" placeholder="Enter Password"  required>
-
-      <button class = "loginbtn">Login</button>
-      <input type="checkbox" checked="checked"> Remember me
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
 </div>
 
+<!--NAV BAR-->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="index.html">home</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="contact.html">contact</a></li>
+                <li><a href="faq.html">faq</a></li>
+                <li><a href="cart.html">cart</a></li>
+                <li><a href="admin.html">admin</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
+<!--Search Header-->
+<div class="header">
+    <div class="container-fluid">
+        <h2><span class="glyphicon glyphicon-search"></span> Search books</h2>
+    </div>
+</div>
+
+    <!--- Search Field -->
+    <div class="jumbotron text-center" style="margin-top: 0; display: none" id="s">
+    <form class="form-inline" method="get" action="search.html" id="search">
+        <div class="input-group">
+            <input type="text" id="course" name="keyword" class="form-control" size="50" required>
+            <div class="input-group-btn">
+                <button id = "btn" type="submit" class="btn btn-danger">search</button>
+            </div>
+
+        </div>
+             
+
+    </form>
+    </div>
+    <form action ="search.html" name = "select" method="get" id = "selection" style="width:210px; margin:0 auto; display: none">
+         <select id="options"  name = "professor" required >
+        
+        </select>
+        <input type="submit" value="submit"></input>
+    </form>
 
 
-<!--- Search Field -->
-<form method="get" action="search.html" id="search">
-<p style="text-align:center; font-size:125%"><b>Search for Books</b></p>
-  <input id ="searchValue" name="submit" type="text" size="40" placeholder="Enter Search" required></input>
-  <p style="text-align:center; font-size:75%"><b>Search By:</b> Author, Title, Course, Professor or CRN</p>
-</form>
 
-  
+    <form action ="search.html" name = "course" method="get" id = "selection2" style="width:210px; margin:0 auto; display: none">
+        <select id="courses"  name = "course" required >
+        
+        </select>
+        <input type="submit" value="submit"></input>
+    </form>
+    <form id ="myform" style="width: 210px; margin: 0 auto">
+        <input type="radio" name = "option" value ="professor" id ="professor" onclick = "displayProfessors()" >Professor</input>
+        <input type="radio" name = "option" value ="summary" id ="keyword" onclick = "displayKW()">Keyword</input>
+        <input type="radio" name = "option" value ="course" id ="crs" onclick = "displayCRS()">Course</input>
+        
+    </form >
+
+
 </body>
-  
-
-
-<link rel = "stylesheet" href="css/index.css"></script>
-<script src="js/converter.js"></script>
 </html>
+
+<script>
+
+</script>

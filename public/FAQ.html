@@ -1,53 +1,53 @@
 <!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>KSU Bookstore</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/title.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/fuse/fuse.min.js"></script>
+    <script src="js/search.js"></script>
 
-  </head>
 
-<body class = "body">
-<p style="text-align:center; font-size:250%" ><b>KSU Online Bookstore</b></p>
-<ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a  href="AboutUs.html">About Us</a></li>
-  <li><a  href="Contact.html">Contact</a></li>
-  <li><a class="active"  href="FAQ.html">FAQ</a></li>
-  <li><a onclick="document.getElementById('id01').style.display='block'">Admin</a></li>
-  <li style="float:right"><a href="Cart.html">Shopping Cart</a></li>
-</ul>
+</head>
+<body>
 
-
-<!-- The Modal -->
-<div id="id01" class="modal" style="display: none">
-  <span onclick="document.getElementById('id01').style.display='none'" 
-class="close" title="Close Modal">&times;</span>
-
-  <!-- Modal Content -->
-  <form class="modal-content animate" method ="post" action ="admin.html">
-    <div class="imgcontainer">
-      <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
+<!--TITLE-->
+<div class="jumbotron text-center">
+    <div class="title">
+        <img class="logo" width="15%" height="15%" src="images/ksulogo.png">
+        <h1>KSU BOOKSTORE</h1>
     </div>
-
-    <div class="container">
-      <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username"  required>
-
-      <label><b>Password</b></label>
-      <input type="password" placeholder="Enter Password"  required>
-
-      <button class = "loginbtn">Login</button>
-      <input type="checkbox" checked="checked"> Remember me
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
 </div>
 
-</body>
-<link rel = "stylesheet" href="css/index.css"></script>
-</html>
+<!--NAV BAR-->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="index.html">home</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="contact.html">contact</a></li>
+                <li><a href="faq.html">faq</a></li>
+                <li><a href="cart.html">cart</a></li>
+                <li><a href="admin.html">admin</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
