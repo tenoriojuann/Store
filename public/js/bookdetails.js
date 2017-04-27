@@ -29,36 +29,8 @@ class Book {
 	print(){
 		console.log(this);
 	}
-
-=======
-    constructor(bookDetails) {
-        this.bookName = bookDetails.bookName;
-        this.author = bookDetails.author;
-        this.isbn = bookDetails.isbn;
-        this.course = bookDetails.course;
-        this.crn = bookDetails.crn;
-        this.priceEbook = bookDetails.priceEbook;
-        this.priceUsed = bookDetails.priceUsed;
-        this.priceNew = bookDetails.priceNew;
-        this.priceRental = bookDetails.priceRental;
-        this.professor = bookDetails.professor;
-        this.quantityEbook = bookDetails.quantityEbook;
-        this.quantityUsed = bookDetails.quantityUsed;
-        this.quantityNew = bookDetails.quantityNew;
-        this.quantityRental = bookDetails.quantityRental;
-        this.quantityTotal = (parseInt(bookDetails.quantityUsed)
-        + parseInt(bookDetails.quantityRental)
-        + parseInt(bookDetails.quantityNew));
-        this.requirement = bookDetails.required;
-        this.summary = bookDetails.summary;
-        this.term = bookDetails.term;
-    }
-
-    print() {
-        console.log(this);
-    }
-
 }
+
 
 function getBookByID() {
     //reference to the root of the database
@@ -91,7 +63,6 @@ function viewBookDetails() {
 		document.getElementById('quantityUsed').innerHTML = myBook.quantityUsed;
 		document.getElementById('quantityRental').innerHTML = myBook.quantityRental;
 		document.getElementById('quantityEbook').innerHTML = myBook.quantityEbook;
-		document.getElementById('professor').innerHTML = myBook.professor;
 		if(myBook.quantityEbook <= 0 || myBook.quantityEbook % 1 != 0) //check if qty less than or equal to 0, or if qty is an int
 		{
 			var strX = "Out of Stock";
@@ -135,6 +106,7 @@ function viewBookDetails() {
         document.getElementById('summary').innerHTML = myBook.summary;
 
     });
+});
 }
 
 
@@ -170,7 +142,7 @@ function addToCart() {
 
 }
 
-
+function addToCart(){
 
     // Adding user input to the book
     var cookie = Cookies.getJSON('cart');
@@ -200,7 +172,7 @@ function addToCart() {
 }
 
 // TODO: going to leave this for now, but this needs to be contained in cart.js, not here
->>>>>>> origin/refactor
+
 // Need to work on this one
 function removeFromCart() {
     var cookie = Cookies.getJSON('cart');
