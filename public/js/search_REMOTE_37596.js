@@ -122,8 +122,6 @@ $('#search-table tr').each(function(index) {
         var quantity = document.createElement('p');
         quantity.innerHTML = "<br>Quantity: " + book.val().quantityNew;
         mycell.append(quantity);
-<<<<<<< HEAD
-=======
         console.log(mycell[0].innerHTML);
 		
 		var mycell2= row.find('td:nth-last-child(6)');
@@ -171,7 +169,6 @@ $('#search-table tr').each(function(index) {
 		
 		
 		
->>>>>>> cbbd8c72b57e3348e31f607c696e1a7a059ab32b
 
       });
       var check = document.createElement('input');
@@ -204,9 +201,7 @@ function sendToCart(){
         var id = row.find('td:nth-last-child(2)').text();
         
         storeRef.child(id).once('value').then(function (book) {
-          temp = book.val();
-          temp["new"] = row.find('td:nth-last-child(4)').find('input').val();
-          myBook.push(temp);
+          myBook.push(new Book(book.val()));
           
          
         });

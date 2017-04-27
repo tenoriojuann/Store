@@ -112,9 +112,8 @@ $('#search-table tr').each(function(index) {
       var id = row.find('td:nth-last-child(2)').text();
       
       storeRef.child(id).once('value').then(function (book) {
-     // var strX = "Out of Stock";
-	 // var redX = "strX.fontcolor("red");
-		var mycell = row.find('td:nth-last-child(7)');
+        var mycell = row.find('td:nth-last-child(4)');
+
         mycell[0].innerHTML = ("$" + book.val().priceNew);
         var input = document.createElement('input');
         input.type = "text";
@@ -122,56 +121,7 @@ $('#search-table tr').each(function(index) {
         var quantity = document.createElement('p');
         quantity.innerHTML = "<br>Quantity: " + book.val().quantityNew;
         mycell.append(quantity);
-<<<<<<< HEAD
-=======
         console.log(mycell[0].innerHTML);
-		
-		var mycell2= row.find('td:nth-last-child(6)');
-		mycell2[0].innerHTML = ("$" + book.val().priceUsed);
-		var input1 = document.createElement('input');
-        input1.type = "text";
-        mycell2.append(input1);
-        var quantity1 = document.createElement('p');
-        quantity1.innerHTML = "<br>Quantity: " + book.val().quantityUsed;
-        mycell2.append(quantity1);
-		
-		var mycell3= row.find('td:nth-last-child(5)');
-		mycell3[0].innerHTML = ("$" + book.val().priceRental);
-		var input2 = document.createElement('input');
-        input2.type = "text";
-        mycell3.append(input2);
-        var quantity2 = document.createElement('p');
-		//if(book.val()quantityRental <= 0 || book.val()quantityRental % 1 !=0)
-		//{
-		//	quantity2 = redX;
-		//	book.val().quantityRental = quantity2;
-		//}
-		
-        quantity2.innerHTML = "<br>Quantity: " + book.val().quantityRental;
-        mycell3.append(quantity2);
-		
-		var mycell4= row.find('td:nth-last-child(4)');
-		mycell4[0].innerHTML = ("$" + book.val().priceEbook);
-		var input3 = document.createElement('input');
-        input3.type = "text";
-        mycell4.append(input3);
-        var quantity3 = document.createElement('p');
-		//if(book.val().quantityEbook > 0)
-		//{
-		//	quantity3 = "Unlimited";
-		//	book.val().quantityEbook = quantity3;
-		//}
-		//if(book.val().quantityEbook <= 0)
-		//{
-			//quantity3 = "redX";
-			//book.val().quantityEbook = quantity3;
-		//}
-        quantity3.innerHTML = "<br>Quantity: " + book.val().quantityEbook;
-        mycell4.append(quantity3);
-		
-		
-		
->>>>>>> cbbd8c72b57e3348e31f607c696e1a7a059ab32b
 
       });
       var check = document.createElement('input');
@@ -204,9 +154,7 @@ function sendToCart(){
         var id = row.find('td:nth-last-child(2)').text();
         
         storeRef.child(id).once('value').then(function (book) {
-          temp = book.val();
-          temp["new"] = row.find('td:nth-last-child(4)').find('input').val();
-          myBook.push(temp);
+          myBook.push(new Book(book.val()));
           
          
         });
