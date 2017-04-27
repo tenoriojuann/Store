@@ -115,57 +115,63 @@ $('#search-table tr').each(function(index) {
 });
 }
 
+
+
 function sendToCart(){
 
   var myBook = [];
-    var rootRef = database.ref();
-    // referencing the 'books' node
-    var storeRef = rootRef.child("books");
+  var rootRef = database.ref();
+  // referencing the 'books' node
+  var storeRef = rootRef.child("books");
 
   $('#search-table tr').each(function(index){
-
+    // Ignoring headers
     if(index > 0){
       var row = $(this);
-      console.log(row.find('td:last-child input'));
-      if(row.find('td:last-child input').is(':checked')){
-      var id = row.find('td:nth-last-child(2)').text();
+      // Detect all the ticked checkboxes
+      if(row.find('input').is(':checked')){
+        
+        var id = row.find('td:nth-last-child(2)').text();
+        
+        storeRef.child(id).once('value').then(function (book) {
+          myBook.push(new Book(book.val()));
+          
+         
+        });
+      }
+    }
+  });
+
+  // waiting for the async function to finish
+  setTimeout(function(){
+    setCookies(myBook);
+  }, 1000);
+}
+
+function setCookies(myBook){
+
+      var cookie = Cookies.getJSON('cart');
+      console.log(myBook);
+      if(cookie === undefined){
+        cookie = [];
+        for (var index in myBook){
+          cookie.push(myBook[index]);
+        }
+      }
+      else{
+        
+        for (var index in myBook){
+          cookie.push(myBook[index]);
+        }
+      }
       
-      storeRef.child(id).once('value', function (book) {
-        myBook.push(new Book(book.val()));
-        console.log(myBook);
-      });
-    
-       // Need to check if the cookie exists first
-    // format of the cookie will end up being different
-    // but this is just a start
-    var cookie = Cookies.getJSON('cart');
-
-
-    if (cookie) {
-        cookie.push(myBook);
-
-        Cookies.remove('cart');
-        Cookies.set('cart', JSON.stringify(cookie));
-    }
-    else {
-        var cookie = [];
-        cookie.push(myBook);
-
-        Cookies.remove('cart');
-        Cookies.set('cart', JSON.stringify(cookie));
-    }
-    console.log(Cookies.getJSON('cart'));
-
-    alert("YES! added to cart!");
-  
-  
-  }
-}
-});
+      console.log(cookie);
+      Cookies.remove('cart');
+      Cookies.set('cart', JSON.stringify(cookie));
+      console.log(Cookies.getJSON('cart'));
+      alert("YES! added to cart!");
 
 }
-
-
 
 function generateUrl(url, params) {
     var i = 0, key;
