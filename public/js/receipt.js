@@ -76,10 +76,12 @@ function email(){
     .then(function(){ 
        alert("Sent!");
          myform.find("button").text("Send");
+         window.location = "index.html"
       }, function(err) {
          alert("Send email failed!\r\n Response:\n " + JSON.stringify(err));
          myform.find("button").text("Send");
       });
+
     return false;
   
 }
