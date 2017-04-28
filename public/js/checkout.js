@@ -65,9 +65,7 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#cancel").click(function () {
-        	document.getElementById('menu').style.display = "block";
-        	document.getElementById('price').style.display = "block";
-            $("#forms").hide("slow");
+        	window.location = "checkout.html";
         });
     });
 
@@ -81,7 +79,7 @@ $(document).ready(
             var number = $('#number').val();
 
             if (verifyCard(name, number, cvc, exp)) {
-                $("#forms").toggle("slows");
+                $("#forms").toggle("slow");
                 $(location).attr('href', "receipt.html");
                 alert("THank you for your payment");
 
@@ -101,7 +99,7 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#cancel2").click(function () {
-            $("#forms2").toggle("slows");
+            window.location = "checkout.html";
         });
     });
 
@@ -110,6 +108,7 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#paypal").click(function () {
+            $('#menu').hide('slow');
             $("#forms2").show("slows");
         });
     });
@@ -123,7 +122,21 @@ $(document).ready(
             var pass = $('#pass').val();
 
             if (verifyPayPal(email, pass)) {
+                $('#forms2').hide('slow');
+                $('#billing').show('slow');
                 // Do something once the paypal information is verified
             }
         });
     });
+
+// Clicking next on the billing information will take the user to the
+// shipping information
+
+$(document).ready(
+    function(){
+        $('#Bnext').click(function(){
+
+            $('#billing').hide('slow');
+            $('#shipping').show('slow');
+        });
+});
