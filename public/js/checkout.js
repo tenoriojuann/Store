@@ -73,11 +73,10 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#cancel").click(function () {
-        	document.getElementById('menu').style.display = "block";
-        	document.getElementById('price').style.display = "block";
-            $("#forms").hide("slow");
+            window.location = "checkout.html";
         });
     });
+
 
 // Evaluate the CC information
 $(document).ready(
@@ -109,15 +108,15 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#cancel2").click(function () {
-            $("#forms2").toggle("slows");
+            window.location = "checkout.html";
         });
     });
-
 
 // show the paypal input form
 $(document).ready(
     function () {
         $("#paypal").click(function () {
+            $('#menu').hide('slow');
             $("#forms2").show("slows");
         });
     });
@@ -131,7 +130,22 @@ $(document).ready(
             var pass = $('#pass').val();
 
             if (verifyPayPal(email, pass)) {
+                $('#forms2').hide('slow');
+                $('#billing').show('slow');
                 // Do something once the paypal information is verified
             }
         });
     });
+
+
+// Clicking next on the billing information will take the user to the
+// shipping information
+
+$(document).ready(
+    function(){
+        $('#Bnext').click(function(){
+
+            $('#billing').hide('slow');
+            $('#shipping').show('slow');
+        });
+});
