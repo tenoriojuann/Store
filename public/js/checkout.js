@@ -1,24 +1,24 @@
 // function will draw a table for the price
 function price() {
     var cookie = Cookies.getJSON('cart');
-
+    console.log(cookie);
     var subtotal = 0;
     var totalBooks = 0;
     for (var index in cookie) {
-        totalBooks += parseInt(cookie[index].new);
-        totalBooks += parseInt(cookie[index].rental);
-        totalBooks += parseInt(cookie[index].used);
-        totalBooks += parseInt(cookie[index].ebook);
+        totalBooks += (parseFloat(cookie[index].new) || 0);
+        totalBooks += (parseFloat(cookie[index].rental) || 0);
+        totalBooks += (parseFloat(cookie[index].used) || 0);
+        totalBooks += (parseFloat(cookie[index].ebook) || 0);
 
 
-        subtotal += parseInt(cookie[index].priceNew) * parseInt(cookie[index].new);
-        subtotal += parseInt(cookie[index].priceUsed) * parseInt(cookie[index].used);
-        subtotal += parseInt(cookie[index].priceRental) * parseInt(cookie[index].rental);
-        subtotal += parseInt(cookie[index].priceEbook) * parseInt(cookie[index].ebook);
+        subtotal += (parseFloat(cookie[index].priceNew)  || 0)* (parseFloat(cookie[index].new || 0));
+        subtotal += (parseFloat(cookie[index].priceUsed)  || 0)* (parseFloat(cookie[index].used || 0));
+        subtotal += (parseFloat(cookie[index].priceRental) || 0) * (parseFloat(cookie[index].rental || 0));
+        subtotal += (parseFloat(cookie[index].priceEbook)  || 0)* (parseFloat(cookie[index].ebook || 0));
 
     }
     var total = (subtotal * .07) + subtotal;
-
+    console.log(total);
     var data = [{
         "amountOfBooks": totalBooks,//new+used+renotal+ebook
         "subtotal": subtotal,
