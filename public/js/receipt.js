@@ -57,9 +57,6 @@ $('#shopping-cart').append('<tr><td>'+"Sub Total: "+subtotal.toString()+'</td><b
 myform.submit(function(event){
   event.preventDefault();
 
-// Change to your service ID, or keep using the default service
-  var service_id = "default_service";
-  var template_id = "temp";
 
   myform.find("button").text("Sending...");
 
@@ -69,6 +66,11 @@ myform.submit(function(event){
 });
 
 function email(){
+
+  // Change to your service ID, or keep using the default service
+  var service_id = "default_service";
+  var template_id = "temp";
+
     // Actually sends the message
     emailjs.sendForm(service_id,template_id,"myform")
     .then(function(){ 
