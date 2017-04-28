@@ -206,6 +206,7 @@ function sendToCart(){
           temp["rental"] = row.find('td:nth-last-child(5)').find('input').val();
           temp["used"] = row.find('td:nth-last-child(6)').find('input').val();
           temp["new"] = row.find('td:nth-last-child(7)').find('input').val();
+          temp["id"] = book.key;
           myBook.push(temp);
           
          

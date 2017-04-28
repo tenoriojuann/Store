@@ -42,7 +42,15 @@ function price() {
 //function will update the database
 
 function updateDataBase() {
-
+var cookie = Cookies.getJSON('cart');
+    for(var index in cookie){
+        firebase.database().ref().child('/books/' + cookie[index].id)
+            .update({ quantityNew: (parseInt(cookie[index].quantityNew || 0)-parseInt(cookie[index].new || 0)).toString(), 
+                    quantityRental: (parseInt(cookie[index].quantityRental || 0)-parseInt(cookie[index].rental || 0)).toString(), 
+                    quantityUsed: (parseInt(cookie[index].quantityUsed || 0)-parseInt(cookie[index].used || 0)).toString(), 
+                    quantityEbook: (parseInt(cookie[index].quantityEbook)-parseInt(cookie[index].ebook || 0)).toString() 
+                });
+    }
 }
 
 // Show the input form for the CC
