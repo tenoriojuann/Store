@@ -1,7 +1,7 @@
 var searchData = [];
 var tableData = [];
 var cookieID = [];
-var sumArr = [];
+var findSearch = 0;
 function search() {
 
     //retrieve book data
@@ -37,7 +37,7 @@ function search() {
         distance: 5000,
         maxPatternLength: 32,
         minMatchCharLength: 1,
-        keys: [value.type1,value.type2]
+        keys: [value.type1,value.type2,value.type3,value.type4]
     };
 
     var f = new Fuse(searchData, options);
@@ -57,18 +57,26 @@ function processForm() {
     var v = {};
     v["value"] = unescape(temp[1]);
     v.value = v.value.replace(new RegExp("\\+","g"),' ');
-
+	
     if(temp[0] == "professor"){
-      v["type1"] = "professor"; 
-      v["type2"] = "author";
+	  v["type1"] = "professor"; 
+	  v["type2"] = "professor";
+	  v["type3"] = "professor";
+	  v["type4"] = "professor";	
+	  findSearch = 1;
     }
     else if(temp[0] == "course"){
       v["type1"] = "course";
       v["type2"] = "course";
+	  v["type3"] = "course";
+	  v["type4"] = "course";
+	  findSearch = 2;
     }
     else if(temp[0] == "keyword"){
-      v["type1"] = "summary"
-      v["type2"] = "summary"
+        v["type1"] = "summary"
+        v["type2"] = "isbn"
+		v["type3"] = "author"
+		v["type4"] = "bookName"
     }
     return v;
 }
@@ -110,6 +118,7 @@ $('#search-table tr').each(function(index) {
       // referencing the 'books' node
       var storeRef = rootRef.child("books");
       var id = row.find('td:nth-last-child(2)').text();
+	  
 	    
 	  var inStock = "In Stock"; //inStock var set to green
 		inStock = inStock.fontcolor("green");
@@ -119,7 +128,7 @@ $('#search-table tr').each(function(index) {
 	  
       
 	  storeRef.child(id).once('value').then(function (book) {
-
+		
 		//***Load book name -> ISBN -> Author -> Brief description of Summary 
 		var myCellSum = row.find('td:nth-last-child(8)'); //book description cell
 		var sumP = document.createElement('p');
@@ -130,7 +139,15 @@ $('#search-table tr').each(function(index) {
 			myCellSum.append("Author(s): " + book.val().author + "<br> Brief Description: "); //insert authors under isbn
 			sumP = summaryArr.substring(0,summaryArr.indexOf('.')); //get the first (.)occurence of summary **still need to work on fixing this up**
 			myCellSum.append( sumP + "...<br/>"); //insert summary last
-	
+		 
+		if(findSearch == 1)
+		{
+			myCellSum.append("<br> This book is " + book.val().required + " for " + book.val().course);
+		}
+		if(findSearch == 2)
+		{
+			myCellSum.append("<br> CRN: " + book.val().crn);
+		}
 		//Price and Quantity for New**************************************/
 		var mycell = row.find('td:nth-last-child(7)');
         mycell[0].innerHTML = ("$" + book.val().priceNew);//insert $ sign
@@ -152,9 +169,8 @@ $('#search-table tr').each(function(index) {
 			mycell.append(quantity);
         }
 		console.log(mycell[0].innerHTML);
-		
 		//Price and Quantity for Used**************************************/
-//Search Results Display Price / Input / Qty with Colored txt for stock
+		//Search Results Display Price / Input / Qty with Colored txt for stock
 		var mycell2= row.find('td:nth-last-child(6)');
 		mycell2[0].innerHTML = ("$" + book.val().priceUsed);//insert $ sign
 		var input1 = document.createElement('input');
@@ -256,8 +272,6 @@ function sendToCart(){
           temp["new"] = row.find('td:nth-last-child(7)').find('input').val();
           temp["id"] = book.key;
           myBook.push(temp);
-          
-         
         });
       }
     }
