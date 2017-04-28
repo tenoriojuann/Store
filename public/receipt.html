@@ -52,17 +52,25 @@ form label {
 <input type="text" name="to_email" />
 <label>to_name</label>
 <input type="text" name="to_name" />
-<label>message_html</label>
-<input id ="message" type="text" name="message_html" />
+<label style="display: none">message_html</label>
+<input id ="message" type="text" style ="display: none" name="message_html" />
 <br><br>
 <button>
 Send
 </button>
 </form>
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+
+    <table class="table" id="shopping-cart">
+        <thead>
+            <th>Details of your purchase:</th><br>
+        </thead>
+    </table>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src = "js/cookie.js"></script>
 <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript" src = "js/dynatable/jquery.dynatable.js"></script>
 <script type="text/javascript">
    (function(){
       emailjs.init("user_qaPfMLPrFXLrGWc1XRiWg");
