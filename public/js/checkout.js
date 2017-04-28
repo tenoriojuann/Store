@@ -5,16 +5,16 @@ function price() {
     var subtotal = 0;
     var totalBooks = 0;
     for (var index in cookie) {
-        totalBooks += parseInt(cookie[index].new);
-        totalBooks += parseInt(cookie[index].rental);
-        totalBooks += parseInt(cookie[index].used);
-        totalBooks += parseInt(cookie[index].ebook);
+        totalBooks += (parseInt(cookie[index].new) || 0);
+        totalBooks += (parseInt(cookie[index].rental)|| 0);
+        totalBooks += (parseInt(cookie[index].used)|| 0);
+        totalBooks += (parseInt(cookie[index].ebook)|| 0);
 
 
-        subtotal += parseInt(cookie[index].priceNew) * parseInt(cookie[index].new);
-        subtotal += parseInt(cookie[index].priceUsed) * parseInt(cookie[index].used);
-        subtotal += parseInt(cookie[index].priceRental) * parseInt(cookie[index].rental);
-        subtotal += parseInt(cookie[index].priceEbook) * parseInt(cookie[index].ebook);
+        subtotal += (parseInt(cookie[index].priceNew)|| 0) * (parseInt(cookie[index].new )|| 0);
+        subtotal += (parseInt(cookie[index].priceUsed) || 0)* (parseInt(cookie[index].used)|| 0);
+        subtotal += (parseInt(cookie[index].priceRental) || 0)* (parseInt(cookie[index].rental)|| 0);
+        subtotal += (parseInt(cookie[index].priceEbook)|| 0) * (parseInt(cookie[index].ebook)|| 0);
 
     }
     var total = (subtotal * .07) + subtotal;
