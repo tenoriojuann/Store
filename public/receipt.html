@@ -46,8 +46,9 @@ form label {
 
 
 
-  
+
 <form id="myform" method="post">
+<b><p style="text-align: center">Enter your email to send your receipt</p></b>  
 <label>to_email</label>
 <input type="text" name="to_email" />
 <label>to_name</label>
@@ -60,9 +61,11 @@ Send
 </button>
 </form>
 
+<button onclick="printTable()">Print Receipt</button>
 
 
-    <table class="table" id="shopping-cart">
+
+    <table class="table" id="shopping-cart" style="display: none">
         <thead>
             <th>Details of your purchase:</th><br>
         </thead>

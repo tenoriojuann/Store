@@ -88,9 +88,10 @@ $(document).ready(
             var number = $('#number').val();
 
             if (verifyCard(name, number, cvc, exp)) {
+                $('#billing').show('slow');
                 $("#forms").toggle("slows");
-                $(location).attr('href', "receipt.html");
-                alert("THank you for your payment");
+                //$(location).attr('href', "receipt.html");
+                //alert("THank you for your payment");
 
             }
             else {
@@ -102,8 +103,26 @@ $(document).ready(
  });
 
 
+// press next on shipping information takes the user to a prompt
+// if the user clicks ok then the user is taken to the receipt page
+$(document).ready(
+    function () {
 
+        $('#Snext').click(function (){
 
+            var r = confirm("Are you sure you want to submit your payment information?");
+
+            if(r){
+                alert("Thank you for the information!");
+                window.location = "receipt.html";
+            }
+            else{
+                window.location = "checkout.html";
+            }
+        })
+
+}
+);
 // hide the paypal input form
 $(document).ready(
     function () {

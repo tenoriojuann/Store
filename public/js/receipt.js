@@ -3,7 +3,14 @@ var myform = $("form#myform");
 var cookie = Cookies.getJSON('cart');
 console.log(cookie);
 
-
+function printTable()
+{
+  send();
+   newWin= window.open("");
+   newWin.document.write($('#shopping-cart').html());
+   newWin.print();
+   newWin.close();
+}
 
 function send(){
 
@@ -55,9 +62,14 @@ myform.submit(function(event){
   var template_id = "temp";
 
   myform.find("button").text("Sending...");
-  send();
 
-  // Actually sends the message
+  send();
+  email();
+
+});
+
+function email(){
+    // Actually sends the message
     emailjs.sendForm(service_id,template_id,"myform")
     .then(function(){ 
        alert("Sent!");
@@ -68,4 +80,4 @@ myform.submit(function(event){
       });
     return false;
   
-});
+}
