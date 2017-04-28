@@ -1,24 +1,24 @@
 // function will draw a table for the price
 function price() {
     var cookie = Cookies.getJSON('cart');
-    console.log(cookie);
+
     var subtotal = 0;
     var totalBooks = 0;
     for (var index in cookie) {
-        totalBooks += (parseFloat(cookie[index].new) || 0);
-        totalBooks += (parseFloat(cookie[index].rental) || 0);
-        totalBooks += (parseFloat(cookie[index].used) || 0);
-        totalBooks += (parseFloat(cookie[index].ebook) || 0);
+        totalBooks += parseInt(cookie[index].new);
+        totalBooks += parseInt(cookie[index].rental);
+        totalBooks += parseInt(cookie[index].used);
+        totalBooks += parseInt(cookie[index].ebook);
 
 
-        subtotal += (parseFloat(cookie[index].priceNew)  || 0)* (parseFloat(cookie[index].new || 0));
-        subtotal += (parseFloat(cookie[index].priceUsed)  || 0)* (parseFloat(cookie[index].used || 0));
-        subtotal += (parseFloat(cookie[index].priceRental) || 0) * (parseFloat(cookie[index].rental || 0));
-        subtotal += (parseFloat(cookie[index].priceEbook)  || 0)* (parseFloat(cookie[index].ebook || 0));
+        subtotal += parseInt(cookie[index].priceNew) * parseInt(cookie[index].new);
+        subtotal += parseInt(cookie[index].priceUsed) * parseInt(cookie[index].used);
+        subtotal += parseInt(cookie[index].priceRental) * parseInt(cookie[index].rental);
+        subtotal += parseInt(cookie[index].priceEbook) * parseInt(cookie[index].ebook);
 
     }
     var total = (subtotal * .07) + subtotal;
-    console.log(total);
+
     var data = [{
         "amountOfBooks": totalBooks,//new+used+renotal+ebook
         "subtotal": subtotal,
@@ -73,7 +73,9 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#cancel").click(function () {
-        	window.location = "checkout.html";
+        	document.getElementById('menu').style.display = "block";
+        	document.getElementById('price').style.display = "block";
+            $("#forms").hide("slow");
         });
     });
 
@@ -87,7 +89,7 @@ $(document).ready(
             var number = $('#number').val();
 
             if (verifyCard(name, number, cvc, exp)) {
-                $("#forms").toggle("slow");
+                $("#forms").toggle("slows");
                 $(location).attr('href', "receipt.html");
                 alert("THank you for your payment");
 
@@ -107,7 +109,7 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#cancel2").click(function () {
-            window.location = "checkout.html";
+            $("#forms2").toggle("slows");
         });
     });
 
@@ -116,7 +118,6 @@ $(document).ready(
 $(document).ready(
     function () {
         $("#paypal").click(function () {
-            $('#menu').hide('slow');
             $("#forms2").show("slows");
         });
     });
@@ -130,21 +131,7 @@ $(document).ready(
             var pass = $('#pass').val();
 
             if (verifyPayPal(email, pass)) {
-                $('#forms2').hide('slow');
-                $('#billing').show('slow');
                 // Do something once the paypal information is verified
             }
         });
     });
-
-// Clicking next on the billing information will take the user to the
-// shipping information
-
-$(document).ready(
-    function(){
-        $('#Bnext').click(function(){
-
-            $('#billing').hide('slow');
-            $('#shipping').show('slow');
-        });
-});
