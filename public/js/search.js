@@ -1,7 +1,7 @@
 var searchData = [];
 var tableData = [];
 var cookieID = [];
-
+var sumArr = [];
 function search() {
 
     //retrieve book data
@@ -83,7 +83,6 @@ function table(){
         search:false
       }
     }).bind('dynatable:afterProcess', setImages);
-
     setImages();
 }
 
@@ -99,8 +98,8 @@ $('#search-table tr').each(function(index) {
     storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
       var img = document.createElement('img');
       img.src = url;
-      img.height = "125";
-      img.width = "100";
+      img.height = "200"; //Changed dimensions of book
+      img.width = "150";
       img.onclick = function() {
           window.location = generateUrl("bookdetails.html", {
               id: row.find('td:nth-last-child(2)').text()
@@ -111,14 +110,27 @@ $('#search-table tr').each(function(index) {
       // referencing the 'books' node
       var storeRef = rootRef.child("books");
       var id = row.find('td:nth-last-child(2)').text();
-	  
+	    
 	  var inStock = "In Stock"; //inStock var set to green
 		inStock = inStock.fontcolor("green");
 	  
 	  var outStock = "Out of Stock"; //outStock var set to red
 		outStock = outStock.fontcolor("red");
+	  
       
 	  storeRef.child(id).once('value').then(function (book) {
+
+		//***Load book name -> ISBN -> Author -> Brief description of Summary 
+		var myCellSum = row.find('td:nth-last-child(8)'); //book description cell
+		var sumP = document.createElement('p');
+		var summaryArr = [];
+		summaryArr = book.val().summary;
+			myCellSum[0].innerHTML = (book.val().bookName + "<br>" + "ISBN: ");//insert bookname into first positon in cell
+			myCellSum.append(book.val().isbn +"<br>"); //insert isbn # under book name
+			myCellSum.append("Author(s): " + book.val().author + "<br> Brief Description: "); //insert authors under isbn
+			sumP = summaryArr.substring(0,summaryArr.indexOf('.')); //get the first (.)occurence of summary **still need to work on fixing this up**
+			myCellSum.append( sumP + "...<br/>"); //insert summary last
+	
 		//Price and Quantity for New**************************************/
 		var mycell = row.find('td:nth-last-child(7)');
         mycell[0].innerHTML = ("$" + book.val().priceNew);//insert $ sign
@@ -127,11 +139,6 @@ $('#search-table tr').each(function(index) {
 		//input.value = "0";  //Uncomment to make input values show as 0
         mycell.append(input);
         var quantity = document.createElement('p');
-
-        quantity.innerHTML = "<br>Quantity: " + book.val().quantityNew;
-        mycell.append(quantity);
-
-
 
 		if(book.val().quantityNew <= 0 || book.val().quantityNew % 1 != 0)//check if qty less than or equal to 0, or if qty is an int
 		{
