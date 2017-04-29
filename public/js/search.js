@@ -32,7 +32,7 @@ function search() {
         matchAllTokens: false,
         findAllMatches: true,
         // threshold determines strictness of search
-        threshold: 0.1,
+        threshold: 0.0,
         location: 0,
         distance: 5000,
         maxPatternLength: 32,
