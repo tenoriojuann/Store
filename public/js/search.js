@@ -145,16 +145,16 @@ $('#search-table tr').each(function(index) {
 			myCellSum.append( sumP + "...<br/>"); //insert summary last
 		if(findSearch == 1)
 		{
-			myCellSum.append("<br> This book is " + bookArr[bookArrIndex].required + " for " + bookArr[bookArrIndex].course);
+			myCellSum.append("<br> This book is " + book.val().required + " for " + book.val().course);
 		}
 		
 		if(findSearch == 2)
 		{
 			
-			myCellSum.append("<br> CRN: " + bookArr[bookArrIndex].crn + " for " + bookArr[bookArrIndex].professor);
+			myCellSum.append("<br> CRN: " + book.val().crn + " for " + book.val().professor);
 			
 		}
-		//Price and Quantity for New**************************************/
+		//Price and Quantity for New**************************************
 		var mycell = row.find('td:nth-last-child(7)');
         mycell[0].innerHTML = ("$" + book.val().priceNew);//insert $ sign
         var input = document.createElement('input');
@@ -176,7 +176,7 @@ $('#search-table tr').each(function(index) {
         }
 		console.log(mycell[0].innerHTML);
 		
-		//Price and Quantity for Used**************************************/
+		//Price and Quantity for Used**************************************
 		//Search Results Display Price / Input / Qty with Colored txt for stock
 		var mycell2= row.find('td:nth-last-child(6)');
 		mycell2[0].innerHTML = ("$" + book.val().priceUsed);//insert $ sign
@@ -199,7 +199,7 @@ $('#search-table tr').each(function(index) {
 		}
 		console.log(mycell2[0].innerHTML);
 		
-		//Price and Quantity for Rental**************************************/
+		//Price and Quantity for Rental**************************************
 		var mycell3= row.find('td:nth-last-child(5)');
 		mycell3[0].innerHTML = ("$" + book.val().priceRental); //insert $ sign
 		var input2 = document.createElement('input');
@@ -221,7 +221,7 @@ $('#search-table tr').each(function(index) {
 		}
 		console.log(mycell3[0].innerHTML);
 		
-		//price and quantity for eBook**************************************/
+		//price and quantity for eBook**************************************
 		var mycell4= row.find('td:nth-last-child(4)');
 		mycell4[0].innerHTML = ("$" + book.val().priceEbook);//insert $ sign
 		var input3 = document.createElement('input');

@@ -177,7 +177,7 @@ function removeFromCart() {
 //Scroll Pane function for summary description
 $(function () {
     $('.scroll-pane')
-        .jScrollPane()
+        .JScrollPane()
         .bind(
             'mousewheel',
             function (e) {
