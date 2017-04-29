@@ -49,7 +49,9 @@ function search() {
 
       tableData.push(output[index].item);
     }
-	
+
+
+	//After we get the search results we can draw the table
     table();
 }
 
@@ -87,7 +89,7 @@ function processForm() {
 function table(){
 
     console.log(tableData);
-    tableData = mergeCRN(tableData);
+    tableData = mergeMultiples(tableData);
     console.log(tableData);
     $('#search-table').dynatable({
       dataset: {
@@ -95,28 +97,8 @@ function table(){
       perPageDefault: 10
       },
       features:{
-        search:false,
-      },
-        readers: {
-            color: function(cell, record) {
-
-                // Inspect the source of this example
-                // to see the getAverageRGB function.
-                var $cell = $(cell);
-                   console.log($cell.find('img').get(0));
-
-                // Store the average RGB image color value
-                // as a decimal in "dec" attribute.
-                record['dec'] = dec;
-
-                // Grab the dinosaur name.
-                record['name'] = $cell.text();
-
-                // Return the HTML of the cell to be stored
-                // as the "color" attribute.
-                return $cell.html();
-            }
-        }
+        search:false
+      }
     }).bind('dynatable:afterProcess', setImages)
     .bind('dynatable:afterProcess', modifyTableData);
     setImages();
@@ -290,7 +272,7 @@ function modifyTableData(){
 }
 
 
-function mergeCRN(arr) {
+function mergeMultiples(arr) {
     return _(arr)
             .groupBy('isbn')
             .map((object, isbn) => ({
@@ -346,8 +328,7 @@ function mergeCRN(arr) {
 
         })).value();
 }
-	  
-	  
+
 
 
 function sendToCart(){
