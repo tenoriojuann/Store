@@ -96,7 +96,27 @@ function table(){
       },
       features:{
         search:false,
-      }
+      },
+        readers: {
+            color: function(cell, record) {
+
+                // Inspect the source of this example
+                // to see the getAverageRGB function.
+                var $cell = $(cell);
+                   console.log($cell.find('img').get(0));
+
+                // Store the average RGB image color value
+                // as a decimal in "dec" attribute.
+                record['dec'] = dec;
+
+                // Grab the dinosaur name.
+                record['name'] = $cell.text();
+
+                // Return the HTML of the cell to be stored
+                // as the "color" attribute.
+                return $cell.html();
+            }
+        }
     }).bind('dynatable:afterProcess', setImages)
     .bind('dynatable:afterProcess', modifyTableData);
     setImages();
@@ -186,7 +206,7 @@ function modifyTableData(){
                 if (book.val().quantityNew <= 0 || book.val().quantityNew % 1 != 0)//check if qty less than or equal to 0, or if qty is an int
                 {
                     quantity = outStock;
-                    PQnew.append("<br/>" + "<br>" + quantity);
+                    PQnew[0].innerHTML = ("<br/>" + "<br>" + quantity);
                 }
                 else //print normal
                 {
@@ -209,7 +229,7 @@ function modifyTableData(){
                 {
                     quantity1 = outStock;
 
-                    PQused.append("<br/>" + "<br>" + quantity1);
+                    PQused[0].innerHTML = ("<br/>" + "<br>" + quantity1);
                 }
                 else  //print normal
                 {
@@ -230,7 +250,7 @@ function modifyTableData(){
                 if (book.val().quantityRental <= 0 || book.val().quantityRental % 1 != 0)//check if qty less than or equal to 0, or if qty is an int
                 {
                     quantity2 = outStock;
-                    PQrental.append("<br/>" + "<br>" + quantity2);
+                    PQrental[0].innerHTML = ("<br/>" + "<br>" + quantity2);
                 }
                 else  //print normal
                 {
