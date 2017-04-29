@@ -61,9 +61,9 @@
 <div class="jumbotron text-center">
     <div class="radio">
     <form id="myform" >
-        <label><input type="radio" name="option" value="professor" id="professor" onclick="displayProfessors()"> Professor</label>
-        <label><input type="radio" name="option" value="summary" id="keyword" onclick="displayKW()"> Keyword</label>
-        <label><input type="radio" name="option" value="course" id="crs" onclick="displayCRS()"> Course</label>
+        <label><input type="radio" name="option" value="professor" id="professor" onclick="displayProfessors()">Professor &nbsp;</label>
+        <label><input type="radio" name="option" value="summary" id="keyword" onclick="displayKW()">Keyword &nbsp;</label>
+        <label><input type="radio" name="option" value="course" id="crs" onclick="displayCRS()">Course &nbsp;</label>
     </form>
     </div>
 </div>
@@ -72,27 +72,26 @@
 <div class="jumbotron text-center" style="margin-top: 0; display: none" id="s">
     <form class="form-inline" method="get" action="search.html" id="search">
         <div class="input-group">
-            <input type="text" id="course" name="keyword" size="50" required>
+            <input type="text" class="form-control" id="course" name="keyword" size="50" required>
             <div class="input-group-btn">
-                <button id="btn" type="submit" class="btn btn-danger">search</button>
+                <button id="btn" type="submit" class="btn btn-primary">search</button>
             </div>
         </div>
     </form>
 </div>
 
-<form action="search.html" name="select" method="get" class="jumbotron text-center" id="selection" style="display: none">
-    <select id="options" class="text-center" name="professor" required>
 
-    </select>
-    <input type="submit" class="btn btn-primary" value="Search"></input>
-</form>
+    <form action="search.html" name="select" method="get" class="jumbotron text-center" id="selection" style="display: none">
+            <label><select id="options" class="btn btn-default" name="professor" required></select></label>
+        <input type="submit" class="btn btn-primary" value="Search">
+    </form>
 
-<form action="search.html" name="course" method="get" class="jumbotron text-center" id="selection2" style="display: none">
-    <select id="courses" class="text-center" name="course" required>
 
-    </select>
-    <input type="submit" class="btn btn-primary" value="Search"></input>
-</form>
+    <form action="search.html" name="course" method="get" class="jumbotron text-center" id="selection2" style="display: none">
+        <label><select id="courses" class="btn btn-default" name="course" required></select></label>
+        <input type="submit" class="btn btn-primary" value="Search">
+    </form>
+
 
 </body>
 </html>
