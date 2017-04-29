@@ -96,8 +96,8 @@ function table(){
       records: tableData,
       perPageDefault: 10
       },
-      features:{
-        search:false
+      features: {
+          search: false
       }
     }).bind('dynatable:afterProcess', setImages)
     .bind('dynatable:afterProcess', modifyTableData);
@@ -276,57 +276,58 @@ function mergeMultiples(arr) {
     return _(arr)
             .groupBy('isbn')
             .map((object, isbn) => ({
-            isbn: isbn,
-            crn: _.map(object, 'crn').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            }),
-            bookName: _.map(object, 'bookName').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            quantityNew: _.map(object, 'quantityNew').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            quantityRental: _.map(object, 'quantityRental').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            quantityUsed: _.map(object, 'quantityUsed').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            quantityEbook: _.map(object, 'quantityEbook').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            summary: _.map(object, 'summary')[0],
-            id: _.map(object, 'id')[0],
 
-            author: _.map(object, 'author').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            course: _.map(object, 'course').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            }),
-            professor: _.map(object, 'professor').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            }),
-            priceEbook: _.map(object, 'priceEbook').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            priceNew: _.map(object, 'priceNew').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            priceUsed: _.map(object, 'priceUsed').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            priceRental: _.map(object, 'priceRental').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            })[0],
-            Required: _.map(object, 'Required').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            }),
-            term: _.map(object, 'term').sort().filter(function (item, pos, ary){
-                return !pos || item != ary[pos - 1];
-            }),
+                isbn: isbn,
+                crn: _.map(object, 'crn').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                }),
+                bookName: _.map(object, 'bookName').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                quantityNew: _.map(object, 'quantityNew').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                quantityRental: _.map(object, 'quantityRental').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                quantityUsed: _.map(object, 'quantityUsed').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                quantityEbook: _.map(object, 'quantityEbook').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                summary: _.map(object, 'summary')[0],
+                id: _.map(object, 'id')[0],
 
-        })).value();
+                author: _.map(object, 'author').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                course: _.map(object, 'course').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                }),
+                professor: _.map(object, 'professor').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                }),
+                priceEbook: _.map(object, 'priceEbook').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                priceNew: _.map(object, 'priceNew').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                priceUsed: _.map(object, 'priceUsed').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                priceRental: _.map(object, 'priceRental').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })[0],
+                Required: _.map(object, 'Required').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                }),
+                term: _.map(object, 'term').sort().filter(function (item, pos, ary) {
+                    return !pos || item != ary[pos - 1];
+                })
+            }))
+            .value();
 }
 
 
