@@ -22,6 +22,8 @@
 
 
 </head>
+
+
 <body onload="price()">
 
 <!--TITLE-->
@@ -30,21 +32,24 @@
         <img class="logo" width="15%" height="15%" src="images/ksulogo.png">
         <h1>KSU BOOKSTORE</h1>
     </div>
-
+</div>
 
 <!--- Total price -->
 
 <table class = "table" id = "price">
-<thead>
-    <th>Amount of Books</th>
-    <th>Subtotal</th>
-    <th>Total</th>
+    <thead>
+        <th>Book Name</th>
+        <th>ISBN</th>
+        <th>New</th>
+        <th>Used</th>
+        <th>Rental</th>
+        <th>Ebook</th>
     </thead>
 </table>
 
-
+<table
 <!--- CC -->
-    <div class="demo-container" id="forms" style="display:none">
+    <div class="text-center" id="forms" style="display:none">
         <div class="card-wrapper"></div>
 
         <div class="form-container active">
@@ -63,7 +68,7 @@
 
 
 <!--- Paypal -->
-<div id="forms2" style="display:none">
+<div id="forms2" class="text-center" style="display:none">
 <form >
 
     <input placeholder="Email" type="email" name="email" id="email">
@@ -97,11 +102,11 @@
 
 <!--- MENU -->
 
-<div id ="menu">
+<div id ="menu" class ="jumbotron text-center">
     <p style="text-align: center" s>How would you like to pay?</p>
 
-    <button id ="cc">Credit Card</button>
-    <button id ="paypal">Paypal</button>
+    <button id ="cc" class="btn-lg btn-danger">Credit Card</button>
+    <button id ="paypal" class="btn-lg btn-warning">Paypal</button>
 </div>
 </body>
 </html>

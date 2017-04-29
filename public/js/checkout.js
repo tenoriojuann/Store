@@ -19,6 +19,7 @@ function price() {
     }
     var total = (subtotal * .07) + subtotal;
 
+
     var data = [{
         "amountOfBooks": totalBooks,//new+used+renotal+ebook
         "subtotal": subtotal,
@@ -27,7 +28,7 @@ function price() {
 
     $('#price').dynatable({
         dataset: {
-            records: data,
+            records: cookie,
             perPageDefault: 1
         },
         features: {
@@ -45,6 +46,7 @@ function updateDataBase() {
 var cookie = Cookies.getJSON('cart');
     for(var index in cookie){
         firebase.database().ref().child('/books/' + cookie[index].id)
+
             .update({ quantityNew: (parseInt(cookie[index].quantityNew || 0)-parseInt(cookie[index].new || 0)).toString(), 
                     quantityRental: (parseInt(cookie[index].quantityRental || 0)-parseInt(cookie[index].rental || 0)).toString(), 
                     quantityUsed: (parseInt(cookie[index].quantityUsed || 0)-parseInt(cookie[index].used || 0)).toString(), 
@@ -90,8 +92,7 @@ $(document).ready(
             if (verifyCard(name, number, cvc, exp)) {
                 $('#billing').show('slow');
                 $("#forms").toggle("slows");
-                //$(location).attr('href', "receipt.html");
-                //alert("THank you for your payment");
+
 
             }
             else {
