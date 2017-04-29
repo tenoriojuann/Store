@@ -1,7 +1,10 @@
 var searchData = [];
 var tableData = [];
 var cookieID = [];
+var bookArr = [];
 var findSearch = 0;
+
+
 function search() {
 
     //retrieve book data
@@ -32,7 +35,7 @@ function search() {
         matchAllTokens: false,
         findAllMatches: true,
         // threshold determines strictness of search
-        threshold: 0.1,
+        threshold: 0.0,
         location: 0,
         distance: 5000,
         maxPatternLength: 32,
@@ -47,6 +50,7 @@ function search() {
 
       tableData.push(output[index].item);
     }
+	
     table();
 }
 
@@ -102,23 +106,23 @@ $('#search-table tr').each(function(index) {
 
   var row = $(this);
   if(index>0){
-    var isbn = row.find('td:nth-last-child(3)').text();
-    storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
-      var img = document.createElement('img');
-      img.src = url;
-      img.height = "200"; //Changed dimensions of book
-      img.width = "150";
-      img.onclick = function() {
-          window.location = generateUrl("bookdetails.html", {
-              id: row.find('td:nth-last-child(2)').text()
-          });
+	  
+			var isbn = row.find('td:nth-last-child(3)').text();
+			storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
+			var img = document.createElement('img');
+			img.src = url;
+			img.height = "200"; //Changed dimensions of book
+			img.width = "150";
+			img.onclick = function() {
+				window.location = generateUrl("bookdetails.html", {
+				id: row.find('td:nth-last-child(2)').text()
+            });
       };
 	  
       var rootRef = database.ref();
       // referencing the 'books' node
       var storeRef = rootRef.child("books");
       var id = row.find('td:nth-last-child(2)').text();
-	  
 	    
 	  var inStock = "In Stock"; //inStock var set to green
 		inStock = inStock.fontcolor("green");
@@ -128,7 +132,7 @@ $('#search-table tr').each(function(index) {
 	  
       
 	  storeRef.child(id).once('value').then(function (book) {
-		
+		//work here
 		//***Load book name -> ISBN -> Author -> Brief description of Summary 
 		var myCellSum = row.find('td:nth-last-child(8)'); //book description cell
 		var sumP = document.createElement('p');
@@ -139,14 +143,16 @@ $('#search-table tr').each(function(index) {
 			myCellSum.append("Author(s): " + book.val().author + "<br> Brief Description: "); //insert authors under isbn
 			sumP = summaryArr.substring(0,summaryArr.indexOf('.')); //get the first (.)occurence of summary **still need to work on fixing this up**
 			myCellSum.append( sumP + "...<br/>"); //insert summary last
-		 
 		if(findSearch == 1)
 		{
-			myCellSum.append("<br> This book is " + book.val().required + " for " + book.val().course);
+			myCellSum.append("<br> This book is " + bookArr[bookArrIndex].required + " for " + bookArr[bookArrIndex].course);
 		}
+		
 		if(findSearch == 2)
 		{
-			myCellSum.append("<br> CRN: " + book.val().crn);
+			
+			myCellSum.append("<br> CRN: " + bookArr[bookArrIndex].crn + " for " + bookArr[bookArrIndex].professor);
+			
 		}
 		//Price and Quantity for New**************************************/
 		var mycell = row.find('td:nth-last-child(7)');
@@ -169,6 +175,7 @@ $('#search-table tr').each(function(index) {
 			mycell.append(quantity);
         }
 		console.log(mycell[0].innerHTML);
+		
 		//Price and Quantity for Used**************************************/
 		//Search Results Display Price / Input / Qty with Colored txt for stock
 		var mycell2= row.find('td:nth-last-child(6)');
@@ -246,6 +253,14 @@ $('#search-table tr').each(function(index) {
 });
 }
 
+
+function mergeNames(arr) {
+    return _.chain(arr).groupBy('isbn').mapValues(function (v) {
+        return _.chain(v).pluck('crn').flattenDeep();
+    }).value();
+}
+	  
+	  
 
 
 function sendToCart(){
