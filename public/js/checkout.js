@@ -2,6 +2,7 @@ var subtotal = 0;
 var totalBooks = 0;
 var total = 0;
 
+//TODO: make use of the variables above and put them under the table
 
 // function will draw a table for the price
 function price() {
@@ -23,12 +24,6 @@ function price() {
     }
     total = (subtotal * .07) + subtotal;
 
-
-    var data = [{
-        "amountOfBooks": totalBooks,//new+used+renotal+ebook
-        "subtotal": subtotal,
-        "total": total
-    }];
 
     $('#price').dynatable({
         dataset: {
@@ -60,7 +55,10 @@ $(document).ready(
                 }
                 else{
                     updateUserMoney(total, userobject.money);
+                    updateQuntities();
 
+                    alert("Payment Accepted");
+                    window.location = "receipt.html"
                 }
             });
 

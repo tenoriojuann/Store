@@ -62,6 +62,7 @@ myform.submit(function(event){
 
   send();
   email();
+  Cookies.remove('cart');
 
 });
 
