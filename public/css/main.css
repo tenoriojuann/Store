@@ -43,3 +43,7 @@
 
 }
 
+.cart > table > thead > th {
+    text-align: center;
+}
+
