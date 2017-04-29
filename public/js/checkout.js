@@ -1,9 +1,13 @@
+var subtotal = 0;
+var totalBooks = 0;
+var total = 0;
+
+
 // function will draw a table for the price
 function price() {
     var cookie = Cookies.getJSON('cart');
 
-    var subtotal = 0;
-    var totalBooks = 0;
+
     for (var index in cookie) {
         totalBooks += (parseInt(cookie[index].new) || 0);
         totalBooks += (parseInt(cookie[index].rental)|| 0);
@@ -17,7 +21,7 @@ function price() {
         subtotal += (parseInt(cookie[index].priceEbook)|| 0) * (parseInt(cookie[index].ebook)|| 0);
 
     }
-    var total = (subtotal * .07) + subtotal;
+    total = (subtotal * .07) + subtotal;
 
 
     var data = [{
@@ -39,10 +43,102 @@ function price() {
     });
 }
 
+// grabs the username from the
+$(document).ready(
+    function () {
+        $("#loginAID").click(function () {
+            var user = $("#username").val();
+            var pass = $("#pass2").val();
 
-//function will update the database
+            checkUser(user, pass, function(userobject){
+                console.log(userobject);
 
-function updateDataBase() {
+
+                if(userobject.money < total){
+                    alert("Dude, you barely got money!\nPick a different payment method");
+                    window.location = "checkout.html"
+                }
+                else{
+                    updateUserMoney(total, userobject.money);
+
+                }
+            });
+
+        });
+    }
+);
+
+// shows the financial aid login page
+
+$(document).ready(
+    function () {
+        $("#Faid").click(function (){
+
+           $("#aid").show("slow");
+           $("#menu").hide("slow");
+            $("#price").hide();
+
+        });
+    }
+);
+
+
+// hides the financial aid login page
+
+$(document).ready(
+    function () {
+        $("#cancelAID").click(function (){
+
+            window.location = "checkout.html";
+
+        });
+    }
+);
+
+// Checks whether the user exists in the database
+// If the user exists, then an object is return
+// the object contains all of the user information
+function checkUser(username, pass, callback){
+
+    var rootRef = database.ref();
+    // referencing the 'books' node
+    var usersRef = rootRef.child("users");
+
+    var userObject;
+    usersRef.once('value', function(snapshot) {
+        if (snapshot.hasChild(username)) {
+
+            if(pass === snapshot.val()[username].password) {
+                userObject =  snapshot.val()[username];
+                callback(userObject);
+            }
+            else{
+                alert("wrong password");
+            }
+        }
+        else{
+            alert("user does not exist");
+        }
+    });
+
+
+}
+
+//function will update money left for the user in the database
+
+function updateUserMoney(moneySpent, financialAidMoney) {
+
+    var user = $("#username").val();
+
+    database.ref().child('/users/' + user)
+
+        .update({ money: (parseInt(financialAidMoney || 0)-parseInt(moneySpent || 0)).toString()
+        });
+}
+
+//function will update the quantities in the database
+
+function updateQuntities() {
 var cookie = Cookies.getJSON('cart');
     for(var index in cookie){
         firebase.database().ref().child('/books/' + cookie[index].id)
@@ -71,7 +167,7 @@ $(document).ready(
 
     });
 
-// hide the CC input form
+// hides the CC input form
 $(document).ready(
     function () {
         $("#cancel").click(function () {
@@ -80,7 +176,7 @@ $(document).ready(
     });
 
 
-// Evaluate the CC information
+// Evaluates the CC information
 $(document).ready(
     function () {
         $("#submit").click(function () {
@@ -124,7 +220,7 @@ $(document).ready(
 
 }
 );
-// hide the paypal input form
+// hides the paypal input form
 $(document).ready(
     function () {
         $("#cancel2").click(function () {
