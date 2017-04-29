@@ -61,7 +61,7 @@
 </div>
 
 <div class="cart">
-    <table class="table" id="shopping-cart">
+    <table class="table table-bordered" id="shopping-cart">
         <thead>
             <th>Art</th>
             <th>Book Name</th>
@@ -69,12 +69,12 @@
             <th>Rental</th>
             <th>Used</th>
             <th>New</th>
+            <th style="display: none;">ID</th>
             <th>ISBN</th>
-            <th>Remove</th>
-
+            <th>Select</th>
         </thead>
     </table>
 
     <button class = "btn btn-success" onclick="location.href = 'checkout.html'">Checkout</button>
-    <button class = "btn btn-warning" onclick="removeFromCart()">Remove</button>
+    <button class = "btn btn-warning" onclick="removeFromCart()">Remove Selected</button>
 </div>

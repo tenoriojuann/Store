@@ -22,18 +22,40 @@ function drawTable() {
                 img.src = url;
                 img.height = "125";
                 img.width = "100";
-                var check = document.createElement('input');
-                check.type = "checkbox";
+                var remove = document.createElement('button');
+                remove.type = "button";
+                remove.className = "btn btn-warning";
+                remove.onclick = function() {
+                    var id = row.find('td:nth-last-child(3)').text();
+                    removeFromCart(id);
+                };
+                remove.innerHTML = "Remove from cart";
                 row.find('td:first-child').replaceWith(img);
-                row.find('td:last-child').replaceWith(check);
+                row.find('td:last-child').replaceWith(remove);
             });
         }
     });
 }
 
 // option if the user wants to remove item from cart
-function removeFromCart() {
-	var cookie = Cookies.getJSON('cart');
+function removeFromCart(id) {
+
+    var cookies = Cookies.getJSON('cart');
+
+    console.log(cookies);
+
+    for(var i = 0; i < cookies.length; i++) {
+        var obj = cookies[i];
+
+        if (obj.id == id) {
+            cookies.remove(obj[i]);
+        }
+    }
+    console.log(cookies);
+
+    //drawTable();
+
+	/*var cookie = Cookies.getJSON('cart');
 	$('#shopping-cart tr').each(function (index) {
 		if(index > 0){
 
@@ -47,7 +69,7 @@ function removeFromCart() {
 
 	Cookies.remove('cart');
 	Cookies.set('cart', JSON.stringify(cookie));
-	window.location = "cart.html"
+	window.location = "cart.html"*/
 
 }
 
