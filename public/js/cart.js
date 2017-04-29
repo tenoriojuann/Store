@@ -1,10 +1,11 @@
-var cookie = Cookies.getJSON('cart');
-console.log(cookie);
+var cookies = Cookies.getJSON('cart');
+console.log(cookies);
 
 function drawTable() {
+
     $('#shopping-cart').dynatable({
         dataset: {
-            records: cookie,
+            records: cookies,
             perPageDefault: 10
         },
         features: {
@@ -40,36 +41,23 @@ function drawTable() {
 // option if the user wants to remove item from cart
 function removeFromCart(id) {
 
-    var cookies = Cookies.getJSON('cart');
 
     console.log(cookies);
 
     for(var i = 0; i < cookies.length; i++) {
         var obj = cookies[i];
-
-        if (obj.id == id) {
-            cookies.remove(obj[i]);
+        console.log(obj);
+        console.log(id);
+        if (obj.id === id) {
+            var index = cookies.indexOf(obj.id);
+            cookies.splice(index, 1);
+            Cookies.remove('cart');
+            Cookies.set('cart', JSON.stringify(cookies));
+            window.location = "cart.html";
         }
     }
-    console.log(cookies);
 
-    //drawTable();
 
-	/*var cookie = Cookies.getJSON('cart');
-	$('#shopping-cart tr').each(function (index) {
-		if(index > 0){
-
-			var row = $(this);
-      // Detect all the ticked checkboxes
-      		if(row.find('input').is(':checked')){
-				cookie.splice(index-1,1);
-      		}
-		}
-	});
-
-	Cookies.remove('cart');
-	Cookies.set('cart', JSON.stringify(cookie));
-	window.location = "cart.html"*/
 
 }
 
