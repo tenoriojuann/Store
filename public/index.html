@@ -56,15 +56,18 @@
         <h2><span class="glyphicon glyphicon-search"></span> Search By:</h2>
     </div>
 </div>
-<div class="form-group">
+
+
+<div class="jumbotron text-center">
     <div class="radio">
-    <form id="myform" style="width:210px; margin:0 auto;">
+    <form id="myform" >
         <label><input type="radio" name="option" value="professor" id="professor" onclick="displayProfessors()"> Professor</label>
         <label><input type="radio" name="option" value="summary" id="keyword" onclick="displayKW()"> Keyword</label>
         <label><input type="radio" name="option" value="course" id="crs" onclick="displayCRS()"> Course</label>
     </form>
     </div>
 </div>
+
 <!--- Search Field -->
 <div class="jumbotron text-center" style="margin-top: 0; display: none" id="s">
     <form class="form-inline" method="get" action="search.html" id="search">
@@ -77,15 +80,15 @@
     </form>
 </div>
 
-<form action="search.html" name="select" method="get" id="selection" style="width:210px; margin:0 auto; display: none">
-    <select id="options" class="form-control" name="professor" required>
+<form action="search.html" name="select" method="get" class="jumbotron text-center" id="selection" style="display: none">
+    <select id="options" class="text-center" name="professor" required>
 
     </select>
     <input type="submit" class="btn btn-primary" value="Search"></input>
 </form>
 
-<form action="search.html" name="course" method="get" id="selection2" style="width:210px; margin:0 auto; display: none">
-    <select id="courses" class="form-control" name="course" required>
+<form action="search.html" name="course" method="get" class="jumbotron text-center" id="selection2" style="display: none">
+    <select id="courses" class="text-center" name="course" required>
 
     </select>
     <input type="submit" class="btn btn-primary" value="Search"></input>

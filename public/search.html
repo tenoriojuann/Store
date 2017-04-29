@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/title.css">
-    <script src="js/bookdetails.js"></script>
     <script src="js/search.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
+	<script type ="text/javascript" src = "https://cdn.jsdelivr.net/g/lodash@4.17.4(lodash.min.js+lodash.core.min.js+lodash.fp.min.js+lodash.core.js+lodash.fp.js+lodash.js+mapping.fp.js)"></script>
 
 </head>
 <body>
@@ -56,20 +56,22 @@
 </nav>
 
 <!--TABLE HEADERS-->
-<table id="search-table" class="table">
+<table id="search-table" class = "table">
     <div class="col-lg-2">
     <thead>
-        <th>Cover</th>
+        <th data-dynatable-no-sort="true">Cover</th>
+        <th data-dynatable-no-sort="true" style="display: none">Course</th>
+        <th data-dynatable-no-sort="true" style="display:none">Professor</th>
+        <th data-dynatable-no-sort="true" style="display: none">CRN</th>
         <th>Book Name</th>
-        <th>Professor</th>
-        <th>Course</th>
-		<th>New</th>
-		<th>Used</th>
-		<th>Rental</th>
-		<th>Ebook</th>
-        <th>isbn</th>
-        <th style="display:none">ID</th>
-        <th>Add to Cart</th>
+
+		<th>Price New</th>
+		<th>Price Used</th>
+		<th>Price Rental</th>
+		<th>Price Ebook</th>
+        <th data-dynatable-no-sort="true" style="display:none">isbn</th>
+        <th data-dynatable-no-sort="true" style="display:none">ID</th>
+        <th data-dynatable-no-sort="true">Add to Cart</th>
 
     </thead>
     </div>
