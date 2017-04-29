@@ -158,7 +158,16 @@ $(document).ready(
         	document.getElementById('price').style.display = "none";
             new Card({
                 form: document.querySelector('form'),
-                container: '.card-wrapper'
+                container: '.card-wrapper',
+                placeholders: {
+                    number: '**** **** **** ****',
+                    name: 'CARD NAME',
+                    expiry: '**/****',
+                    cvc: '***'
+                },
+                masks: {
+                    cardNumber: '•' // optional - mask card number
+                }
             });
             $("#forms").show("slow");
         });
