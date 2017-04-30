@@ -2,6 +2,7 @@ var searchData = [];
 var tableData = [];
 var bookArray = [];
 var findSearch = 0;
+var myBook = [];
 
 
 function search() {
@@ -34,7 +35,7 @@ function search() {
         matchAllTokens: false,
         findAllMatches: true,
         // threshold determines strictness of search
-        threshold: 0.3,
+        threshold: 0.2,
         location: 0,
         distance: 5000,
         maxPatternLength: 32,
@@ -93,14 +94,11 @@ function processForm() {
 
 function table(){
 
-    console.log(tableData);
-    tableData = mergeMultiples(tableData);
-    console.log(tableData);
 
 
     $('#search-table').dynatable({
       dataset: {
-      records: tableData,
+      records: mergeMultiples(tableData),
       perPageDefault: 10
       },
       features: {
@@ -188,7 +186,7 @@ function modifyTableData(){
                 PQnew[0].innerHTML = ("$" + book.val().priceNew);//insert $ sign
                 var input = document.createElement('input');
                 input.type = "text";
-                input.value = "0";  //Uncomment to make input values show as 0
+                //input.value = "0";  //Uncomment to make input values show as 0
                 PQnew.append(input);
                 var quantity = document.createElement('p');
 
@@ -211,7 +209,7 @@ function modifyTableData(){
                 PQused[0].innerHTML = ("$" + book.val().priceUsed);//insert $ sign
                 var input1 = document.createElement('input');
                 input1.type = "text";
-                input1.value = "0";  //Uncomment to make input values show as 0
+                //input1.value = "0";  //Uncomment to make input values show as 0
                 PQused.append(input1);
                 var quantity1 = document.createElement('p');
 
@@ -234,7 +232,7 @@ function modifyTableData(){
                 PQrental[0].innerHTML = ("$" + book.val().priceRental); //insert $ sign
                 var input2 = document.createElement('input');
                 input2.type = "text";
-                input2.value = "0";  //Uncomment to make input values show as 0
+                //input2.value = "0";  //Uncomment to make input values show as 0
                 PQrental.append(input2);
                 var quantity2 = document.createElement('p');
 
@@ -255,7 +253,7 @@ function modifyTableData(){
                 PQebook[0].innerHTML = ("$" + book.val().priceEbook);//insert $ sign
                 var input3 = document.createElement('input');
                 input3.type = "text";
-                input3.value = "0";  //Uncomment to make input values show as 0
+                //input3.value = "0";  //Uncomment to make input values show as 0
                 PQebook.append(input3);
                 var quantity3 = document.createElement('p');
 
@@ -345,7 +343,7 @@ function mergeMultiples(arr) {
 
 function sendToCart(){
 
-  var myBook = [];
+
   var rootRef = database.ref();
   // referencing the 'books' node
   var storeRef = rootRef.child("books");
@@ -361,88 +359,88 @@ function sendToCart(){
         
         storeRef.child(id).once('value').then(function (book) {
           temp = book.val();
-          var added = true;
-          if(parseInt(row.find('td:nth-last-child(4)').find('input').val() ||0) > temp.quantityEbook){
+          if(parseInt(row.find('td:nth-last-child(4)').find('input').val() || -1) > temp.quantityEbook){
               alert("The entered number of ebooks exceeds our inventory!");
-              added = false;
+
           }
           else {
-              temp["ebook"] = (parseInt(row.find('td:nth-last-child(4)').find('input').val() || 0).toString());
+              temp["ebook"] = (parseInt(row.find('td:nth-last-child(4)').find('input').val()) || 0).toString();
           }
-            if(parseInt(row.find('td:nth-last-child(5)').find('input').val() ||0) > temp.quantityRental){
+            if(parseInt(row.find('td:nth-last-child(5)').find('input').val() ||-1) > temp.quantityRental){
                 alert("The entered number of rental books exceeds our inventory!");
-                added = false;
+
             }
             else {
-                temp["rental"] = (parseInt(row.find('td:nth-last-child(5)').find('input').val() || 0).toString());
+                temp["rental"] = (parseInt(row.find('td:nth-last-child(5)').find('input').val()) || 0).toString();
             }
-            if(parseInt(row.find('td:nth-last-child(6)').find('input').val() ||0) > temp.quantityUsed){
+            if(parseInt(row.find('td:nth-last-child(6)').find('input').val() ||-1) > temp.quantityUsed){
                 alert("The entered number of used books exceeds our inventory!");
-                added = false;
+
             }
             else {
-                temp["used"] = (parseInt(row.find('td:nth-last-child(6)').find('input').val() || 0).toString());
+                temp["used"] = (parseInt(row.find('td:nth-last-child(6)').find('input').val()) || 0).toString();
             }
-            if(parseInt(row.find('td:nth-last-child(7)').find('input').val() ||0) > temp.quantityNew){
+            if(parseInt(row.find('td:nth-last-child(7)').find('input').val() || -1) > temp.quantityNew){
                 alert("The entered number of new books exceeds our inventory!");
-                added = false;
+
             }
             else {
-                temp["new"] = (parseInt(row.find('td:nth-last-child(7)').find('input').val() || 0).toString());
+                temp["new"] = (parseInt(row.find('td:nth-last-child(7)').find('input').val()) || 0).toString();
             }
 
-            if(added) {
-                temp["id"] = book.key;
-                console.log(temp);
-                myBook.push(temp);
-            }
+            temp["id"] = book.key;
+
+            myBook.push(temp);
+
         });
       }
 
-      else{
-          alert("Please click the checkbox to add the book to cart!");
-          return false;
-      }
+
     }
   });
 
   // waiting for the async function to finish
   setTimeout(function(){
-    setCookies(myBook);
-  }, 1000);
+
+    setCookies();
+  }, 2000);
 }
 
-function setCookies(myBook){
+function setCookies(){
 
-      var cookie = Cookies.getJSON('cart');
+      var cookie =  JSON.parse(localStorage.getItem('cart'));
 
-      var cookieL = cookie.length;
+      if(cookie == null){
 
-      if(cookie === undefined){
-        cookie = [];
+
+          localStorage.setItem('cart', JSON.stringify(myBook));
+          alert("YES! added to cart!1");
+
+
+      }
+      else{
+
+          //cookie = mergeMultiples(cookie);
+
+          var cookieL = cookie.length;
         for (var index in myBook){
           cookie.push(myBook[index]);
         }
-      }
-      else{
-        
-        for (var index in myBook){
-          cookie.push(myBook[index]);
-        }
-      }
+
+          localStorage.setItem('cart', JSON.stringify(cookie));
+
+          if(cookie.length > cookieL) {
+
+              alert("YES! added to cart!");
+          }
+          else{
+              alert("Please try again!");
+          }
 
 
-      Cookies.remove('cart');
-      Cookies.set('cart', JSON.stringify(cookie));
-
-      if(cookie.length > cookieL) {
-          console.log(Cookies.getJSON('cart'));
-          alert("YES! added to cart!");
-      }
-      else{
-          alert("Please try again!");
       }
 
+    console.log(JSON.parse(localStorage.getItem('cart')));
 
 }
 

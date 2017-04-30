@@ -1,6 +1,6 @@
 var myform = $("form#myform");
 
-var cookie = Cookies.getJSON('cart');
+var cookie = JSON.parse(localStorage.getItem('cart'));
 console.log(cookie);
 
 function printTable()
@@ -16,7 +16,7 @@ function printTable()
 function send(){
 
 
-  var cookie = Cookies.getJSON('cart');
+  var cookie =JSON.parse(localStorage.getItem('cart'));
 
       var subtotal = 0;
     var totalBooks = 0;

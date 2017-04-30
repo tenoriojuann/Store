@@ -6,7 +6,7 @@ var total = 0;
 
 // function will draw a table for the price
 function price() {
-    var cookie = Cookies.getJSON('cart');
+    var cookie = JSON.parse(localStorage.getItem('cart'));
 
 
     for (var index in cookie) {

@@ -1,8 +1,84 @@
-var cookies = Cookies.getJSON('cart');
+var cookies = JSON.parse(localStorage.getItem('cart'));
 console.log(cookies);
+
+
+function mergeMultiples(arr) {
+    return _(arr)
+            .groupBy('isbn')
+            .map((object, isbn) => ({
+            isbn: isbn,
+            crn: _.map(object, 'crn').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }),
+            bookName: _.map(object, 'bookName').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            quantityNew: _.map(object, 'quantityNew').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            quantityRental: _.map(object, 'quantityRental').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            quantityUsed: _.map(object, 'quantityUsed').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            quantityEbook: _.map(object, 'quantityEbook').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            summary: _.map(object, 'summary')[0],
+            id: _.map(object, 'id')[0],
+
+            author: _.map(object, 'author').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            course: _.map(object, 'course').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }),
+            professor: _.map(object, 'professor').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }),
+            priceEbook: _.map(object, 'priceEbook').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            priceNew: _.map(object, 'priceNew').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            priceUsed: _.map(object, 'priceUsed').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            priceRental: _.map(object, 'priceRental').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            })[0],
+            Required: _.map(object, 'Required').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }),
+            term: _.map(object, 'term').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }),
+            new: _.map(object, 'new').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }).reduce(function(a, b) { return (parseInt(a) + parseInt(b)).toString(); }, 0),
+            used: _.map(object, 'used').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }).reduce(function(a, b) { return (parseInt(a) + parseInt(b)).toString(); }, 0),
+            rental: _.map(object, 'rental').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }).reduce(function(a, b) { return (parseInt(a) + parseInt(b)).toString(); }, 0),
+            ebook: _.map(object, 'ebook').sort().filter(function (item, pos, ary) {
+                return !pos || item != ary[pos - 1];
+            }).reduce(function(a, b) { return (parseInt(a) + parseInt(b)).toString(); }, 0),
+        }))
+.value();
+}
+
+
 
 function drawTable() {
 
+    cookies = mergeMultiples(cookies);
+    localStorage.setItem('cart', JSON.stringify(cookies));
+    console.log(cookies);
+    //cookies = mergeMultiples(cookies);
     $('#shopping-cart').dynatable({
         dataset: {
             records: cookies,
@@ -29,8 +105,8 @@ function drawTable() {
                 remove.type = "button";
                 remove.className = "btn btn-warning";
                 remove.onclick = function() {
-                    var id = row.find('td:nth-last-child(3)').text();
-                    removeFromCart(id);
+                    var isbn = row.find('td:nth-last-child(2)').text();
+                    removeFromCart(isbn);
                 };
                 remove.innerHTML = "Remove from cart";
                 row.find('td:first-child').replaceWith(img);
@@ -41,24 +117,15 @@ function drawTable() {
 }
 
 // option if the user wants to remove item from cart
-function removeFromCart(id) {
+function removeFromCart(isbn) {
 
 
-    console.log(cookies);
+    var data = $.grep(cookies, function(e){
+        return e.isbn != isbn;
+    });
 
-    for(var i = 0; i < cookies.length; i++) {
-        var obj = cookies[i];
-        console.log(obj);
-        console.log(id);
-        if (obj.id === id) {
-            var index = cookies.indexOf(obj.id);
-            cookies.splice(index, 1);
-            Cookies.remove('cart');
-            Cookies.set('cart', JSON.stringify(cookies));
-            window.location = "cart.html";
-        }
-    }
-
+    localStorage.setItem('cart', JSON.stringify(data));
+    window.location = "cart.html";
 
 
 }
