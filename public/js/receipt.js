@@ -1,5 +1,5 @@
 var myform = $("form#myform");
-
+var q;
 var cookie = Cookies.getJSON('cart');
 console.log(cookie);
 
@@ -11,6 +11,7 @@ function printTable()
    newWin.print();
    newWin.close();
 }
+
 
 function send(){
 
@@ -33,20 +34,61 @@ function send(){
 
     }
     var total = (subtotal * .07) + subtotal;
+function deleteRow(row)
+{
+    var i=row.parentNode.parentNode.rowIndex;
+    document.getElementById('shopping-cart').deleteRow(i);
+}
+  function insRow()
+{
+    console.log( 'hi');
+    var x=document.getElementById('shopping-cart');
+    var new_row = x.rows[1].cloneNode(true);
+    var len = x.rows.length;
+    new_row.cells[0].innerHTML = len;
+    
+    var inp1 = new_row.cells[1];
+    inp1.id += len;
+    inp1.value = '';
 
-  
-
-  for(var index in cookie){
-    console.log(cookie[index].new);
-  $('#shopping-cart').append('<tr><td>'+"*"+cookie[index].bookName+'</td>'+
-                             '<td>'+" New: "+(parseInt(cookie[index].new)||0).toString()+'</td>'+
-                             '<td>'+" Used: "+(parseInt(cookie[index].used)||0).toString()+'</td>'+
-                             '<td>'+" Rental: "+(parseInt(cookie[index].rental)||0).toString()+'</td>'+
-                             '<td>'+" eBook: "+(parseInt(cookie[index].ebook)||0).toString()+'</td><tr><br>');
+    x.appendChild( new_row );
 }
 
-$('#shopping-cart').append('<tr><td>'+"Sub Total: "+subtotal.toString()+'</td><br>'+
-                           '<td>'+"Total:"+ total.toString()+'<td>'+'</tr><br>');
+  for(var index in cookie)
+{
+	var i = 0;
+	if (i != index)
+	{	
+		insRow();
+		i++; 
+	}
+
+    console.log(cookie[index].new);
+	q = document.createElement('p');
+	
+	q = (cookie[index].bookName);
+	document.getElementById("DescBox").value = q;
+	
+	q = (cookie[index].priceNew);
+	var t = "$" + q;
+	document.getElementById("PriceBox").value = t;
+	
+	q = (cookie[index].new);
+	document.getElementById("QtyBox").value = q;
+	
+	
+	
+	
+	
+	
+	//$('#shopping-cart').append('<tr><td>'+"*"+cookie[index].bookName);
+	
+	
+}
+
+
+/*$('#shopping-cart').append('<tr><td>'+"Sub Total: "+subtotal.toString()+'</td><br>'+
+                           '<td>'+"Total:"+ total.toString()+'<td>'+'</tr><br>');*/
   var message = $("#message");
 
   message.val($('#shopping-cart').html());
@@ -56,7 +98,6 @@ $('#shopping-cart').append('<tr><td>'+"Sub Total: "+subtotal.toString()+'</td><b
 
 myform.submit(function(event){
   event.preventDefault();
-
 
   myform.find("button").text("Sending...");
 

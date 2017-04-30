@@ -44,9 +44,6 @@ form label {
 </style>
 
 
-
-
-
 <form id="myform" method="post">
 <b><p style="text-align: center">Enter your email to send your receipt</p></b>  
 <label>to_email</label>
@@ -64,11 +61,23 @@ Send
 <button onclick="printTable()">Print Receipt</button>
 
 
-
-    <table class="table" id="shopping-cart" style="display: none">
-        <thead>
-            <th>Details of your purchase:</th><br>
-        </thead>
+	<!--<div id = "POItablediv">-->
+	
+    <table class="tablef" id="shopping-cart"> <!--style="display: none"-->
+        <tr>
+			<td>#</td>
+			<td>Item Description</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total Price</td>
+		</tr>
+		<tr>
+            <td>1</td>
+            <td><input size=50 type="text" id="DescBox" readonly=true/></td>
+            <td><input size=25 type="text" id="PriceBox" readonly=true/></td>
+            <td><input size=25 type="text" id="QtyBox" readonly=true/></td>
+            <td><input size=25 type="text" id="TotalPrice" readonly=true/></td>
+        </tr>
     </table>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src = "js/cookie.js"></script>
