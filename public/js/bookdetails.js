@@ -101,7 +101,7 @@ function addToCart() {
     // Need to check if the cookie exists first
     // format of the cookie will end up being different
     // but this is just a start
-    var cookie = Cookies.getJSON('cart');
+    var cookie =JSON.parse( localStorage.getItem('cart'));
 
     myBook["id"] = bookID;
     myBook["new"] = document.getElementById('new').value;
@@ -109,53 +109,24 @@ function addToCart() {
     myBook["used"] = document.getElementById('used').value;
     myBook["ebook"] = document.getElementById('ebook').value;
 
-    if (cookie) {
+    if (cookie != null) {
         cookie.push(myBook);
 
-        Cookies.remove('cart');
-        Cookies.set('cart', JSON.stringify(cookie));
+
+        localStorage.setItem('cart', JSON.stringify(cookie));
     }
     else {
-        var cookie = [];
+        cookie = [];
         cookie.push(myBook);
 
-        Cookies.remove('cart');
-        Cookies.set('cart', JSON.stringify(cookie));
+        localStorage.setItem('cart', JSON.stringify(cookie));
     }
-    console.log(Cookies.getJSON('cart'));
 
     alert("Item successfully added to cart!");
 
 }
 
 
-function addToCart() {
-    // Adding user input to the book
-    var cookie = Cookies.getJSON('cart');
-
-    myBook["id"] = bookID;
-    myBook["new"] = document.getElementById('new').value;
-    myBook["rental"] = document.getElementById('rental').value;
-    myBook["used"] = document.getElementById('used').value;
-    myBook["ebook"] = document.getElementById('ebook').value;
-
-    // Need to check if the cookie exists first
-    if (cookie) {
-        cookie.push(myBook);
-
-        Cookies.remove('cart');
-        Cookies.set('cart', JSON.stringify(cookie));
-    }
-    else {
-        var cookie = [];
-        cookie.push(myBook);
-
-        Cookies.remove('cart');
-        Cookies.set('cart', JSON.stringify(cookie));
-    }
-    //console.log(Cookies.getJSON('cart'));
-    alert("Item successfully added to cart!");
-}
 
 //Scroll Pane function for summary description
 $(function () {
