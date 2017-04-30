@@ -195,7 +195,8 @@ function modifyTableData(){
                 if (book.val().quantityNew <= 0 || book.val().quantityNew % 1 != 0)//check if qty less than or equal to 0, or if qty is an int
                 {
                     quantity = outStock;
-                    PQnew[0].innerHTML = ("<br/>" + "<br>" + quantity);
+                    PQnew[0].innerHTML = ("$" + book.val().priceNew);//insert $ sign
+                    PQnew.append( ("<br/>" + "<br>" + quantity));
                 }
                 else //print normal
                 {
@@ -217,8 +218,9 @@ function modifyTableData(){
                 if (book.val().quantityUsed <= 0 || book.val().quantityUsed % 1 != 0)//check if qty less than or equal to 0, or if qty is an int
                 {
                     quantity1 = outStock;
+                    PQused[0].innerHTML = ("$" + book.val().priceUsed);//insert $ sign
 
-                    PQused[0].innerHTML = ("<br/>" + "<br>" + quantity1);
+                    PQused.append(("<br/>" + "<br>" + quantity1));
                 }
                 else  //print normal
                 {
@@ -239,7 +241,8 @@ function modifyTableData(){
                 if (book.val().quantityRental <= 0 || book.val().quantityRental % 1 != 0)//check if qty less than or equal to 0, or if qty is an int
                 {
                     quantity2 = outStock;
-                    PQrental[0].innerHTML = ("<br/>" + "<br>" + quantity2);
+                    PQrental[0].innerHTML = ("$" + book.val().priceRental); //insert $ sign
+                    PQrental.append(("<br/>" + "<br>" + quantity2));
                 }
                 else  //print normal
                 {
@@ -265,7 +268,8 @@ function modifyTableData(){
                 if (book.val().quantityEbook <= 0 || book.val().quantityEbook % 1 != 0) //Any int value under 0 = no stock
                 {
                     quantity3 = outStock;
-                    PQebook[0].innerHTML = ("<br/>" + "<br>" + quantity3);
+                    PQebook[0].innerHTML = ("$" + book.val().priceEbook);//insert $ sign
+                    PQebook.append (("<br/>" + "<br>" + quantity3));
 
                 }
 
@@ -434,6 +438,9 @@ function setCookies(myBook){
       if(cookie.length > cookieL) {
           console.log(Cookies.getJSON('cart'));
           alert("YES! added to cart!");
+      }
+      else{
+          alert("Please try again!");
       }
 
 
