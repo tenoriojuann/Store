@@ -47,5 +47,35 @@
     text-align: center;
 }
 
+footer {
+    background-color: black;
+    color: #ffffff;
+}
+
+footer > img {
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#myCarousel {
+    margin-top: 5%;
+}
+
+.carousel-inner img {
+    width: 100%; /* Set width to 100% */
+    margin: auto;
+}
+
+.carousel-caption h3 {
+    color: #fff !important;
+}
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+}
+
 
 
