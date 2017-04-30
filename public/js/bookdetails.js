@@ -124,7 +124,7 @@ function addToCart() {
     }
     console.log(Cookies.getJSON('cart'));
 
-    alert("YES! added to cart!");
+    alert("Item successfully added to cart!");
 
 }
 
@@ -155,23 +155,6 @@ function addToCart() {
     }
     //console.log(Cookies.getJSON('cart'));
     alert("Item successfully added to cart!");
-}
-
-// TODO: going to leave this for now, but this needs to be contained in cart.js, not here
-
-// Need to work on this one
-function removeFromCart() {
-    var cookie = Cookies.getJSON('cart');
-
-    cookie = jQuery.grep(cookie, function (value) {
-        return value != bookID;
-    });
-
-    Cookies.remove('cart');
-
-    Cookies.set('cart', JSON.stringify(bookID));
-
-    console.log(Cookies.getJSON('cart'));
 }
 
 //Scroll Pane function for summary description

@@ -13,11 +13,13 @@ th a:hover {
 
 .dynatable-pagination-links {
     float: right;
+    margin-right: 12%;
 }
 
 .dynatable-record-count {
     display: block;
     padding: 5px 0;
+    margin-left: 13%;
 }
 
 .dynatable-pagination-links span,
@@ -61,4 +63,8 @@ th a:hover {
 table {
     max-width: 75% !important;
     margin: auto;
+}
+
+.dynatable-per-page {
+    margin-left: 13%;
 }

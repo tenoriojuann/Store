@@ -6,10 +6,12 @@ function drawTable() {
     $('#shopping-cart').dynatable({
         dataset: {
             records: cookies,
-            perPageDefault: 10
+            perPageDefault: 100
         },
         features: {
-            search: false
+            search: false,
+            paginate: false,
+            recordCount: false
         }
     });
 

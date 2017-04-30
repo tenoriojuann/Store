@@ -45,11 +45,10 @@ function search() {
     var f = new Fuse(searchData, options);
     var output = f.search(value.value);
 
-    for(var index in output){
+    for(var index in output) {
 
-      tableData.push(output[index].item);
+        tableData.push(output[index].item);
     }
-
 
 	//After we get the search results we can draw the table
     table();
@@ -161,14 +160,14 @@ function modifyTableData(){
                 var sumP = document.createElement('p');
                 var summaryArr = [];
                 summaryArr = book.val().summary;
-                PQnewSum[0].innerHTML = (book.val().bookName + "<br>" + "ISBN: ");//insert bookname into first positon in cell
+                PQnewSum[0].innerHTML = (book.val().bookName + "<br>" + "<b>ISBN:</b> ");//insert bookname into first positon in cell
                 PQnewSum.append(book.val().isbn + "<br>"); //insert isbn # under book name
-                PQnewSum.append("Author(s): " + book.val().author + "<br> Brief Description: "); //insert authors under isbn
+                PQnewSum.append("<b>Author(s): </b>" + book.val().author + "<br><b>Brief Description:</b>"); //insert authors under isbn
                 sumP = summaryArr.substring(0, summaryArr.indexOf('.')); //get the first (.)occurence of summary **still need to work on fixing this up**
                 PQnewSum.append(sumP + "...<br/>"); //insert summary last
 
                 if (findSearch == 1) {
-                    PQnewSum.append("<br> This book is " + book.val().required + " for " +  row.find('td:nth-last-child(11)').text());
+                    PQnewSum.append("<br> This book is " + "<b>" + book.val().required + "</b>" + " for " + "<b>" + row.find('td:nth-last-child(11)').text() + "</b>");
                 }
 
                 if (findSearch == 2) {
