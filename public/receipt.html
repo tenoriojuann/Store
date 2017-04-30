@@ -5,77 +5,41 @@
 
 <form id="myform" method="post" class="jumbotron text-center">
 <b><p style="text-align: center">Enter your email to send your receipt</p></b>  
-<label>to_email</label>
+<label>Email Address</label>
 <input type="text" name="to_email" />
-<label>to_name</label>
+<label>Name</label>
 <input type="text" name="to_name" />
 <label style="display: none">message_html</label>
 <input id ="message" type="text" style ="display: none" name="message_html" />
 <br><br>
-<button>
+<button class="btn btn-primary">
 Send
 </button>
 </form>
 
-<button onclick="printTable()">Print Receipt</button>
+<div class="text-center">
+<img src="images/ksulogo.png" style = "max-width:300px;">
+<h2 style = "margin-left: 4px">KSU BOOKSTORE</h2>
+</div>
 
+<div class="text-center">
+<button class="btn btn-primary" onclick="printTable()">Print Receipt</button>
 
-<table class="tableX" id = "shopping-cartx" style = float: left> <!--cellpadding="0" cellspacing="0"-->
-    <tr class="top">
-
-        <td colspan="2">
-
-            <table>
-                <tr>
-                    <td class="title">
-
-                        <img src="images/ksulogo.png" style = "max-width:300px;"><!--style="width:60%; max-width:300px;"> -->
-                        <h2 style = "margin-left: 4px">KSU BOOKSTORE</h2>
-                    </td>
-
-                    <td id = "date">
-
-                        <!-- <Invoice #: 123<br>
-                         Created: January 1, 2015<br>
-                         Due: February 1, 2015-->
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr class="information">
-        <td colspan="2">
-            <table>
-                <tr>
-                    <td>
-                        Kennesaw State University<br>
-                        Chastain Road <br>
-                        Kennesaw, GA 30066
-                    </td>
-
-                    <td>
-                        User's Address<br>
-                        User's Name<br>
-                        Users@email.com
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-
+<table class="table" id="shopping-cartx">
     <tr>
-        <th id = "t1">#</th>
-        <th id = "t2">Description</th>
-        <th id = "t3">New</th>
-        <th id = "t4">Used</th>
-        <th id = "t5">Rental</th>
-        <th id = "t6">Ebook</th>
-        <th id = "t7">Total</th>
+        <td id="name"></td>
     </tr>
+
+    <!--<th id = "t1">#</th>
+    <th id = "t2">Description</th>
+    <th id = "t3">New</th>
+    <th id = "t4">Used</th>
+    <th id = "t5">Rental</th>
+    <th id = "t6">Ebook</th>
+    <th id = "t7">Total</th>-->
 
 </table>
-
-
+</div>
 
 </body>
 
