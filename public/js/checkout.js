@@ -54,6 +54,11 @@ $(document).ready(
                     window.location = "checkout.html"
                 }
                 else{
+                    var payment = {
+                        "type": "Financial Aid"
+                    };
+
+                    localStorage.setItem('payment', JSON.stringify(payment));
                     updateUserMoney(total, userobject.money);
                     updateQuantities();
 
@@ -193,6 +198,12 @@ $(document).ready(
             var number = $('#number').val();
 
             if (verifyCard(name, number, cvc, exp)) {
+
+                var payment = {
+                    "type": "Credit Card\n"+whatCompany(number)
+                };
+
+                localStorage.setItem('payment', JSON.stringify(payment));
                 $('#billing').show('slow');
                 $("#forms").toggle("slows");
 
@@ -217,6 +228,13 @@ $(document).ready(
             var r = confirm("Are you sure you want to submit your payment information?");
 
             if(r){
+                var ShippingInformation = {
+                    "address" : $('#Saddress').val(),
+                "zip" : $('#Szip'),
+                "state" : $('#Sstate')
+            };
+
+                localStorage.setItem('shipping', JSON.stringify(ShippingInformation));
                 updateQuantities();
                 alert("Thank you for the information!");
                 window.location = "receipt.html";
@@ -256,6 +274,11 @@ $(document).ready(
             if (verifyPayPal(email, pass)) {
                 $('#forms2').hide('slow');
                 $('#shipping').show('slow');
+                var payment = {
+                    "type": "Paypal"
+                };
+
+                localStorage.setItem('payment', JSON.stringify(payment));
                 // Do something once the paypal information is verified
             }
         });
@@ -270,6 +293,13 @@ $(document).ready(
         $('#Bnext').click(function(){
 
             $('#billing').hide('slow');
+            var billingInformation = {
+              "address" : $('#address').val(),
+              "zip" : $('#zip'),
+              "state" : $('#state')
+            };
+
+            localStorage.setItem('billing', JSON.stringify(billingInformation));
             $('#shipping').show('slow');
         });
 });
