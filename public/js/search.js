@@ -130,6 +130,20 @@ function setImages(){
                 };
                 var check = document.createElement('input');
                 check.type = "checkbox";
+                check.onclick = function(){
+                    if(check.checked) {
+                        $('#' + ((index * 7) + 20)).show("slow");
+                        $('#' + ((index * 7) + 21)).show("slow");
+                        $('#' + ((index * 7) + 22)).show("slow");
+                        $('#' + ((index * 7) + 23)).show("slow");
+                    }
+                    else{
+                        $('#' + ((index * 7) + 20)).hide("slow");
+                        $('#' + ((index * 7) + 21)).hide("slow");
+                        $('#' + ((index * 7) + 22)).hide("slow");
+                        $('#' + ((index * 7) + 23)).hide("slow");
+                    }
+                };
                 row.find('td:first-child').replaceWith(img); //table first child set to image
                 row.find('td:last-child').replaceWith(check); //table last child set to check mark
             });
@@ -186,6 +200,8 @@ function modifyTableData(){
                 PQnew[0].innerHTML = ("$" + book.val().priceNew);//insert $ sign
                 var input = document.createElement('input');
                 input.type = "text";
+                input.id = ""+((index*7)+20);
+                input.style.display = "none";
                 //input.value = "0";  //Uncomment to make input values show as 0
                 PQnew.append(input);
                 var quantity = document.createElement('p');
@@ -209,6 +225,8 @@ function modifyTableData(){
                 PQused[0].innerHTML = ("$" + book.val().priceUsed);//insert $ sign
                 var input1 = document.createElement('input');
                 input1.type = "text";
+                input1.id = ""+((index*7)+21);
+                input1.style.display = "none";
                 //input1.value = "0";  //Uncomment to make input values show as 0
                 PQused.append(input1);
                 var quantity1 = document.createElement('p');
@@ -232,8 +250,11 @@ function modifyTableData(){
                 PQrental[0].innerHTML = ("$" + book.val().priceRental); //insert $ sign
                 var input2 = document.createElement('input');
                 input2.type = "text";
+                input2.id = ""+((index*7)+22);
+                input2.style.display = "none";
                 //input2.value = "0";  //Uncomment to make input values show as 0
                 PQrental.append(input2);
+
                 var quantity2 = document.createElement('p');
 
                 if (book.val().quantityRental <= 0 || book.val().quantityRental % 1 != 0)//check if qty less than or equal to 0, or if qty is an int
@@ -253,6 +274,8 @@ function modifyTableData(){
                 PQebook[0].innerHTML = ("$" + book.val().priceEbook);//insert $ sign
                 var input3 = document.createElement('input');
                 input3.type = "text";
+                input3.id = ""+((index*7)+23);
+                input3.style.display = "none";
                 //input3.value = "0";  //Uncomment to make input values show as 0
                 PQebook.append(input3);
                 var quantity3 = document.createElement('p');
@@ -340,7 +363,6 @@ function mergeMultiples(arr) {
 }
 
 
-
 function sendToCart(){
 
 
@@ -348,6 +370,7 @@ function sendToCart(){
   // referencing the 'books' node
   var storeRef = rootRef.child("books");
 
+  var checkedBox = 0;
   $('#search-table tr').each(function(index){
     // Ignoring headers
     if(index > 0){
@@ -393,17 +416,23 @@ function sendToCart(){
             myBook.push(temp);
 
         });
+          checkedBox +=1;
       }
 
 
     }
   });
 
-  // waiting for the async function to finish
-  setTimeout(function(){
+if(checkedBox > 0) {
+    // waiting for the async function to finish
+    setTimeout(function () {
 
-    setCookies();
-  }, 2000);
+        setCookies();
+    }, 2000);
+}
+else{
+    alert("Please select at least a book");
+}
 }
 
 function setCookies(){
