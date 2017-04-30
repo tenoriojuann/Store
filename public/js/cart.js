@@ -104,6 +104,7 @@ function drawTable() {
                 var remove = document.createElement('button');
                 remove.type = "button";
                 remove.className = "btn btn-warning";
+                remove.style.marginLeft = "18%";
                 remove.onclick = function() {
                     var isbn = row.find('td:nth-last-child(2)').text();
                     removeFromCart(isbn);
