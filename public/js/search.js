@@ -188,7 +188,7 @@ function modifyTableData(){
                 PQnew[0].innerHTML = ("$" + book.val().priceNew);//insert $ sign
                 var input = document.createElement('input');
                 input.type = "text";
-                //input.value = "0";  //Uncomment to make input values show as 0
+                input.value = "0";  //Uncomment to make input values show as 0
                 PQnew.append(input);
                 var quantity = document.createElement('p');
 
@@ -210,7 +210,7 @@ function modifyTableData(){
                 PQused[0].innerHTML = ("$" + book.val().priceUsed);//insert $ sign
                 var input1 = document.createElement('input');
                 input1.type = "text";
-                //input1.value = "0";  //Uncomment to make input values show as 0
+                input1.value = "0";  //Uncomment to make input values show as 0
                 PQused.append(input1);
                 var quantity1 = document.createElement('p');
 
@@ -232,7 +232,7 @@ function modifyTableData(){
                 PQrental[0].innerHTML = ("$" + book.val().priceRental); //insert $ sign
                 var input2 = document.createElement('input');
                 input2.type = "text";
-                //input2.value = "0";  //Uncomment to make input values show as 0
+                input2.value = "0";  //Uncomment to make input values show as 0
                 PQrental.append(input2);
                 var quantity2 = document.createElement('p');
 
@@ -252,7 +252,7 @@ function modifyTableData(){
                 PQebook[0].innerHTML = ("$" + book.val().priceEbook);//insert $ sign
                 var input3 = document.createElement('input');
                 input3.type = "text";
-                //input3.value = "0";  //Uncomment to make input values show as 0
+                input3.value = "0";  //Uncomment to make input values show as 0
                 PQebook.append(input3);
                 var quantity3 = document.createElement('p');
 
@@ -357,13 +357,47 @@ function sendToCart(){
         
         storeRef.child(id).once('value').then(function (book) {
           temp = book.val();
-          temp["ebook"] = row.find('td:nth-last-child(4)').find('input').val();
-          temp["rental"] = row.find('td:nth-last-child(5)').find('input').val();
-          temp["used"] = row.find('td:nth-last-child(6)').find('input').val();
-          temp["new"] = row.find('td:nth-last-child(7)').find('input').val();
-          temp["id"] = book.key;
-          myBook.push(temp);
+          var added = true;
+          if(parseInt(row.find('td:nth-last-child(4)').find('input').val() ||0) > temp.quantityEbook){
+              alert("The entered number of ebooks exceeds our inventory!");
+              added = false;
+          }
+          else {
+              temp["ebook"] = (parseInt(row.find('td:nth-last-child(4)').find('input').val() || 0).toString());
+          }
+            if(parseInt(row.find('td:nth-last-child(5)').find('input').val() ||0) > temp.quantityRental){
+                alert("The entered number of rental books exceeds our inventory!");
+                added = false;
+            }
+            else {
+                temp["rental"] = (parseInt(row.find('td:nth-last-child(5)').find('input').val() || 0).toString());
+            }
+            if(parseInt(row.find('td:nth-last-child(6)').find('input').val() ||0) > temp.quantityUsed){
+                alert("The entered number of used books exceeds our inventory!");
+                added = false;
+            }
+            else {
+                temp["used"] = (parseInt(row.find('td:nth-last-child(6)').find('input').val() || 0).toString());
+            }
+            if(parseInt(row.find('td:nth-last-child(7)').find('input').val() ||0) > temp.quantityNew){
+                alert("The entered number of new books exceeds our inventory!");
+                added = false;
+            }
+            else {
+                temp["new"] = (parseInt(row.find('td:nth-last-child(7)').find('input').val() || 0).toString());
+            }
+
+            if(added) {
+                temp["id"] = book.key;
+                console.log(temp);
+                myBook.push(temp);
+            }
         });
+      }
+
+      else{
+          alert("Please click the checkbox to add the book to cart!");
+          return false;
       }
     }
   });
@@ -378,6 +412,8 @@ function setCookies(myBook){
 
       var cookie = Cookies.getJSON('cart');
 
+      var cookieL = cookie.length;
+
       if(cookie === undefined){
         cookie = [];
         for (var index in myBook){
@@ -391,10 +427,15 @@ function setCookies(myBook){
         }
       }
 
+
       Cookies.remove('cart');
       Cookies.set('cart', JSON.stringify(cookie));
-      console.log(Cookies.getJSON('cart'));
-      alert("YES! added to cart!");
+
+      if(cookie.length > cookieL) {
+          console.log(Cookies.getJSON('cart'));
+          alert("YES! added to cart!");
+      }
+
 
 }
 
