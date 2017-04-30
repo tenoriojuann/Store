@@ -20,34 +20,81 @@ Send
 <button onclick="printTable()">Print Receipt</button>
 
 
-	<!--<div id = "POItablediv">-->
-	
-    <table class="table" id="shopping-cart"> <!--style="display: none"-->
-        <thead>
-			<th>#</th>
-			<th>Item Description</th>
-            <th>New</th>
-            <th>Used</th>
-            <th>Rental</th>
-            <th>Ebook</th>
+<table class="tableX" id = "shopping-cartx" style = float: left> <!--cellpadding="0" cellspacing="0"-->
+    <tr class="top">
 
-		</thead>
+        <td colspan="2">
 
-    </table>
+            <table>
+                <tr>
+                    <td class="title">
+
+                        <img src="images/ksulogo.png" style = "max-width:300px;"><!--style="width:60%; max-width:300px;"> -->
+                        <h2 style = "margin-left: 4px">KSU BOOKSTORE</h2>
+                    </td>
+
+                    <td id = "date">
+
+                        <!-- <Invoice #: 123<br>
+                         Created: January 1, 2015<br>
+                         Due: February 1, 2015-->
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr class="information">
+        <td colspan="2">
+            <table>
+                <tr>
+                    <td>
+                        Kennesaw State University<br>
+                        Chastain Road <br>
+                        Kennesaw, GA 30066
+                    </td>
+
+                    <td>
+                        User's Address<br>
+                        User's Name<br>
+                        Users@email.com
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <th id = "t1">#</th>
+        <th id = "t2">Description</th>
+        <th id = "t3">New</th>
+        <th id = "t4">Used</th>
+        <th id = "t5">Rental</th>
+        <th id = "t6">Ebook</th>
+        <th id = "t7">Total</th>
+    </tr>
+
+</table>
+
+
+
+</body>
+
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src = "js/cookie.js"></script>
 <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script type="text/javascript" src = "js/dynatable/jquery.dynatable.js"></script>
 <script type="text/javascript">
-   (function(){
-      emailjs.init("user_qaPfMLPrFXLrGWc1XRiWg");
-   })();
+    (function(){
+        emailjs.init("user_qaPfMLPrFXLrGWc1XRiWg");
+    })();
 </script>
-
-
-</body>
-
-
+<!-- Print Invocie # + Current date top right row header -->
+<script>
+    var d = new Date();
+    var zz = "Invoice #: ";
+    var pp = zz + "<br>" + d.toDateString();
+    document.getElementById("date").innerHTML = pp;
+</script>
 
 <script type="text/javascript" src = "js/receipt.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
