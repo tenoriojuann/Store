@@ -1,17 +1,17 @@
 var myform = $("form#myform");
-var q;
+
 var cookie = Cookies.getJSON('cart');
 console.log(cookie);
 
 function printTable()
 {
-  send();
-   newWin= window.open("");
-   newWin.document.write($('#shopping-cart').html());
-   newWin.print();
-   newWin.close();
+    send();
+    var myTable = document.getElementById('shopping-cart');
+    newWin= window.open("");
+    newWin.document.write(myTable.outerHTML);
+    newWin.print();
+    newWin.close();
 }
-
 
 function send(){
 
@@ -33,62 +33,32 @@ function send(){
         subtotal += (parseInt(cookie[index].priceEbook)|| 0) * (parseInt(cookie[index].ebook)|| 0);
 
     }
+
+
     var total = (subtotal * .07) + subtotal;
-function deleteRow(row)
-{
-    var i=row.parentNode.parentNode.rowIndex;
-    document.getElementById('shopping-cart').deleteRow(i);
-}
-  function insRow()
-{
-    console.log( 'hi');
-    var x=document.getElementById('shopping-cart');
-    var new_row = x.rows[1].cloneNode(true);
-    var len = x.rows.length;
-    new_row.cells[0].innerHTML = len;
-    
-    var inp1 = new_row.cells[1];
-    inp1.id += len;
-    inp1.value = '';
 
-    x.appendChild( new_row );
-}
+    // Removes all Rows from the table
+    var table = document.getElementById("shopping-cart");
 
-  for(var index in cookie)
-{
-	var i = 0;
-	if (i != index)
-	{	
-		insRow();
-		i++; 
-	}
+    for(var i = table.rows.length - 1; i > 0; i--)
+    {
+        table.deleteRow(i);
+    }
 
+  for(var index in cookie){
     console.log(cookie[index].new);
-	q = document.createElement('p');
-	
-	q = (cookie[index].bookName);
-	document.getElementById("DescBox").value = q;
-	
-	q = (cookie[index].priceNew);
-	var t = "$" + q;
-	document.getElementById("PriceBox").value = t;
-	
-	q = (cookie[index].new);
-	document.getElementById("QtyBox").value = q;
-	
-	
-	
-	
-	
-	
-	//$('#shopping-cart').append('<tr><td>'+"*"+cookie[index].bookName);
-	
-	
+
+
+  $('#shopping-cart').append('<tr><td>'+"*"+(index+1)+'</td>'+
+                             '<td>'+"*"+cookie[index].bookName+'</td>'+
+                             '<td>'+"Purchased: "+(parseInt(cookie[index].new)||0).toString()+"\nPrice:"+(parseInt(cookie[index].priceNew)||0).toString()+'</td>'+
+                             '<td>'+(parseInt(cookie[index].used)||0).toString()+'</td>'+
+                             '<td>'+(parseInt(cookie[index].rental)||0).toString()+'</td>'+
+                             '<tr><br>');
 }
 
-
-/*$('#shopping-cart').append('<tr><td>'+"Sub Total: "+subtotal.toString()+'</td><br>'+
-                           '<td>'+"Total:"+ total.toString()+'<td>'+'</tr><br>');*/
+$('#shopping-cart').append('<tr><td>'+"Sub Total: "+subtotal.toString()+'</td><br>'+
+                           '<td>'+"Total:"+ total.toString()+'<td>'+'</tr><br>');
   var message = $("#message");
 
   message.val($('#shopping-cart').html());
@@ -98,6 +68,7 @@ function deleteRow(row)
 
 myform.submit(function(event){
   event.preventDefault();
+
 
   myform.find("button").text("Sending...");
 
