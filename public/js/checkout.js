@@ -55,7 +55,7 @@ $(document).ready(
                 }
                 else{
                     updateUserMoney(total, userobject.money);
-                    updateQuntities();
+                    updateQuantities();
 
                     alert("Payment Accepted");
                     window.location = "receipt.html"
@@ -136,8 +136,8 @@ function updateUserMoney(moneySpent, financialAidMoney) {
 
 //function will update the quantities in the database
 
-function updateQuntities() {
-var cookie = Cookies.getJSON('cart');
+function updateQuantities() {
+var cookie = JSON.parse(localStorage.getItem('cart'));
     for(var index in cookie){
         firebase.database().ref().child('/books/' + cookie[index].id)
 
@@ -217,6 +217,7 @@ $(document).ready(
             var r = confirm("Are you sure you want to submit your payment information?");
 
             if(r){
+                updateQuantities();
                 alert("Thank you for the information!");
                 window.location = "receipt.html";
             }
@@ -254,7 +255,7 @@ $(document).ready(
 
             if (verifyPayPal(email, pass)) {
                 $('#forms2').hide('slow');
-                $('#billing').show('slow');
+                $('#shipping').show('slow');
                 // Do something once the paypal information is verified
             }
         });

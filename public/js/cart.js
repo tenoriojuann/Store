@@ -125,7 +125,7 @@ function removeFromCart(isbn) {
     });
 
     localStorage.setItem('cart', JSON.stringify(data));
-    window.location = "cart.html";
+    window.location = "Cart.html";
 
 
 }

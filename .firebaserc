@@ -1,5 +1,6 @@
 {
   "projects": {
-    "store": "bookstore-e0ecb"
+    "store": "bookstore-e0ecb",
+    "default": "ksu-bookstore"
   }
 }

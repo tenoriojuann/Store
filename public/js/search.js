@@ -132,10 +132,12 @@ function setImages(){
                 check.type = "checkbox";
                 check.onclick = function(){
                     if(check.checked) {
+
                         $('#' + ((index * 7) + 20)).show("slow");
                         $('#' + ((index * 7) + 21)).show("slow");
                         $('#' + ((index * 7) + 22)).show("slow");
                         $('#' + ((index * 7) + 23)).show("slow");
+                        alert("Please enter the quantity you want to order!");
                     }
                     else{
                         $('#' + ((index * 7) + 20)).hide("slow");

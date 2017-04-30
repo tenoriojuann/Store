@@ -3,8 +3,8 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "public",
     "cleanURLs": true,
-  	"trailingSlash" : false
+  	"trailingSlash" : false,
+    "public": "public"
   }
 }
