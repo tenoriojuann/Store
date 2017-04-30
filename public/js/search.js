@@ -34,7 +34,7 @@ function search() {
         matchAllTokens: false,
         findAllMatches: true,
         // threshold determines strictness of search
-        threshold: 0.0,
+        threshold: 0.3,
         location: 0,
         distance: 5000,
         maxPatternLength: 32,
@@ -50,7 +50,9 @@ function search() {
         tableData.push(output[index].item);
     }
 
-	//After we get the search results we can draw the table
+
+
+    //After we get the search results we can draw the table
     table();
 }
 
@@ -85,11 +87,17 @@ function processForm() {
     return v;
 }
 
+
+
+
+
 function table(){
 
     console.log(tableData);
     tableData = mergeMultiples(tableData);
     console.log(tableData);
+
+
     $('#search-table').dynatable({
       dataset: {
       records: tableData,

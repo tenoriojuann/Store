@@ -6,6 +6,14 @@ function displayKW(){
 
 }
 
+
+function toProperCase(s)
+{
+    return s.toLowerCase().replace(/^(.)|\s(.)/g,
+        function($1) { return $1.toUpperCase(); });
+}
+
+
 function displayProfessors(){
 
 
@@ -22,14 +30,24 @@ function displayProfessors(){
         	prof.push(data[id].professor);
            
         }
+
+        console.log(prof);
+
+            // Changing all the professors names to Proper Case
+            for(var entry in prof){
+                prof[entry] = toProperCase(prof[entry]);
+            }
         document.getElementById('s').style.display = "none";
         document.getElementById('selection2').style.display = "none";
 		document.getElementById('selection').style.display = "block";
 		prof.sort();
+
+		// Remove multiple entries
 		prof = prof.filter( function( item, index, inputArray ) {
            return inputArray.indexOf(item) == index;
     });
 
+		// Adding each professor to the drop down
 		$.each(prof, function(key, value) {   
      		$('#options')
          	.append($("<option></option>")
