@@ -4,7 +4,6 @@ var bookArray = [];
 var findSearch = 0;
 var myBook = [];
 
-
 function search() {
 
     //retrieve book data
@@ -21,7 +20,6 @@ function search() {
                 // the search needs an array of objects
                 searchData.push(data[id]);
             }
-
         },
         async: false
     });
@@ -47,13 +45,10 @@ function search() {
     var output = f.search(value.value);
 
     for(var index in output) {
-
         tableData.push(output[index].item);
     }
 
-
-
-    //After we get the search results we can draw the table
+    //draw the table
     table();
 }
 
@@ -88,13 +83,7 @@ function processForm() {
     return v;
 }
 
-
-
-
-
 function table(){
-
-
 
     $('#search-table').dynatable({
       dataset: {
@@ -110,15 +99,14 @@ function table(){
     modifyTableData();
 }
 
-
 // Sets the images of the books to the given div
-function setImages(){
+function setImages() {
 
     $('#search-table tr').each(function(index) {
         var row = $(this);
         if(index>0){
             var isbn = row.find('td:nth-last-child(3)').text();
-            storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url){
+            storageRef.child('images/'+isbn+'.jpg').getDownloadURL().then(function(url) {
                 var img = document.createElement('img');
                 img.src = url;
                 img.height = "200"; //Changed dimensions of book
@@ -151,13 +139,9 @@ function setImages(){
             });
         }
     });
-
-
-
 }
 
-
-function modifyTableData(){
+function modifyTableData() {
 
     $('#search-table tr').each(function(index) {
         var row = $(this);
@@ -188,14 +172,14 @@ function modifyTableData(){
                 sumP = summaryArr.substring(0, summaryArr.indexOf('.')); //get the first (.)occurence of summary **still need to work on fixing this up**
                 PQnewSum.append(sumP + "...<br/>"); //insert summary last
 
-                if (findSearch == 1) {
+                if (findSearch == 1)
+                {
                     PQnewSum.append("<br> This book is " + "<b>" + book.val().required + "</b>" + " for " + "<b>" + row.find('td:nth-last-child(11)').text() + "</b>");
                 }
 
-                if (findSearch == 2) {
-
+                if (findSearch == 2)
+                {
                     PQnewSum.append("<br>CRN(s): " + row.find('td:nth-last-child(9)').text() + "<br>Professor(s) " + row.find('td:nth-last-child(10)').text());
-
                 }
                 //Price and Quantity for New**************************************
                 var PQnew = row.find('td:nth-last-child(7)');
@@ -204,7 +188,9 @@ function modifyTableData(){
                 input.type = "text";
                 input.id = ""+((index*7)+20);
                 input.style.display = "none";
-                //input.value = "0";  //Uncomment to make input values show as 0
+                input.onkeyup = function(event) {
+                    isNumberKey(event);
+                };
                 PQnew.append(input);
                 var quantity = document.createElement('p');
 
@@ -220,7 +206,6 @@ function modifyTableData(){
                     PQnew.append(quantity);
                 }
 
-
                 //Price and Quantity for Used**************************************
                 //Search Results Display Price / Input / Qty with Colored txt for stock
                 var PQused = row.find('td:nth-last-child(6)');
@@ -229,7 +214,9 @@ function modifyTableData(){
                 input1.type = "text";
                 input1.id = ""+((index*7)+21);
                 input1.style.display = "none";
-                //input1.value = "0";  //Uncomment to make input values show as 0
+                input1.onkeyup = function(event) {
+                    isNumberKey(event);
+                };
                 PQused.append(input1);
                 var quantity1 = document.createElement('p');
 
@@ -254,7 +241,9 @@ function modifyTableData(){
                 input2.type = "text";
                 input2.id = ""+((index*7)+22);
                 input2.style.display = "none";
-                //input2.value = "0";  //Uncomment to make input values show as 0
+                input2.onkeyup = function(event) {
+                    isNumberKey(event);
+                };
                 PQrental.append(input2);
 
                 var quantity2 = document.createElement('p');
@@ -278,7 +267,9 @@ function modifyTableData(){
                 input3.type = "text";
                 input3.id = ""+((index*7)+23);
                 input3.style.display = "none";
-                //input3.value = "0";  //Uncomment to make input values show as 0
+                input3.onkeyup = function(event) {
+                    isNumberKey(event);
+                };
                 PQebook.append(input3);
                 var quantity3 = document.createElement('p');
 
@@ -293,18 +284,22 @@ function modifyTableData(){
                     quantity3 = outStock;
                     PQebook[0].innerHTML = ("$" + book.val().priceEbook);//insert $ sign
                     PQebook.append (("<br/>" + "<br>" + quantity3));
-
                 }
-
                 bookArray.push(book.val());
-
             });
         }
     });
-
-
 }
 
+function isNumberKey(evt)
+{
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode != 8) {
+        if (charCode < 48 || charCode > 57)
+            alert('you must enter a positive number');
+    }
+    return true;
+}
 
 function mergeMultiples(arr) {
     return _(arr)
@@ -364,16 +359,14 @@ function mergeMultiples(arr) {
             .value();
 }
 
-
 function sendToCart(){
-
 
   var rootRef = database.ref();
   // referencing the 'books' node
   var storeRef = rootRef.child("books");
 
   var checkedBox = 0;
-  $('#search-table tr').each(function(index){
+  $('#search-table tr').each(function(index) {
     // Ignoring headers
     if(index > 0){
       var row = $(this);
@@ -420,67 +413,63 @@ function sendToCart(){
         });
           checkedBox +=1;
       }
-
-
     }
   });
 
-if(checkedBox > 0) {
-    // waiting for the async function to finish
-    setTimeout(function () {
+    if(checkedBox > 0)
+    {
+        // waiting for the async function to finish
+        setTimeout(function () {
 
-        setCookies();
-    }, 2000);
-}
-else{
-    alert("Please select at least a book");
-}
+            setCookies();
+        }, 2000);
+    }
+    else
+    {
+        alert("Please select at least 1 book");
+    }
 }
 
-function setCookies(){
+function setCookies() {
 
       var cookie =  JSON.parse(localStorage.getItem('cart'));
 
-      if(cookie == null){
-
-
+      if(cookie == null)
+      {
           localStorage.setItem('cart', JSON.stringify(myBook));
           alert("YES! added to cart!1");
-
-
       }
-      else{
-
-          //cookie = mergeMultiples(cookie);
-
+      else
+      {
           var cookieL = cookie.length;
-        for (var index in myBook){
-          cookie.push(myBook[index]);
-        }
+          for (var index in myBook)
+          {
+            cookie.push(myBook[index]);
+          }
 
           localStorage.setItem('cart', JSON.stringify(cookie));
 
-          if(cookie.length > cookieL) {
-
+          if(cookie.length > cookieL)
+          {
               alert("YES! added to cart!");
           }
-          else{
+          else
+          {
               alert("Please try again!");
           }
-
-
       }
-
-    console.log(JSON.parse(localStorage.getItem('cart')));
-
 }
 
 function generateUrl(url, params) {
     var i = 0, key;
-    for (key in params) {
-        if (i === 0) {
+    for (key in params)
+    {
+        if (i === 0)
+        {
             url += "?";
-        } else {
+        }
+        else
+        {
             url += "&";
         }
         url += key;
