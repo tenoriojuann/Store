@@ -1,7 +1,7 @@
 var myform = $("form#myform");
 var qq;
 var tt3 = [];
-
+var dateX = new Date(); // date for invoice
 var numCheck = 0;
 var cookie = JSON.parse(localStorage.getItem('cart'));
 
@@ -12,9 +12,17 @@ function printTable()
     send();
     var myTable = document.getElementById('shopping-cartx');
 
+    myTable.style.display = "block";
+    var date = document.createElement('p');
+
+    date.class = "topcorner";
+    var d = new Date();
+    date.innerHTML = (d);
     newWin= window.open("");
+    newWin.document.write(date.outerHTML);
     newWin.document.write(myTable.outerHTML);
     newWin.print();
+    myTable.style.display = "none";
     newWin.close();
 }
 
@@ -41,113 +49,98 @@ function send(){
     }
 
 
-    var total = (subtotal * .07) + subtotal;
+    var total = Math.round(((subtotal * .07) + (subtotal)) * 100) / 100;
+    var totalWithShipping = Math.round((total + 14.99)* 100) / 100;
 
     // Removes all Rows from the table
     var table = document.getElementById("shopping-cartx");
 
-    for(var i = table.rows.length-1; i > 2; i--) //i > 2 (dont want to delete the wrong stuff when back is pressed)
+    for(var i = table.rows.length-1; i > 1; i--)
     {
         table.deleteRow(i);
     }
 
-    /*Insert users address / name / email here*/
+    /*Top of invoice Insert Invoice / date placed / users address / name / email here*/
+    $('#shopping-cartx').append('<tr><td>'+"Invoice # "+Math.floor((Math.random() * 100) + 1).toString()+'<br>' +
+        dateX.toDateString() + '</td><tr>');
 
-    var holder = 0;
-    for(var index in cookie){
-        console.log(cookie[index].new);
+    var shipping = JSON.parse(localStorage.getItem('shipping'));
 
-        //qq = cookie[index].new;
-        //var z = qq;
+    if(!shipping || (shipping.length <= 0) ) {
+        shipping = JSON.parse(localStorage.getItem('billing'));
+        var name = JSON.parse(localStorage.getItem('name'));
 
-        //var tempTable =  document.getElementById('shopping-cartx');
-        var tempT1 = document.getElementById('t1').innerHTML;
-        var tempT2 = document.getElementById('t2').innerHTML;
-        var tempT3 = document.getElementById('t3').innerHTML;
-        var tempT4 = document.getElementById('t4').innerHTML;
-        var tempT5 = document.getElementById('t5').innerHTML;
-        var tempT6 = document.getElementById('t6').innerHTML;
-        var tempT33 = 0, tempT44 = 0, tempT55 = 0, tempT66 = 0;
+        $('#shopping-cartx').append('<tr>'+ '<td>'+ 'Order from KSU Bookstore' + '<br>' +
+            "<b>Name: </b>"+name.name + '</td></tr>' +
+            '<td><b>Billing Address: </b></td></tr>' +
+            '<tr><td>'+shipping.address+'</td></tr>'+
+            '<tr><td>'+shipping.state+'</td></tr>'+
+            '<tr><td>'+shipping.zip+'</td></tr>');
+    }
+    else{
+        var name = JSON.parse(localStorage.getItem('name'));
 
-
-        tempT1 = (index); //Get #
-        tempT2 = cookie[index].bookName; //Get BookName
-
-        qq = cookie[index].new;
-        if(cookie[index].new == holder || cookie[index].new % 1 != 0)
-        {
-            tempT3 = "";
-            tempT33 = "";
-        }
-        else
-        {
-            tempT3 = "Price New: $ " + cookie[index].priceNew;
-            tempT33 = "Qty (" + qq + ")";
-            //tempT3 = "Price New $" + cookie[index].priceNew + " | " + "Qty (" + qq + ") | ";
-        }
-
-        qq = cookie[index].used;
-        if(cookie[index].used == holder ||cookie[index].used % 1 != 0)
-        {
-            tempT4 = "";
-            tempT44 = "";
-        }
-        else
-        {
-
-            tempT4 = "Price Used: $" + cookie[index].priceUsed;
-            tempT44 = " | " + "Qty U(" + qq + ")";
-        }
-
-        qq = cookie[index].rental;
-        if(cookie[index].rental == holder || cookie[index].rental % 1 != 0)
-        {
-            tempT5 = "";
-            tempT55 = "";
-
-        }
-        else
-        {
-            tempT5 = "Price Rental: $" + cookie[index].priceRental;
-            tempT55 = " | " + "Qty R(" + qq + ")";
-        }
-        qq = cookie[index].ebook;
-        if(cookie[index].ebook == holder || cookie[index].ebook % 1 != 0)
-        {
-            tempT6 = "";
-            tempT66 ="";
-        }
-        else
-        {
-            tempT6 = "Price Ebook: $"
-            tempT66 = " | " + "Qty (" + qq + ")";
-        }
-
-        //$('#shopping-cartx').append
-        $('#shopping-cartx').append('<tr><td>' + tempT1 + " " + tempT2 + " " + tempT3 + " " + tempT4 + " " + tempT5 + " " + tempT6 +
-            '<br>' + tempT33 + " "  + tempT44 + " "  + tempT55 + " "  + tempT66);
-
-
-        /* $('#shopping-cartx').append('<tr><td>'+"*"+(index+1)+'</td>'+
-         '<td>'+"*"+cookie[index].bookName+'</td>'+
-         '<td>'+"Price:"+(parseInt(cookie[index].priceNew)||0).toString()+'<br>'+
-         "Purchased: "+(parseInt(cookie[index].new)||0).toString()+'</td>'+
-         '<td>'+(parseInt(cookie[index].used)||0).toString()+'</td>'+
-         '<td>'+(parseInt(cookie[index].rental)||0).toString()+'</td>'+
-         '</tr><br>');*/
+        $('#shopping-cartx').append('<tr>'+ '<td>'+ 'Order from KSU Bookstore' + '<br>' +
+            "<b>Name: </b>"+name.name + '</td></tr>' +
+            '<td><b>Shipping Address: </b></td></tr>' +
+            '<tr><td>'+shipping.address+'</td></tr>'+
+            '<tr><td>'+shipping.state+'</td></tr>'+
+            '<tr><td>'+shipping.zip+'</td></tr>');
     }
 
-    var totz = document.getElementById('t7').innerHTML;
-    totz = "SubTotal: $" + subtotal.toString() +  '<br>' + "Total: $" + total.toString();
-    $('#shopping-cartx').append(totz);
 
 
-    //$('#shopping-cart').append('<tr><td>'+"Sub Total: "+subtotal.toString()+'</td><br>'+
-    // '<td>'+"Total:"+ total.toString()+'<td>'+'</tr><br>');
+
+    $('#shopping-cartx').append('<tr>'+
+        '<td>'+"#"+'</td>'+
+        '<td>'+"Description"+'</td>'+
+        '<td>'+"New"+'</td>'+
+        '<td>'+"Used"+'</td>'+
+        '<td>'+"Rental"+'</td>'+
+        '<td>'+"Ebook"+'</td>');
+    for(var index in cookie){
+
+        $('#shopping-cartx').append('<tr><td>'+"*"+(index+1)+'</td>'+
+            '<td>'+cookie[index].bookName+'</td>'+
+            '<td>'+"\tPrice: $"+(parseInt(cookie[index].priceNew)||0).toString()+'<br>'+
+            "\tQty: "+(parseInt(cookie[index].new)||0).toString()+ '<br>' +
+            "Total: $" + (parseInt(cookie[index].priceNew)|| 0) * (parseInt(cookie[index].new )|| 0) + '<br>' +
+            '<td>'+"\tPrice: $"+(parseInt(cookie[index].priceUsed)||0).toString()+'<br>'+
+            "\tQty: "+(parseInt(cookie[index].used)||0).toString()+ '<br>' +
+            "Total: $" +(parseInt(cookie[index].priceUsed) || 0)* (parseInt(cookie[index].used)|| 0) + '<br>' +
+            '<td>'+"\tPrice: $"+(parseInt(cookie[index].priceRental)||0).toString()+'<br>'+
+            "\tQty: "+(parseInt(cookie[index].rental)||0).toString()+ '<br>'+
+            "Total: $" + (parseInt(cookie[index].priceRental) || 0)* (parseInt(cookie[index].rental)|| 0) +'<br>' +
+            '<td>'+"\tPrice: $"+(parseInt(cookie[index].priceEbook)||0).toString()+'<br>'+
+            "\tQty:: "+(parseInt(cookie[index].ebook)||0).toString()+ '<br>' +
+            "Total: $" +(parseInt(cookie[index].priceEbook)|| 0) * (parseInt(cookie[index].ebook)|| 0) +'<br>' +
+            '</tr><br>');
+
+
+
+    }
+
+     shipping = JSON.parse(localStorage.getItem('shipping'));
+
+    if(!shipping || shipping.length < 0 ) {
+        $('#shopping-cartx').append('<tr>'+ '<td><td><td><td><td><td><b> Total Items:  ' + totalBooks.toString()+ '</b></td></tr>' +
+            '<td><td><td><td><td><td><b> Subtotal: $' + total.toString() + '</b></td>' +
+            '<tr>'+ '<td><td><td><td><td><td><b> Shipping: $14.99' + '</b></td>' +
+            '<tr>'+ '<td><td><td><td><td><td><b> Total: $' + totalWithShipping.toString() + '</b></td>');
+
+
+    }
+    else{
+        $('#shopping-cartx').append('<tr>'+ '<td><td><td><td><td><td><b> Total Items:  ' + totalBooks.toString()+ '</b></td></tr>' +
+            '<td><td><td><td><td><td><b> Subtotal: $' + total.toString() + '</b></td>'+
+            '<tr>'+ '<td><td><td><td><td><td><b> Total: $' + totalWithShipping.toString() + '</b></td>');
+
+
+    }
+
     var message = $("#message");
 
     message.val($('#shopping-cartx').html());
-    console.log(message.val());
 }
 
 
@@ -158,7 +151,7 @@ myform.submit(function(event){
 
     send();
     email();
-    Cookies.remove('cart');
+
 
 });
 

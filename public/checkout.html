@@ -14,14 +14,13 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/firebase.js"></script>
-    <script type="text/javascript" src = "js/cookie.js"></script>
-    <script type="text/javascript" src = "js/paypal.js"></script>
-    <script type="text/javascript" src = "js/dynatable/jquery.dynatable.js"></script>
-    <script type="text/javascript" src = "js/creditcardpayment.js"></script>
-    <script type="text/javascript" src ="js/card/card.js"></script>
-    <script type="text/javascript" src ="js/card/jquery.card.js"></script>
-    <script type="text/javascript" src ="js/checkout.js"></script>
-
+    <script type="text/javascript" src="js/cookie.js"></script>
+    <script type="text/javascript" src="js/paypal.js"></script>
+    <script type="text/javascript" src="js/dynatable/jquery.dynatable.js"></script>
+    <script type="text/javascript" src="js/creditcardpayment.js"></script>
+    <script type="text/javascript" src="js/card/card.js"></script>
+    <script type="text/javascript" src="js/card/jquery.card.js"></script>
+    <script type="text/javascript" src="js/checkout.js"></script>
 
 </head>
 
@@ -58,96 +57,97 @@
 </nav>
 
 <!--- Total price -->
-
-<table class = "table" id = "price">
+<table class="table" id="price">
     <thead>
-        <th>Book Name</th>
-        <th>ISBN</th>
-        <th>New</th>
-        <th>Used</th>
-        <th>Rental</th>
-        <th>Ebook</th>
+    <th>Book Name</th>
+    <th>ISBN</th>
+    <th>New</th>
+    <th>Used</th>
+    <th>Rental</th>
+    <th>Ebook</th>
     </thead>
 </table>
 
-
 <!--- CC -->
-    <div class="text-center" id="forms" style="display:none">
-        <div class="card-wrapper"></div>
-
-        <div class="form-container active">
-            <form id = "inputForm">
+<div class="text-center" id="forms" style="display:none">
+    <div class="card-wrapper">
+    <div class="form-container active">
+        <form id="inputForm">
             <br>
-                <input placeholder="Card number" type="tel" name="number" id ="number"/>
-                <input placeholder="Full name" type="text" name="name" id="name"/><br>
-                <input placeholder="MM/YY" type="tel" name="expiry" id="exp"/>
-                <input placeholder="CVC" type="number" name="cvc" id="cvc"/>
-            </form>
-        </div>
-        <br>
-        <button id ="submit" class="btn btn-success">Submit</button>
-        <button id = "cancel" class="btn btn-danger">Cancel</button>
+            <input placeholder="Card number" type="tel" name="number" id="number"/>
+            <input placeholder="Full name" type="text" name="name" id="name"/><br>
+            <input placeholder="MM/YY" type="tel" name="expiry" id="exp"/>
+            <input placeholder="CVC" type="number" name="cvc" id="cvc"/>
+        </form>
     </div>
-
+    </div>
+    <br>
+    <div class="btn btn-group-lg">
+    <button id="submit" class="btn btn-success">Submit</button>
+    <button id="cancel" class="btn btn-danger">Cancel</button>
+    </div>
+</div>
 
 <!--- Paypal -->
 <div id="forms2" class="text-center" style="display:none">
-<form >
-
-    <input placeholder="Email" type="email" name="email" id="email">
-    <input placeholder="password" type="password" name="pass" id = "pass">
-
-</form>
-    <br>
-    <button id="login" class="btn btn-success">Login</button>
-    <button id ="cancel2" class = "btn btn-danger">Cancel</button>
-
-</div>
-
-
-<!--- Financial Aid -->
-<div id = "aid" class="text-center" style="display: none">
     <form>
-        <input placeholder="Username" type="text" name="email" id="username">
-        <input placeholder="password" type="password" name="pass" id = "pass2">
+        <input placeholder="Email" type="email" name="email" id="email">
+        <input placeholder="password" type="password" name="pass" id="pass">
     </form>
     <br>
-    <button id="loginAID" class="btn btn-success">Login</button>
-    <button id ="cancelAID" class = "btn btn-danger">Cancel</button>
+    <div class="btn btn-group-lg">
+    <button id="login" class="btn btn-success">Login</button>
+    <button id="cancel2" class="btn btn-danger">Cancel</button>
+    </div>
+</div>
 
+<!--- Financial Aid -->
+<div id="aid" class="text-center" style="display: none">
+    <form>
+        <input placeholder="Username" type="text" name="email" id="username">
+        <input placeholder="password" type="password" name="pass" id="pass2">
+    </form>
+    <br>
+    <div class="btn btn-group-lg">
+    <button id="loginAID" class="btn btn-success">Login</button>
+    <button id="cancelAID" class="btn btn-danger">Cancel</button>
+    </div>
 </div>
 
 <!--- Billing information-->
 <div class="text-center">
-<div id = "billing" class="form-container" style="display: none">
-    <input type="text" name="street" placeholder="Address" id = "address"><br>
-    <input type="text" name="state" placeholder="state" id = "state"><br>
-    <input type="text" name="zip" placeholder="zip code" id = "zip"><br>
-    <button class="btn btn-success" id = "Bnext"> Next</button>
-</div>
-</div>
 
+
+    <div id="billing" class="form-container" style="display: none">
+        <p>Please enter your billing information</p>
+        <input type="text" name="street" placeholder="Address" id="address"><br>
+        <input type="text" name="state" placeholder="state" id="state"><br>
+        <input type="text" name="zip" placeholder="zip code" id="zip"><br>
+        <button class="btn btn-success" id="Bnext"> Next</button>
+    </div>
+</div>
 
 <!--- Shipping information-->
 <div class="text-center">
-<div id = "shipping" class="form-container" style="display: none">
-    <input type="text" name="street" placeholder="Address" id = "Saddress"><br>
-    <input type="text" name="state" placeholder="state" id = "Sstate"><br>
-    <input type="text" name="zip" placeholder="zip code" id = "Szip"><br>
-    <button class="btn btn-success" id="Snext"> Submit</button>
-</div>
-</div>
 
+    <div id="shipping" class="form-container" style="display: none">
+        <p>Please enter your shipping information</p>
+        <input type="text" name="street" placeholder="Address" id="Saddress"><br>
+        <input type="text" name="state" placeholder="state" id="Sstate"><br>
+        <input type="text" name="zip" placeholder="zip code" id="Szip"><br>
+        <button class="btn btn-success" id="Snext"> Submit</button>
+    </div>
+</div>
 
 <!--- MENU -->
 
-<div id ="menu" class ="jumbotron text-center" style="margin-bottom: 100px;">
+<div id="menu" class="jumbotron text-center" style="margin-bottom: 100px;">
     <p style="text-align: center" s>How would you like to pay?</p>
 
-    <button id ="cc" class="btn-lg btn-danger">Credit Card</button>
-    <button id ="paypal" class="btn-lg btn-warning">Paypal</button>
-    <button id ="Faid" class="btn-lg btn-info">Financial Aid</button>
-    <button id ="keepShop" class="btn-lg btn-success" onclick="window.location='index.html'">Keep Shopping</button>
+    <button id="cc" class="btn-lg btn-danger">Credit Card</button>
+    <button id="paypal" class="btn-lg btn-warning">Paypal</button>
+    <button id="Faid" class="btn-lg btn-info">Financial Aid</button>
+    <button id="keepShop" class="btn-lg btn-success" onclick="window.location='index.html'">Keep Shopping</button>
 </div>
 </body>
 

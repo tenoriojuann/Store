@@ -1,12 +1,12 @@
 var subtotal = 0;
 var totalBooks = 0;
 var total = 0;
-
+var cookie = JSON.parse(localStorage.getItem('cart'));
 //TODO: make use of the variables above and put them under the table
 
 // function will draw a table for the price
 function price() {
-    var cookie = JSON.parse(localStorage.getItem('cart'));
+
 
 
     for (var index in cookie) {
@@ -58,12 +58,16 @@ $(document).ready(
                         "type": "Financial Aid"
                     };
 
+                    prompt("Are you sure you want to submit your payment information?")
+
                     localStorage.setItem('payment', JSON.stringify(payment));
                     updateUserMoney(total, userobject.money);
                     updateQuantities();
 
                     alert("Payment Accepted");
-                    window.location = "receipt.html"
+
+
+                    $('#billing').show('');
                 }
             });
 
@@ -203,7 +207,12 @@ $(document).ready(
                     "type": "Credit Card\n"+whatCompany(number)
                 };
 
+                var name = {
+                    "name": $('#name').val()
+                };
+
                 localStorage.setItem('payment', JSON.stringify(payment));
+                localStorage.setItem('name',JSON.stringify(name));
                 $('#billing').show('slow');
                 $("#forms").toggle("slows");
 
@@ -230,8 +239,8 @@ $(document).ready(
             if(r){
                 var ShippingInformation = {
                     "address" : $('#Saddress').val(),
-                "zip" : $('#Szip'),
-                "state" : $('#Sstate')
+                "zip" : $('#Szip').val(),
+                "state" : $('#Sstate').val()
             };
 
                 localStorage.setItem('shipping', JSON.stringify(ShippingInformation));
@@ -273,13 +282,13 @@ $(document).ready(
 
             if (verifyPayPal(email, pass)) {
                 $('#forms2').hide('slow');
-                $('#shipping').show('slow');
                 var payment = {
                     "type": "Paypal"
                 };
 
                 localStorage.setItem('payment', JSON.stringify(payment));
                 // Do something once the paypal information is verified
+                $('#billing').show('slow');
             }
         });
     });
@@ -295,11 +304,25 @@ $(document).ready(
             $('#billing').hide('slow');
             var billingInformation = {
               "address" : $('#address').val(),
-              "zip" : $('#zip'),
-              "state" : $('#state')
+              "zip" : $('#zip').val(),
+              "state" : $('#state').val()
             };
 
             localStorage.setItem('billing', JSON.stringify(billingInformation));
-            $('#shipping').show('slow');
+            var ebookOrNOT  = false;
+            for(index in cookie){
+                if(((parseInt(cookie[index].ebook) || 0) <=  0 ) && (((parseInt(cookie[index].new) || 0) >  0 )
+                || ((parseInt(cookie[index].used) || 0) >  0 ) | ((parseInt(cookie[index].rental) || 0) >  0 ))) {
+                    ebookOrNOT = true;
+                }
+            }
+
+            if(ebookOrNOT){
+                $('#shipping').show('slow');
+            }
+            else{
+                window.location = "receipt.html";
+            }
+
         });
 });

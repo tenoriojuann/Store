@@ -5,8 +5,7 @@
     <title>KSU Bookstore</title>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -21,7 +20,8 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="js/search.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
-	<script type ="text/javascript" src = "https://cdn.jsdelivr.net/g/lodash@4.17.4(lodash.min.js+lodash.core.min.js+lodash.fp.min.js+lodash.core.js+lodash.fp.js+lodash.js+mapping.fp.js)"></script>
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/g/lodash@4.17.4(lodash.min.js+lodash.core.min.js+lodash.fp.min.js+lodash.core.js+lodash.fp.js+lodash.js+mapping.fp.js)"></script>
 
 </head>
 <body>
@@ -59,33 +59,36 @@
 <!--TABLE HEADERS-->
 <table id="search-table" class="table">
     <div class="col-lg-2">
-    <thead>
+        <thead>
         <th data-dynatable-no-sort="true">Cover</th>
         <th data-dynatable-no-sort="true" style="display: none">Course</th>
         <th data-dynatable-no-sort="true" style="display:none">Professor</th>
         <th data-dynatable-no-sort="true" style="display: none">CRN</th>
         <th>Book Name</th>
 
-		<th>Price New</th>
-		<th>Price Used</th>
-		<th>Price Rental</th>
-		<th>Price Ebook</th>
+        <th>Price New</th>
+        <th>Price Used</th>
+        <th>Price Rental</th>
+        <th>Price Ebook</th>
         <th data-dynatable-no-sort="true" style="display:none">isbn</th>
         <th data-dynatable-no-sort="true" style="display:none">ID</th>
         <th data-dynatable-no-sort="true">Add to Cart</th>
 
-    </thead>
+        </thead>
     </div>
     <tbody>
     </tbody>
 </table>
 
 <div style="margin-bottom: 15px;">
-    <button onclick = "location.href='index.html'" class="btn btn-warning" 
-            style="margin-left: 40%;">Back to search</button>
-
+    <button onclick="location.href='index.html'" class="btn btn-warning"
+            style="margin-left: 40%;">Back to search
+    </button>
     <button onclick = "sendToCart()" class="btn btn-primary"
             style="margin: auto;">Add to Cart</button>
+
+    <button onclick="window.location='cart.html'" class="btn btn btn-success"
+             style="margin: auto;">View Cart</button>
 </div>
 
 

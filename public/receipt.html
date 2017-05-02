@@ -1,7 +1,13 @@
 <html>
 
 <body>
-
+<style type="text/css">
+    .topcorner{
+        position:absolute;
+        top:0;
+        right:0;
+    }
+</style>
 
 <form id="myform" method="post" class="jumbotron text-center">
 <b><p style="text-align: center">Enter your email to send your receipt</p></b>  
@@ -18,28 +24,24 @@ Send
 </form>
 
 <div class="text-center">
-<img src="images/ksulogo.png" style = "max-width:300px;">
+<img src="https://ksu-bookstore.firebaseapp.com/images/ksulogo.png" style = "max-width:300px;">
 <h2 style = "margin-left: 4px">KSU BOOKSTORE</h2>
 </div>
 
 <div class="text-center">
 <button class="btn btn-primary" onclick="printTable()">Print Receipt</button>
 
-<table class="table" id="shopping-cartx">
+<table class="table" id="shopping-cartx"  >
     <tr>
         <td id="name"></td>
     </tr>
 
-    <!--<th id = "t1">#</th>
-    <th id = "t2">Description</th>
-    <th id = "t3">New</th>
-    <th id = "t4">Used</th>
-    <th id = "t5">Rental</th>
-    <th id = "t6">Ebook</th>
-    <th id = "t7">Total</th>-->
 
 </table>
 </div>
+
+
+<p class ="topcorner" id = "date"></p>
 
 </body>
 
@@ -52,13 +54,7 @@ Send
         emailjs.init("user_qaPfMLPrFXLrGWc1XRiWg");
     })();
 </script>
-<!-- Print Invocie # + Current date top right row header -->
-<script>
-    var d = new Date();
-    var zz = "Invoice #: ";
-    var pp = zz + "<br>" + d.toDateString();
-    document.getElementById("date").innerHTML = pp;
-</script>
+
 
 <script type="text/javascript" src = "js/receipt.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
