@@ -172,13 +172,12 @@ function modifyTableData() {
                 sumP = summaryArr.substring(0, summaryArr.indexOf('.')); //get the first (.)occurence of summary **still need to work on fixing this up**
                 PQnewSum.append(sumP + "...<br/>"); //insert summary last
 
-                if (findSearch == 1)
-                {
+                //Display book requirements for Search by Professor
+                if (findSearch == 1) {
                     PQnewSum.append("<br> This book is " + "<b>" + book.val().required + "</b>" + " for " + "<b>" + row.find('td:nth-last-child(11)').text() + "</b>");
                 }
-
-                if (findSearch == 2)
-                {
+                //Display CRN / Professor for book
+                if (findSearch == 2) {
                     PQnewSum.append("<br>CRN(s): " + row.find('td:nth-last-child(9)').text() + "<br>Professor(s) " + row.find('td:nth-last-child(10)').text());
                 }
                 //Price and Quantity for New**************************************
@@ -191,6 +190,7 @@ function modifyTableData() {
                 input.onkeyup = function(event) {
                     isNumberKey(event);
                 };
+
                 PQnew.append(input);
                 var quantity = document.createElement('p');
 
@@ -244,6 +244,7 @@ function modifyTableData() {
                 input2.onkeyup = function(event) {
                     isNumberKey(event);
                 };
+
                 PQrental.append(input2);
 
                 var quantity2 = document.createElement('p');
@@ -267,9 +268,11 @@ function modifyTableData() {
                 input3.type = "text";
                 input3.id = ""+((index*7)+23);
                 input3.style.display = "none";
+
                 input3.onkeyup = function(event) {
                     isNumberKey(event);
                 };
+
                 PQebook.append(input3);
                 var quantity3 = document.createElement('p');
 
