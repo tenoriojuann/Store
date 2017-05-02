@@ -11,7 +11,10 @@ function printTable()
 {
     send();
     var myTable = document.getElementById('shopping-cartx');
+
+    myTable.style.display = "block";
     var date = document.createElement('p');
+
     date.class = "topcorner";
     var d = new Date();
     date.innerHTML = (d);
@@ -19,6 +22,7 @@ function printTable()
     newWin.document.write(date.outerHTML);
     newWin.document.write(myTable.outerHTML);
     newWin.print();
+    myTable.style.display = "none";
     newWin.close();
 }
 
@@ -62,12 +66,29 @@ function send(){
 
     var shipping = JSON.parse(localStorage.getItem('shipping'));
 
-    $('#shopping-cartx').append('<tr>'+ '<td>'+ 'Order from KSU Bookstore' + '<br>' +
-        'Customer Name Goes Here' + '</td></tr>' +
-        '<td><b>Shipping Address: </b></td></tr>' +
-        '<tr><td>'+shipping.address+'</td></tr>'+
-        '<tr><td>'+shipping.state+'</td></tr>'+
-        '<tr><td>'+shipping.zip+'</td></tr>');
+    if(!shipping || (shipping.length <= 0) ) {
+        shipping = JSON.parse(localStorage.getItem('billing'));
+        var name = JSON.parse(localStorage.getItem('name'));
+
+        $('#shopping-cartx').append('<tr>'+ '<td>'+ 'Order from KSU Bookstore' + '<br>' +
+            "<b>Name: </b>"+name.name + '</td></tr>' +
+            '<td><b>Billing Address: </b></td></tr>' +
+            '<tr><td>'+shipping.address+'</td></tr>'+
+            '<tr><td>'+shipping.state+'</td></tr>'+
+            '<tr><td>'+shipping.zip+'</td></tr>');
+    }
+    else{
+        var name = JSON.parse(localStorage.getItem('name'));
+
+        $('#shopping-cartx').append('<tr>'+ '<td>'+ 'Order from KSU Bookstore' + '<br>' +
+            "<b>Name: </b>"+name.name + '</td></tr>' +
+            '<td><b>Shipping Address: </b></td></tr>' +
+            '<tr><td>'+shipping.address+'</td></tr>'+
+            '<tr><td>'+shipping.state+'</td></tr>'+
+            '<tr><td>'+shipping.zip+'</td></tr>');
+    }
+
+
 
 
     $('#shopping-cartx').append('<tr>'+
@@ -99,20 +120,23 @@ function send(){
 
     }
 
-    var shipping = JSON.parse(localStorage.getItem('shipping'));
+     shipping = JSON.parse(localStorage.getItem('shipping'));
 
-   /* $('#shopping-cartx').append('<tr>'+
-     '<td><b>Shipping Address: </b></td></tr>' +
-     '<tr><td>'+shipping.address+'</td></tr>'+
-     '<tr><td>'+shipping.state+'</td></tr>'+
-     '<tr><td>'+shipping.zip+'</td></tr>');*/
+    if(!shipping || shipping.length < 0 ) {
+        $('#shopping-cartx').append('<tr>'+ '<td><td><td><td><td><td><b> Total Items:  ' + totalBooks.toString()+ '</b></td></tr>' +
+            '<td><td><td><td><td><td><b> Subtotal: $' + total.toString() + '</b></td>' +
+            '<tr>'+ '<td><td><td><td><td><td><b> Shipping: $14.99' + '</b></td>' +
+            '<tr>'+ '<td><td><td><td><td><td><b> Total: $' + totalWithShipping.toString() + '</b></td>');
 
 
-    $('#shopping-cartx').append('<tr>'+ '<td><td><td><td><td><td><b> Total Items:  ' + totalBooks.toString()+ '</b></td></tr>' +
-        '<td><td><td><td><td><td><b> Subtotal: $' + total.toString() + '</b></td>' +
-        '<tr>'+ '<td><td><td><td><td><td><b> Shipping: $14.99' + '</b></td>' +
-        '<tr>'+ '<td><td><td><td><td><td><b> Total: $' + totalWithShipping.toString() + '</b></td>');
+    }
+    else{
+        $('#shopping-cartx').append('<tr>'+ '<td><td><td><td><td><td><b> Total Items:  ' + totalBooks.toString()+ '</b></td></tr>' +
+            '<td><td><td><td><td><td><b> Subtotal: $' + total.toString() + '</b></td>'+
+            '<tr>'+ '<td><td><td><td><td><td><b> Total: $' + totalWithShipping.toString() + '</b></td>');
 
+
+    }
 
     var message = $("#message");
 
