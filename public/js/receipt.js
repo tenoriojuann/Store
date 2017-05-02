@@ -66,7 +66,7 @@ function send(){
 
     var shipping = JSON.parse(localStorage.getItem('shipping'));
 
-    if(!shipping || (shipping.length <= 0) ) {
+    if(shipping == null || (shipping.length <= 0) ) {
         shipping = JSON.parse(localStorage.getItem('billing'));
         var name = JSON.parse(localStorage.getItem('name'));
 
