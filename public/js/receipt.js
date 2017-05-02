@@ -1,7 +1,7 @@
 var myform = $("form#myform");
 var qq;
 var tt3 = [];
-
+var dateX = new Date(); // date for invoice
 var numCheck = 0;
 var cookie = JSON.parse(localStorage.getItem('cart'));
 
@@ -45,7 +45,8 @@ function send(){
     }
 
 
-    var total = (subtotal * .07) + subtotal;
+    var total = Math.round(((subtotal * .07) + (subtotal)) * 100) / 100;
+    var totalWithShipping = Math.round((total + 14.99)* 100) / 100;
 
     // Removes all Rows from the table
     var table = document.getElementById("shopping-cartx");
@@ -55,8 +56,19 @@ function send(){
         table.deleteRow(i);
     }
 
-    /*Insert users address / name / email here*/
-    $('#shopping-cartx').append('<tr><td>'+"Invoice # "+Math.floor((Math.random() * 100) + 1).toString()+'</td><tr>');
+    /*Top of invoice Insert Invoice / date placed / users address / name / email here*/
+    $('#shopping-cartx').append('<tr><td>'+"Invoice # "+Math.floor((Math.random() * 100) + 1).toString()+'<br>' +
+        dateX.toDateString() + '</td><tr>');
+
+    var shipping = JSON.parse(localStorage.getItem('shipping'));
+
+    $('#shopping-cartx').append('<tr>'+ '<td>'+ 'Order from KSU Bookstore' + '<br>' +
+        'Customer Name Goes Here' + '</td></tr>' +
+        '<td><b>Shipping Address: </b></td></tr>' +
+        '<tr><td>'+shipping.address+'</td></tr>'+
+        '<tr><td>'+shipping.state+'</td></tr>'+
+        '<tr><td>'+shipping.zip+'</td></tr>');
+
 
     $('#shopping-cartx').append('<tr>'+
         '<td>'+"#"+'</td>'+
@@ -69,27 +81,37 @@ function send(){
 
         $('#shopping-cartx').append('<tr><td>'+"*"+(index+1)+'</td>'+
             '<td>'+cookie[index].bookName+'</td>'+
-            '<td>'+"Price: $"+(parseInt(cookie[index].priceNew)||0).toString()+'<br>'+
-            "Purchased: "+(parseInt(cookie[index].new)||0).toString()+'</td>'+
+            '<td>'+"\tPrice: $"+(parseInt(cookie[index].priceNew)||0).toString()+'<br>'+
+            "\tQty: "+(parseInt(cookie[index].new)||0).toString()+ '<br>' +
+            "Total: $" + (parseInt(cookie[index].priceNew)|| 0) * (parseInt(cookie[index].new )|| 0) + '<br>' +
             '<td>'+"\tPrice: $"+(parseInt(cookie[index].priceUsed)||0).toString()+'<br>'+
-            "\tPurchased: "+(parseInt(cookie[index].used)||0).toString()+'</td>'+
+            "\tQty: "+(parseInt(cookie[index].used)||0).toString()+ '<br>' +
+            "Total: $" +(parseInt(cookie[index].priceUsed) || 0)* (parseInt(cookie[index].used)|| 0) + '<br>' +
             '<td>'+"\tPrice: $"+(parseInt(cookie[index].priceRental)||0).toString()+'<br>'+
-            "\tPurchased: "+(parseInt(cookie[index].rental)||0).toString()+'</td>'+
+            "\tQty: "+(parseInt(cookie[index].rental)||0).toString()+ '<br>'+
+            "Total: $" + (parseInt(cookie[index].priceRental) || 0)* (parseInt(cookie[index].rental)|| 0) +'<br>' +
             '<td>'+"\tPrice: $"+(parseInt(cookie[index].priceEbook)||0).toString()+'<br>'+
-            "\tPurchased: "+(parseInt(cookie[index].ebook)||0).toString()+'</td>'+
+            "\tQty:: "+(parseInt(cookie[index].ebook)||0).toString()+ '<br>' +
+            "Total: $" +(parseInt(cookie[index].priceEbook)|| 0) * (parseInt(cookie[index].ebook)|| 0) +'<br>' +
             '</tr><br>');
+
 
 
     }
 
     var shipping = JSON.parse(localStorage.getItem('shipping'));
 
-    $('#shopping-cartx').append('<tr>'+
-        '<td><b>Shipping Address: </b></td></tr>' +
-        '<tr><td>'+shipping.address+'</td></tr>'+
-        '<tr><td>'+shipping.state+'</td></tr>'+
-        '<tr><td>'+shipping.zip+'</td></tr>');
+   /* $('#shopping-cartx').append('<tr>'+
+     '<td><b>Shipping Address: </b></td></tr>' +
+     '<tr><td>'+shipping.address+'</td></tr>'+
+     '<tr><td>'+shipping.state+'</td></tr>'+
+     '<tr><td>'+shipping.zip+'</td></tr>');*/
 
+
+    $('#shopping-cartx').append('<tr>'+ '<td><td><td><td><td><td><b> Total Items:  ' + totalBooks.toString()+ '</b></td></tr>' +
+        '<td><td><td><td><td><td><b> Subtotal: $' + total.toString() + '</b></td>' +
+        '<tr>'+ '<td><td><td><td><td><td><b> Shipping: $14.99' + '</b></td>' +
+        '<tr>'+ '<td><td><td><td><td><td><b> Total: $' + totalWithShipping.toString() + '</b></td>');
 
 
     var message = $("#message");
