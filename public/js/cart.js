@@ -71,7 +71,25 @@ function mergeMultiples(arr) {
 .value();
 }
 
+$(document).ready(function (){
 
+
+    var cart = JSON.parse(localStorage.getItem('cart'));
+    console.log(cart);
+    if(cart !== null && cart.length > 0){
+
+
+        $('#checkout').click(function (){
+            window.location = "checkout.html";
+
+        });
+    }
+    else{
+
+
+        $('#checkout').attr("disabled", true);
+    }
+});
 
 function drawTable() {
 

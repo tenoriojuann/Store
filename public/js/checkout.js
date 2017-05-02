@@ -230,8 +230,8 @@ $(document).ready(
             if(r){
                 var ShippingInformation = {
                     "address" : $('#Saddress').val(),
-                "zip" : $('#Szip'),
-                "state" : $('#Sstate')
+                "zip" : $('#Szip').val(),
+                "state" : $('#Sstate').val()
             };
 
                 localStorage.setItem('shipping', JSON.stringify(ShippingInformation));
@@ -295,8 +295,8 @@ $(document).ready(
             $('#billing').hide('slow');
             var billingInformation = {
               "address" : $('#address').val(),
-              "zip" : $('#zip'),
-              "state" : $('#state')
+              "zip" : $('#zip').val(),
+              "state" : $('#state').val()
             };
 
             localStorage.setItem('billing', JSON.stringify(billingInformation));
