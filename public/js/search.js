@@ -204,7 +204,6 @@ function modifyTableData(){
                 input.type = "text";
                 input.id = ""+((index*7)+20);
                 input.style.display = "none";
-                //input.value = "0";  //Uncomment to make input values show as 0
                 PQnew.append(input);
                 var quantity = document.createElement('p');
 
@@ -229,7 +228,6 @@ function modifyTableData(){
                 input1.type = "text";
                 input1.id = ""+((index*7)+21);
                 input1.style.display = "none";
-                //input1.value = "0";  //Uncomment to make input values show as 0
                 PQused.append(input1);
                 var quantity1 = document.createElement('p');
 
@@ -254,7 +252,6 @@ function modifyTableData(){
                 input2.type = "text";
                 input2.id = ""+((index*7)+22);
                 input2.style.display = "none";
-                //input2.value = "0";  //Uncomment to make input values show as 0
                 PQrental.append(input2);
 
                 var quantity2 = document.createElement('p');
@@ -278,7 +275,6 @@ function modifyTableData(){
                 input3.type = "text";
                 input3.id = ""+((index*7)+23);
                 input3.style.display = "none";
-                //input3.value = "0";  //Uncomment to make input values show as 0
                 PQebook.append(input3);
                 var quantity3 = document.createElement('p');
 
