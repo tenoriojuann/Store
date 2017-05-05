@@ -1,11 +1,6 @@
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyA5sQLFwbqG-b1OqK9ROXYN8yBJnL5zIC0",
-    authDomain: "ksu-bookstore.firebaseapp.com",
-    databaseURL: "https://ksu-bookstore.firebaseio.com",
-    projectId: "ksu-bookstore",
-    storageBucket: "ksu-bookstore.appspot.com",
-    messagingSenderId: "87493716263"
+// Your firebase information goes here
 };
 
 firebase.initializeApp(config);
